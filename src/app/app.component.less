@@ -1,0 +1,202 @@
+@smallest-space: 5px;
+@small-space: 10px;
+@space: 20px;
+@white-text-color: white;
+@grey-color: #d7d7d7;
+@green-color: #00a100;
+@light-brown-color: #9f6969;
+@blue-color: #596b9f;
+@error-background-color: #d6dfef;
+@error-text-color: #1e0456;
+@border-radius: 5px;
+@form-width: 230px;
+
+@background-dark-theme: #2b2e30;
+@background-light-theme: #d7d5d5;
+@text-light-color: lighten(black, 10%);
+@text-dark-color: white;
+
+@window-light-theme-background: #f3f3f3;
+@window-dark-theme-background: #777777;
+@input-dark-theme-background: #efefef;
+
+.link {
+  color: #6455b2;
+  text-decoration: none;
+}
+
+.flex-grow {
+  flex-grow: 1;
+}
+
+.fixed-bottom {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}
+
+.padding {
+  padding: @space;
+}
+
+.vertical-padding {
+  padding: @space 0;
+}
+
+.vertical-small-padding {
+  padding: @small-space 0;
+}
+
+.horizontal-padding {
+  padding: 0 @space;
+}
+
+.horizontal-small-padding {
+  padding: 0 @small-space;
+}
+
+.horizontal-right-padding {
+  padding: 0 @space 0 0;
+}
+
+.horizontal-margin {
+  margin: 0 @space;
+}
+
+.horizontal-small-margin {
+  margin: 0 @small-space;
+}
+
+.horizontal-left-margin {
+  margin: 0 0 0 @space;
+}
+
+.horizontal-small-right-margin {
+  margin: auto @small-space auto 0;
+}
+
+.horizontal-small-left-margin {
+  margin: auto 0 auto @small-space;
+}
+
+.vertical-margin {
+  margin: @space 0;
+}
+
+.center-aligned {
+  margin: auto;
+}
+
+.right-aligned {
+  margin: auto 0 auto auto;
+}
+
+.left-aligned {
+  margin: auto auto auto 0;
+}
+
+.column-display {
+  display: flex;
+  flex-direction: column;
+}
+
+.row-display {
+  display: flex;
+}
+
+.button {
+  outline: none;
+  padding: @smallest-space @small-space;
+}
+
+.small-icon {
+  width: 1.1em;
+}
+
+.sign-in {
+  .button;
+  color: @white-text-color;
+  background: @green-color;
+  border-color: @green-color;
+  border-left: none;
+}
+
+.sign-up {
+  .button;
+  background: @grey-color;
+  border-color: @grey-color;
+  border-right: none;
+}
+
+.relative-position {
+  position: relative;
+}
+
+.absolute-in-top-right {
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.background {
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  padding: 0.5em;
+  overflow-y: scroll;
+}
+
+.theme {
+  position: fixed;
+  width: 2.7em;
+  height: 2.7em;
+  left: 0.7em;
+  top: 0.7em;
+  border: 1px solid transparent;
+  border-radius: 100%;
+  outline: none;
+  &-icon {
+    line-height: 0.7em;
+    font-size: 1.2em;
+  }
+}
+
+.light-theme {
+  background: @background-light-theme;
+  color: @text-light-color;
+  &-button {
+    background: darken(@background-dark-theme, 5%);
+    box-shadow: 0 0 0.5em darken(@background-dark-theme, 5%);;
+    &:hover {
+      background: darken(@background-dark-theme, 10%);
+      box-shadow: 0 0 1em darken(@background-dark-theme, 20%);
+    }
+  }
+}
+.dark-theme {
+  background: @background-dark-theme;
+  color: @text-dark-color;
+  &-button {
+    background: darken(@background-light-theme, 10%);
+    box-shadow: 0 0 0.5em darken(@background-light-theme, 10%);
+    &:hover {
+      background: darken(@background-light-theme, 5%);
+      box-shadow: 0 0 1em @background-light-theme;
+    }
+  }
+}
+
+.window-light-theme {
+  background: @window-light-theme-background;
+}
+
+.window-dark-theme {
+  background: @window-dark-theme-background;
+}
+
+::-webkit-scrollbar {
+  width: 0;
+}

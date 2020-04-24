@@ -1,0 +1,20 @@
+@import "../../app.component.less";
+@input-width: 170px;
+@small-input-width: 100px;
+.form {
+  .horizontal-padding;
+  &-field {
+    .column-display;
+    .vertical-small-padding;
+    &-input {
+      width: @input-width;
+      outline: none;
+    }
+  }
+  &-submit {
+    .button;
+    background: @light-brown-color;
+    border-color: @light-brown-color;
+    color: @white-text-color;
+  }
+}

@@ -1,0 +1,54 @@
+@import "../../app.component.less";
+@input-width: 170px;
+@small-input-width: 100px;
+.form {
+  .padding;
+  position: relative;
+  width: @form-width;
+  border-radius: @border-radius;
+  &-field {
+    .column-display;
+    .vertical-small-padding;
+    &-input {
+      outline: none;
+      &-password {
+        width: @small-input-width;
+        outline: none;
+      }
+      &-login-loading {
+        height: 100%;
+      }
+    }
+  }
+  &-submit {
+    .button;
+    background: @blue-color;
+    border-color: @blue-color;
+    color: @white-text-color;
+  }
+}
+
+.input-dark-theme {
+  background: @input-dark-theme-background;
+  border-color: @input-dark-theme-background;
+}
+
+.error {
+  .horizontal-small-margin;
+  padding: @smallest-space @small-space;
+  border-radius: @border-radius;
+  background: @error-background-color;
+  max-width: @input-width + @space;
+  color: @error-text-color;
+}
+
+.message {
+  &-sign {
+    &::before {
+      content: "⚠";
+      text-align: center;
+      color: @error-text-color;
+      margin-right: @small-space;
+    }
+  }
+}

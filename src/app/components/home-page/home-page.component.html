@@ -1,0 +1,7 @@
+<div class="window">
+  <div *ngIf="userExist" class="window-main">
+    <img src="../../../assets/danger.gif" alt="kitty">
+    <span class="centered-text"><b>Вот ты и попався, {{user.username}} 😈</b></span>
+    <a routerLink="/profile" class="centered-text link">Редактировать</a>
+  </div>
+</div>

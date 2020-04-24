@@ -1,0 +1,40 @@
+<div class="column-display">
+  <form novalidate [formGroup]="registerForm" (ngSubmit)="submitForm()"
+        [ngClass]="{ 'window-light-theme': !darkThemeEnable, 'window-dark-theme': darkThemeEnable }"
+        class="form column-display center-aligned">
+    <label class="form-field">
+      <span>Login</span>
+      <label class="row-display">
+        <input formControlName="login" [ngClass]="{ 'input-dark-theme': darkThemeEnable }"
+               class="form-field-input flex-grow">
+        <label class="relative-position">
+<!--          <img src="../../../assets/loading_light.gif" alt="load" class="small-icon horizontal-margin">-->
+<!--          <img src="../../../assets/loading_dark.gif" alt="load" class="small-icon horizontal-margin">-->
+<!--          <img src="../../../assets/success_light.ico" alt="load" class="small-icon horizontal-margin">-->
+<!--          <img src="../../../assets/success_dark.ico" alt="load" class="small-icon horizontal-margin">-->
+<!--          <img src="../../../assets/error_dark.ico" alt="load" class="small-icon horizontal-margin">-->
+<!--          <img src="../../../assets/error_light.ico" alt="load" class="small-icon horizontal-margin">-->
+        </label>
+      </label>
+    </label>
+    <label class="row-display error">
+      <span class="right-aligned message-sign"></span>
+      <span class="left-aligned message">{{invalidError.patternError}}</span>
+    </label>
+    <label class="form-field">
+      <span>Username</span>
+      <input formControlName="username" class="form-field-input">
+    </label>
+    <label class="row-display">
+      <label class="form-field left-aligned">
+        <span class="center-aligned">Password</span>
+        <input formControlName="password" type="password" class="form-field-input-password">
+      </label>
+      <label class="form-field right-aligned">
+        <span class="center-aligned">Password again</span>
+        <input formControlName="passwordAgain" type="password" class="form-field-input-password">
+      </label>
+    </label>
+    <input formControlName="submitButton" type="submit" class="form-submit">
+  </form>
+</div>

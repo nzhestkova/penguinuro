@@ -1,0 +1,14 @@
+<div class="column-display">
+  <form novalidate [formGroup]="loginForm" (ngSubmit)="submitForm()"
+        class="form column-display center-aligned">
+    <label class="form-field">
+      <span class="center-aligned">Login</span>
+      <input formControlName="login" class="form-field-input">
+    </label>
+    <label class="form-field left-aligned">
+      <span class="center-aligned">Password</span>
+      <input formControlName="password" type="password" class="form-field-input">
+    </label>
+    <input formControlName="submitButton" type="submit" class="form-submit">
+  </form>
+</div>
