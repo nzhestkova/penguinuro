@@ -1,10 +1,10 @@
 <div *ngIf="userExist" class="row-display user-data">
-  <div class="column-display">
+  <div class="column-display right-aligned">
     <img src="../../../assets/cat_avatar.png" alt="women" class="user-data-ico">
     <span class="user-data-username center-aligned">{{user.username}}</span>
-    <a class="link center-aligned vertical-padding" routerLink="">← вернуться</a>
+    <a class="link center-aligned" routerLink="">← вернуться</a>
   </div>
-  <div class="column-display message">
+  <div class="column-display message left-aligned">
     <span class="flex-grow">Увы :(</span>
     <span class="flex-grow">Ты ничего не можешь изменить</span>
     <span class="flex-grow part">не расстраивайся, дело не в тебе</span>

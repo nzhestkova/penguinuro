@@ -1,5 +1,5 @@
 export const environment = {
   production: false,
   url: "https://mysterious-oasis-74963.herokuapp.com/",
-  versionSign: "totally useless commit"
+  versionSign: "totally useless update"
 };
