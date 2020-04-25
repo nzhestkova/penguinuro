@@ -1,18 +1,80 @@
 @import "../../app.component.less";
 @input-width: 170px;
 @small-input-width: 100px;
+@font-size: 16px;
+.remove-left-border {
+  border-top-right-radius: @border-radius;
+  border-bottom-right-radius: @border-radius;
+  border-color: saturate(darken(@window-light-theme-background, 20%), 3%);
+  border-width: 1px;
+  border-style: solid;
+  border-left: none;
+}
+
+.set-left-border {
+  border-top-right-radius: @border-radius;
+  border-bottom-right-radius: @border-radius;
+  border-color: saturate(darken(@window-light-theme-background, 20%), 3%);
+  border-width: 1px;
+  border-style: solid;
+}
+
+.pointer {
+  &:hover {
+    cursor: pointer;
+  }
+}
+.right-icon {
+  outline: none;
+  border-radius: @border-radius;
+  border-color: saturate(darken(@window-light-theme-background, 20%), 3%);
+  border-width: 1px;
+  border-style: solid;
+  background: @window-light-theme-background;
+  height: 2em;
+  font-size: @font-size;
+  text-align: center;
+  padding-left: @small-space;
+  z-index: 0;
+}
+.right-icon-container {
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  z-index: 1;
+  padding: 0 @small-space;
+  background: @window-light-theme-background;
+  width: @small-icon-width;
+}
 .form {
   .padding;
+  font-family: @font-family;
   position: relative;
-  width: @form-width;
+  min-width: @form-width;
+  width: 25%;
   border-radius: @border-radius;
   &-field {
     .column-display;
     .vertical-small-padding;
+    &-text {
+      margin-bottom: @small-space;
+    }
     &-input {
       outline: none;
+      border-radius: @border-radius;
+      background: @window-light-theme-background;
+      border: 1px solid saturate(darken(@window-light-theme-background, 20%), 3%);
+      height: 2em;
+      font-size: @font-size;
+      text-align: center;
+      padding-left: @small-space;
       &-password {
-        width: @small-input-width;
+        text-align: center;
+        border-radius: @border-radius;
+        border: none;
+        height: 2em;
+        font-size: @font-size;
         outline: none;
       }
       &-login-loading {
@@ -22,13 +84,26 @@
   }
   &-submit {
     .button;
-    margin-top: @small-space;
+    margin-left: 3 * @space;
+    margin-right: 3 * @space;
+    margin-top: @space;
+    font-size: @font-size;
+    height: 2.3em;
     background: @blue-color;
-    border-color: @blue-color;
+    border: none;
+    border-radius: @border-radius;
     color: @white-text-color;
+    transition: all 500ms ease;
+    &:hover {
+      cursor: pointer;
+      background: saturate(lighten(@blue-color, 10%), 20%);
+    }
     &:disabled {
-      background: lighten(@blue-color, 20%);
-      border-color: lighten(@blue-color, 20%);
+      cursor: auto;
+      background: desaturate(darken(@blue-color, 10%), 20%);
+    }
+    &:active {
+      background: desaturate(lighten(@blue-color, 10%), 20%);
     }
   }
 }
@@ -43,7 +118,7 @@
   padding: @smallest-space @small-space;
   border-radius: @border-radius;
   background: @error-background-color;
-  max-width: @input-width + @space;
+  //max-width: @input-width + @space;
   color: @error-text-color;
 }
 

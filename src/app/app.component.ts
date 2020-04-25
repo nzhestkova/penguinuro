@@ -45,12 +45,15 @@ export class AppComponent implements OnInit, DoCheck {
         data => {
           this.userStore.loginUser(data);
         },
+        () => {
+          this.cookieService.deleteCookies();
+        },
       );
     }
-    const currentHour = new Date().getHours();
-    if ((currentHour >= 21 && currentHour < 24) || (0 <= currentHour && currentHour <= 7)) {
-      this.themeStore.toggleTheme();
-    }
+    // const currentHour = new Date().getHours();
+    // if ((currentHour >= 21 && currentHour < 24) || (0 <= currentHour && currentHour <= 7)) {
+    //   this.themeStore.toggleTheme();
+    // }
   }
 
   ngDoCheck(): void {

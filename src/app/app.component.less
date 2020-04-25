@@ -9,7 +9,8 @@
 @error-background-color: #d6dfef;
 @error-text-color: #1e0456;
 @border-radius: 5px;
-@form-width: 230px;
+@form-width: 240px;
+@small-icon-width: 1.3em;
 
 @background-dark-theme: #2b2e30;
 @background-light-theme: #d7d5d5;
@@ -19,6 +20,16 @@
 @window-light-theme-background: #f3f3f3;
 @window-dark-theme-background: #777777;
 @input-dark-theme-background: #efefef;
+
+@font-family: "Georgia", sans-serif;
+
+.font-set {
+  font-family: @font-family;
+}
+
+.bold-text {
+  font-weight: bold;
+}
 
 .link {
   color: #6455b2;
@@ -60,6 +71,11 @@
   padding: 0 @space 0 0;
 }
 
+.horizontal-auto-margin {
+  margin-left: auto;
+  margin-right: auto;
+}
+
 .horizontal-margin {
   margin: 0 @space;
 }
@@ -84,6 +100,11 @@
   margin: @space 0;
 }
 
+.vertical-auto-margin {
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
 .center-aligned {
   margin: auto;
 }
@@ -106,12 +127,13 @@
 }
 
 .button {
+  font-family: @font-family;
   outline: none;
   padding: @smallest-space @small-space;
 }
 
 .small-icon {
-  width: 1.1em;
+  width: @small-icon-width;
 }
 
 .sign-in {
@@ -158,6 +180,7 @@
   border: 1px solid transparent;
   border-radius: 100%;
   outline: none;
+  z-index: 1;
   &-icon {
     line-height: 0.7em;
     font-size: 1.2em;

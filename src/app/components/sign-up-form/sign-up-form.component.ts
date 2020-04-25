@@ -53,10 +53,10 @@ export class SignUpFormComponent implements OnInit, DoCheck {
   }, passwordMatch());
 
   submitForm(): void {
-    console.log(this.registerForm.status);
     if (this.registerForm.get("password").value !== this.registerForm.get("passwordAgain").value) {
       return;
     }
+    this.registerForm.get("submitButton").disable();
     if (this.registerForm.invalid) { return; }
     const newUser = {
       _id: 0,
@@ -93,13 +93,18 @@ export class SignUpFormComponent implements OnInit, DoCheck {
     this.cdr.markForCheck();
   }
 
+  resetLoadSigns(): void {
+    this.loginCheckStatus.pending = false;
+    this.loginCheckStatus.exist = false;
+    this.loginCheckStatus.free = false;
+    this.cdr.markForCheck();
+  }
+
   checkLogin(): void {
     if (this.registerForm.get("login").invalid) {
       return;
     }
-
     this.showLoading();
-    console.log(`request send`);
     this.userService.checkLogin(this.registerForm.get("login").value).subscribe(
       () => {
         {

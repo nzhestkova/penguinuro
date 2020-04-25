@@ -18,3 +18,23 @@
     color: @white-text-color;
   }
 }
+
+.error {
+  .horizontal-small-margin;
+  padding: @smallest-space @small-space;
+  border-radius: @border-radius;
+  background: @error-background-color;
+  max-width: @input-width + @space;
+  color: @error-text-color;
+}
+
+.message {
+  &-sign {
+    &::before {
+      content: "⚠";
+      text-align: center;
+      color: @error-text-color;
+      margin-right: @small-space;
+    }
+  }
+}

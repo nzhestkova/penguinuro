@@ -1,6 +1,10 @@
 <div class="column-display">
   <form novalidate [formGroup]="loginForm" (ngSubmit)="submitForm()"
         class="form column-display center-aligned">
+    <label class="row-display error">
+      <span class="right-aligned message-sign"></span>
+      <span class="left-aligned message">Ошибка</span>
+    </label>
     <label class="form-field">
       <span class="center-aligned">Login</span>
       <input formControlName="login" class="form-field-input">

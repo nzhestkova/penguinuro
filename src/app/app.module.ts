@@ -10,6 +10,8 @@ import { HomePageComponent } from "./components/home-page/home-page.component";
 import { ProfileComponent } from "./components/profile/profile.component";
 import { SignInFormComponent } from "./components/sign-in-form/sign-in-form.component";
 import { SignUpFormComponent } from "./components/sign-up-form/sign-up-form.component";
+import { ChangeImageDirective } from "./directives/change-image/change-image.directive";
+import { ShowPasswordDirective } from "./directives/show-password/show-password.directive";
 import { UserService } from "./services/user-service/user.service";
 import { appReducers } from "./store/reducers/app.reducers";
 import { ThemeStoreService } from "./store/services/theme-store.service/theme-store.service";
@@ -22,6 +24,8 @@ import { UserStoreService } from "./store/services/user-store.service/user-store
     SignInFormComponent,
     HomePageComponent,
     ProfileComponent,
+    ShowPasswordDirective,
+    ChangeImageDirective,
   ],
   imports: [
     BrowserModule,
