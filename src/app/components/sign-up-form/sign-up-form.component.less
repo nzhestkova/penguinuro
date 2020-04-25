@@ -64,7 +64,9 @@
       outline: none;
       border-radius: @border-radius;
       background: @window-light-theme-background;
-      border: 1px solid saturate(darken(@window-light-theme-background, 20%), 3%);
+      border-color: saturate(darken(@window-light-theme-background, 20%), 3%);
+      border-width: 1px;
+      border-style: solid;
       height: 2em;
       font-size: @font-size;
       text-align: center;
@@ -96,11 +98,11 @@
     transition: all 500ms ease;
     &:hover {
       cursor: pointer;
-      background: saturate(lighten(@blue-color, 10%), 20%);
+      background: saturate(darken(@blue-color, 10%), 10%);
     }
     &:disabled {
       cursor: auto;
-      background: desaturate(darken(@blue-color, 10%), 20%);
+      background: desaturate(lighten(@blue-color, 20%), 20%);
     }
     &:active {
       background: desaturate(lighten(@blue-color, 10%), 20%);
