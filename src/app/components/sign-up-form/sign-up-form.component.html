@@ -5,25 +5,29 @@
     <label class="form-field">
       <span>Login</span>
       <label class="row-display">
-        <input formControlName="login" [ngClass]="{ 'input-dark-theme': darkThemeEnable }"
+        <input formControlName="login" [ngClass]="{ 'input-dark-theme': darkThemeEnable }" (change)="checkLogin()"
                class="form-field-input flex-grow">
         <label class="relative-position">
-<!--          <img src="../../../assets/loading_light.gif" alt="load" class="small-icon horizontal-margin">-->
-<!--          <img src="../../../assets/loading_dark.gif" alt="load" class="small-icon horizontal-margin">-->
-<!--          <img src="../../../assets/success_light.ico" alt="load" class="small-icon horizontal-margin">-->
-<!--          <img src="../../../assets/success_dark.ico" alt="load" class="small-icon horizontal-margin">-->
-<!--          <img src="../../../assets/error_dark.ico" alt="load" class="small-icon horizontal-margin">-->
-<!--          <img src="../../../assets/error_light.ico" alt="load" class="small-icon horizontal-margin">-->
+          <img *ngIf="!darkThemeEnable && loginCheckStatus.pending" src="../../../assets/loading_light.gif" alt="load" class="small-icon horizontal-margin">
+          <img *ngIf="darkThemeEnable && loginCheckStatus.pending" src="../../../assets/loading_dark.gif" alt="load" class="small-icon horizontal-margin">
+          <img *ngIf="!darkThemeEnable && loginCheckStatus.free" src="../../../assets/success_light.ico" alt="load" class="small-icon horizontal-margin">
+          <img *ngIf="darkThemeEnable && loginCheckStatus.free" src="../../../assets/success_dark.ico" alt="load" class="small-icon horizontal-margin">
+          <img *ngIf="!darkThemeEnable && loginCheckStatus.exist" src="../../../assets/error_light.ico" alt="load" class="small-icon horizontal-margin">
+          <img *ngIf="darkThemeEnable && loginCheckStatus.exist" src="../../../assets/error_dark.ico" alt="load" class="small-icon horizontal-margin">
         </label>
       </label>
     </label>
-    <label class="row-display error">
+    <label class="row-display error" *ngIf="registerForm.get('login').invalid && registerForm.get('login').touched">
       <span class="right-aligned message-sign"></span>
-      <span class="left-aligned message">{{invalidError.patternError}}</span>
+      <span class="left-aligned message">{{invalidError[controlStatus(registerForm.get('login'), "login")]}}</span>
     </label>
     <label class="form-field">
       <span>Username</span>
       <input formControlName="username" class="form-field-input">
+    </label>
+    <label class="row-display error" *ngIf="registerForm.get('username').invalid && registerForm.get('username').touched">
+      <span class="right-aligned message-sign"></span>
+      <span class="left-aligned message">{{invalidError[controlStatus(registerForm.get('username'), "username")]}}</span>
     </label>
     <label class="row-display">
       <label class="form-field left-aligned">
@@ -34,6 +38,14 @@
         <span class="center-aligned">Password again</span>
         <input formControlName="passwordAgain" type="password" class="form-field-input-password">
       </label>
+    </label>
+    <label class="row-display error" *ngIf="registerForm.get('password').invalid && registerForm.get('password').touched">
+      <span class="right-aligned message-sign"></span>
+      <span class="left-aligned message">{{invalidError[controlStatus(registerForm.get('password'), "password")]}}</span>
+    </label>
+    <label class="row-display error" *ngIf="registerForm.hasError('doesntMatch')">
+      <span class="right-aligned message-sign"></span>
+      <span class="left-aligned message">{{invalidError.passwordDoesntMatch}}</span>
     </label>
     <input formControlName="submitButton" type="submit" class="form-submit">
   </form>

@@ -1,6 +1,7 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from "@angular/core";
-import { FormControl, FormGroup, Validators } from "@angular/forms";
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, DoCheck, OnInit } from "@angular/core";
+import { AbstractControl, FormControl, FormGroup, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
+import { passwordMatch } from "../../custom-validators/password-match.validator";
 import { messages } from "../../model/messages";
 import { CookiesService } from "../../services/cookies-service/cookies.service";
 import { UserService } from "../../services/user-service/user.service";
@@ -13,7 +14,7 @@ import { UserStoreService } from "../../store/services/user-store.service/user-s
   styleUrls: ["./sign-up-form.component.less"],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class SignUpFormComponent implements OnInit {
+export class SignUpFormComponent implements OnInit, DoCheck {
   constructor(private userService: UserService,
               private cookieService: CookiesService,
               private userStore: UserStoreService,
@@ -24,13 +25,20 @@ export class SignUpFormComponent implements OnInit {
   invalidError = messages.validation;
   darkThemeEnable: boolean;
 
+  loginCheckStatus = {
+    pending: false,
+    exist: false,
+    free: false,
+  };
   registerForm = new FormGroup({
     login: new FormControl("", [
       Validators.required,
-      Validators.pattern(/\w*[A-Za-z]+\d*/),
+      Validators.minLength(4),
+      Validators.pattern(/^\w*[A-Za-z]+[_]*\d*$/),
     ]),
     username: new FormControl("", [
       Validators.required,
+      Validators.minLength(2),
       Validators.pattern(/^[a-zA-Zа-яА-Я\s]+$/),
     ]),
     password: new FormControl("", [
@@ -42,7 +50,7 @@ export class SignUpFormComponent implements OnInit {
       Validators.minLength(8),
     ]),
     submitButton: new FormControl("Submit"),
-  });
+  }, passwordMatch());
 
   submitForm(): void {
     console.log(this.registerForm.status);
@@ -65,11 +73,55 @@ export class SignUpFormComponent implements OnInit {
     });
   }
 
+  controlStatus(control: AbstractControl, name: string): string {
+    if (control.hasError("required")) {
+      return "requireError";
+    }
+    if (control.hasError("pattern")) {
+      return "patternError";
+    }
+    if (control.hasError("minlength")) {
+      return name + "MinLengthError";
+    }
+    return "";
+  }
+
+  showLoading(): void {
+    this.loginCheckStatus.pending = true;
+    this.loginCheckStatus.exist = false;
+    this.loginCheckStatus.free = false;
+    this.cdr.markForCheck();
+  }
+
   checkLogin(): void {
+    if (this.registerForm.get("login").invalid) {
+      return;
+    }
+
+    this.showLoading();
+    console.log(`request send`);
     this.userService.checkLogin(this.registerForm.get("login").value).subscribe(
-      () => console.log("login exist"),
-      () => console.log("login doesn't exist"),
+      () => {
+        {
+          this.loginCheckStatus.pending = false;
+          this.loginCheckStatus.exist = true;
+          this.loginCheckStatus.free = false;
+          this.cdr.markForCheck();
+        }
+      },
+      () => {
+        this.loginCheckStatus.pending = false;
+        this.loginCheckStatus.exist = false;
+        this.loginCheckStatus.free = true;
+        this.cdr.markForCheck();
+      },
     );
+  }
+
+  ngDoCheck(): void {
+    this.registerForm.valid && this.loginCheckStatus.free
+      ? this.registerForm.get("submitButton").enable()
+      : this.registerForm.get("submitButton").disable();
   }
 
   ngOnInit(): void {

@@ -22,9 +22,14 @@
   }
   &-submit {
     .button;
+    margin-top: @small-space;
     background: @blue-color;
     border-color: @blue-color;
     color: @white-text-color;
+    &:disabled {
+      background: lighten(@blue-color, 20%);
+      border-color: lighten(@blue-color, 20%);
+    }
   }
 }
 
