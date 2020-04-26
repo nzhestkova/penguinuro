@@ -53,10 +53,8 @@ export class SignUpFormComponent implements OnInit, DoCheck {
   }, passwordMatch());
 
   submitForm(): void {
-    if (this.registerForm.get("password").value !== this.registerForm.get("passwordAgain").value) {
-      return;
-    }
     this.registerForm.get("submitButton").disable();
+    this.registerForm.markAsUntouched();
     if (this.registerForm.invalid) { return; }
     const newUser = {
       _id: 0,
@@ -124,6 +122,10 @@ export class SignUpFormComponent implements OnInit, DoCheck {
   }
 
   ngDoCheck(): void {
+    if (this.registerForm.untouched) {
+      this.registerForm.get("submitButton").disable();
+      return;
+    }
     this.registerForm.valid && this.loginCheckStatus.free
       ? this.registerForm.get("submitButton").enable()
       : this.registerForm.get("submitButton").disable();

@@ -1,4 +1,4 @@
-<div class="column-display center-aligned">
+<div class="column-display">
   <form novalidate [formGroup]="registerForm" (ngSubmit)="submitForm()"
         [ngClass]="{ 'window-light-theme': !darkThemeEnable, 'window-dark-theme': darkThemeEnable }"
         class="form column-display center-aligned">
@@ -34,20 +34,20 @@
       <span class="form-field-text center-aligned bold-text">Password</span>
       <label class="row-display relative-position">
         <input formControlName="password" type="password" class="form-field-input flex-grow">
-        <label class="relative-position column-display right-icon-container set-left-border pointer">
+        <label [appChangeImage]="['../../../assets/show_password.png', '../../../assets/hide_password.png']"
+               class="relative-position column-display right-icon-container set-left-border pointer">
           <img appShowPassword src="../../../assets/hide_password.png"
-               [appChangeImage]="['../../../assets/show_password.png', '../../../assets/hide_password.png']"
-               alt="load" class="small-icon vertical-auto-margin">
+               alt="show password" class="small-icon vertical-auto-margin">
         </label>
       </label>
     </label>
       <label class="form-field">
         <label class="row-display relative-position">
           <input formControlName="passwordAgain" type="password" class="form-field-input flex-grow">
-          <label class="relative-position column-display right-icon-container set-left-border pointer">
+          <label [appChangeImage]="['../../../assets/show_password.png', '../../../assets/hide_password.png']"
+                 class="relative-position column-display right-icon-container set-left-border pointer">
             <img appShowPassword src="../../../assets/hide_password.png"
-                 [appChangeImage]="['../../../assets/show_password.png', '../../../assets/hide_password.png']"
-                 alt="load" class="small-icon vertical-auto-margin">
+                 alt="hide password" class="small-icon vertical-auto-margin">
           </label>
         </label>
       </label>

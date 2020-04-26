@@ -1,31 +1,16 @@
 @import "../../app.component.less";
-@input-width: 170px;
-@small-input-width: 100px;
-.form {
-  .horizontal-padding;
-  &-field {
-    .column-display;
-    .vertical-small-padding;
-    &-input {
-      width: @input-width;
-      outline: none;
-    }
-  }
-  &-submit {
-    .button;
-    background: @light-brown-color;
-    border-color: @light-brown-color;
-    color: @white-text-color;
-  }
-}
+@import "../sign-up-form/sign-up-form.component.less";
+@auth-error-background: #bf9494;
 
-.error {
-  .horizontal-small-margin;
-  padding: @smallest-space @small-space;
+.auth-error {
+  margin-bottom: @small-space;
+  padding: @small-space @space;
+  min-width: @form-width;
+  width: 25%;
   border-radius: @border-radius;
-  background: @error-background-color;
-  max-width: @input-width + @space;
-  color: @error-text-color;
+  border: 1px solid darken(@auth-error-background, 5%);
+  background: @auth-error-background;
+  color: @white-text-color
 }
 
 .message {
@@ -33,8 +18,9 @@
     &::before {
       content: "⚠";
       text-align: center;
-      color: @error-text-color;
+      color: @white-text-color;
       margin-right: @small-space;
     }
   }
 }
+

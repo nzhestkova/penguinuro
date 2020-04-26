@@ -1,17 +1,26 @@
 <div class="column-display">
+  <label *ngIf="authErrors.getError" class="row-display auth-error center-aligned">
+    <span class="right-aligned message-sign"></span>
+    <span *ngIf="authErrors.loginDoesntExist" class="left-aligned message">{{authErrorMessages.loginDoesntExist}}</span>
+    <span *ngIf="authErrors.passwordDoesntMatch" class="left-aligned message">{{authErrorMessages.passwordDoesntMatch}}</span>
+  </label>
   <form novalidate [formGroup]="loginForm" (ngSubmit)="submitForm()"
+        [ngClass]="{ 'window-light-theme': !darkThemeEnable, 'window-dark-theme': darkThemeEnable }"
         class="form column-display center-aligned">
-    <label class="row-display error">
-      <span class="right-aligned message-sign"></span>
-      <span class="left-aligned message">Ошибка</span>
-    </label>
     <label class="form-field">
-      <span class="center-aligned">Login</span>
+      <span class="form-field-text center-aligned bold-text">Login</span>
       <input formControlName="login" class="form-field-input">
     </label>
-    <label class="form-field left-aligned">
-      <span class="center-aligned">Password</span>
-      <input formControlName="password" type="password" class="form-field-input">
+    <label class="form-field">
+      <span class="form-field-text center-aligned bold-text">Password</span>
+      <label class="row-display relative-position">
+        <input formControlName="password" type="password" class="form-field-input flex-grow">
+        <label [appChangeImage]="['../../../assets/show_password.png', '../../../assets/hide_password.png']"
+               class="relative-position column-display right-icon-container set-left-border pointer">
+          <img appShowPassword src="../../../assets/hide_password.png"
+               alt="show password" class="small-icon vertical-auto-margin">
+        </label>
+      </label>
     </label>
     <input formControlName="submitButton" type="submit" class="form-submit">
   </form>

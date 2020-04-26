@@ -1,8 +1,10 @@
-import { ChangeDetectionStrategy, Component, OnInit } from "@angular/core";
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, DoCheck, OnInit } from "@angular/core";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
+import { messages } from "../../model/messages";
 import { CookiesService } from "../../services/cookies-service/cookies.service";
 import { UserService } from "../../services/user-service/user.service";
+import { ThemeStoreService } from "../../store/services/theme-store.service/theme-store.service";
 import { UserStoreService } from "../../store/services/user-store.service/user-store.service";
 
 @Component({
@@ -11,11 +13,22 @@ import { UserStoreService } from "../../store/services/user-store.service/user-s
   styleUrls: ["./sign-in-form.component.less"],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class SignInFormComponent implements OnInit {
+export class SignInFormComponent implements OnInit, DoCheck {
   constructor(private userService: UserService,
               private userStore: UserStoreService,
+              private themeStore: ThemeStoreService,
               private cookieService: CookiesService,
-              private router: Router) { }
+              private cdr: ChangeDetectorRef,
+              private router: Router) {
+  }
+
+  darkThemeEnable: boolean;
+  authErrorMessages = messages.authentication;
+  authErrors = {
+    getError: false,
+    loginDoesntExist: false,
+    passwordDoesntMatch: false,
+  };
 
   loginForm = new FormGroup({
     login: new FormControl("", [
@@ -29,9 +42,22 @@ export class SignInFormComponent implements OnInit {
     submitButton: new FormControl("Submit"),
   });
 
+  resetErrorSigns(): void {
+    this.authErrors = {
+      getError: false,
+      loginDoesntExist: false,
+      passwordDoesntMatch: false,
+    };
+    this.cdr.markForCheck();
+  }
+
   submitForm(): void {
-    console.log(this.loginForm.status);
     if (this.loginForm.invalid) { return; }
+
+    this.loginForm.get("submitButton").disable();
+    this.loginForm.markAsUntouched();
+    this.resetErrorSigns();
+
     const login = this.loginForm.get("login").value;
     const password = this.loginForm.get("password").value;
     this.userService.loginUser(login, password).subscribe(
@@ -40,10 +66,37 @@ export class SignInFormComponent implements OnInit {
         this.cookieService.saveLogin(data.login);
         this.cookieService.savePassword(data.password);
         this.router.navigate([""]).then();
-        },
+      },
+      (error) => {
+        this.authErrors.getError = true;
+        if (error.status === 404) {
+          this.authErrors.loginDoesntExist = true;
+          this.authErrors.passwordDoesntMatch = false;
+        }
+        if (error.status === 502) {
+          this.authErrors.loginDoesntExist = false;
+          this.authErrors.passwordDoesntMatch = true;
+        }
+        this.cdr.markForCheck();
+      },
     );
   }
 
+  ngDoCheck(): void {
+    if (this.loginForm.untouched) {
+      this.loginForm.get("submitButton").disable();
+      return;
+    }
+
+    this.loginForm.valid
+      ? this.loginForm.get("submitButton").enable()
+      : this.loginForm.get("submitButton").disable();
+  }
+
   ngOnInit(): void {
+    this.themeStore.loadThemeInfo().subscribe(mode => {
+      this.darkThemeEnable = mode;
+      this.cdr.markForCheck();
+    });
   }
 }

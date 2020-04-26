@@ -7,5 +7,9 @@ export const messages = {
     usernameMinLengthError: "Имя слишком короткое",
     passwordMinLengthError: "Пароль слишком короткий",
     passwordDoesntMatch: "Пароли не совпадают",
+  },
+  authentication: {
+    loginDoesntExist: "Пользователя с таким логином не существует",
+    passwordDoesntMatch: "Неверный пароль"
   }
 };

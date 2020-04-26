@@ -11,7 +11,7 @@ export class ChangeImageDirective {
   }
 
   @HostListener("click") toggle(): void {
-    this.elementRef.nativeElement.src = this.appChangeImage[this.click % 2];
+    this.elementRef.nativeElement.childNodes[0].src = this.appChangeImage[this.click % 2];
     this.click += 1;
   }
 }
