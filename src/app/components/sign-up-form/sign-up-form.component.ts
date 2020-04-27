@@ -7,6 +7,7 @@ import { CookiesService } from "../../services/cookies-service/cookies.service";
 import { UserService } from "../../services/user-service/user.service";
 import { ThemeStoreService } from "../../store/services/theme-store.service/theme-store.service";
 import { UserStoreService } from "../../store/services/user-store.service/user-store.service";
+import { WaitingStoreService } from "../../store/services/waiting-store.service/waiting-store.service";
 
 @Component({
   selector: "app-sign-up-form",
@@ -19,6 +20,7 @@ export class SignUpFormComponent implements OnInit, DoCheck {
               private cookieService: CookiesService,
               private userStore: UserStoreService,
               private themeStore: ThemeStoreService,
+              private waitingStore: WaitingStoreService,
               private cdr: ChangeDetectorRef,
               private router: Router) {
   }
@@ -63,12 +65,16 @@ export class SignUpFormComponent implements OnInit, DoCheck {
       username: this.registerForm.get("username").value,
       password: this.registerForm.get("password").value
     };
+    this.waitingStore.activateLoading();
     this.userService.registerNewUser(newUser).subscribe(data => {
       this.cookieService.saveLogin(data.login);
       this.cookieService.savePassword(data.password);
       this.userStore.loginUser(data);
+      this.waitingStore.deactivateLoading();
       this.router.navigate([""]).then();
-    });
+    },
+      () => this.waitingStore.deactivateLoading(),
+    );
   }
 
   controlStatus(control: AbstractControl, name: string): string {

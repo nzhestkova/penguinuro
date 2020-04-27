@@ -18,3 +18,9 @@
     <span class="center-aligned">~ {{specialSign}}</span>
   </div>
 </div>
+<div class="load-popup" *ngIf="loading | async">
+  <div class="center-aligned column-display load-icon">
+    <img src="../assets/onload.gif" alt="loading" class="load-image">
+    <span class="center-aligned font-set load-phrase">Подождите</span>
+  </div>
+</div>

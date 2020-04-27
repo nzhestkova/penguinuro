@@ -6,6 +6,7 @@ import { CookiesService } from "../../services/cookies-service/cookies.service";
 import { UserService } from "../../services/user-service/user.service";
 import { ThemeStoreService } from "../../store/services/theme-store.service/theme-store.service";
 import { UserStoreService } from "../../store/services/user-store.service/user-store.service";
+import { WaitingStoreService } from "../../store/services/waiting-store.service/waiting-store.service";
 
 @Component({
   selector: "app-sign-in-form",
@@ -17,6 +18,7 @@ export class SignInFormComponent implements OnInit, DoCheck {
   constructor(private userService: UserService,
               private userStore: UserStoreService,
               private themeStore: ThemeStoreService,
+              private waitingStore: WaitingStoreService,
               private cookieService: CookiesService,
               private cdr: ChangeDetectorRef,
               private router: Router) {
@@ -60,11 +62,13 @@ export class SignInFormComponent implements OnInit, DoCheck {
 
     const login = this.loginForm.get("login").value;
     const password = this.loginForm.get("password").value;
+    this.waitingStore.activateLoading();
     this.userService.loginUser(login, password).subscribe(
       data => {
         this.userStore.loginUser(data);
         this.cookieService.saveLogin(data.login);
         this.cookieService.savePassword(data.password);
+        this.waitingStore.deactivateLoading();
         this.router.navigate([""]).then();
       },
       (error) => {
@@ -77,6 +81,7 @@ export class SignInFormComponent implements OnInit, DoCheck {
           this.authErrors.loginDoesntExist = false;
           this.authErrors.passwordDoesntMatch = true;
         }
+        this.waitingStore.deactivateLoading();
         this.cdr.markForCheck();
       },
     );

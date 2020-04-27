@@ -1,11 +1,13 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, DoCheck, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
+import { Observable } from "rxjs";
 import { environment } from "../environments/environment";
 import { User } from "./model/user";
 import { CookiesService } from "./services/cookies-service/cookies.service";
 import { UserService } from "./services/user-service/user.service";
 import { ThemeStoreService } from "./store/services/theme-store.service/theme-store.service";
 import { UserStoreService } from "./store/services/user-store.service/user-store.service";
+import { WaitingStoreService } from "./store/services/waiting-store.service/waiting-store.service";
 
 @Component({
   selector: "app-root",
@@ -18,6 +20,7 @@ export class AppComponent implements OnInit, DoCheck {
               private userService: UserService,
               private cookieService: CookiesService,
               private themeStore: ThemeStoreService,
+              private waitingStore: WaitingStoreService,
               private router: Router,
               private cdr: ChangeDetectorRef) {
   }
@@ -26,6 +29,7 @@ export class AppComponent implements OnInit, DoCheck {
   user: User | {};
   showSign: boolean;
   darkThemeEnable: boolean;
+  loading: Observable<boolean>;
 
   logout(): void {
     this.cookieService.deleteCookies();
@@ -38,15 +42,19 @@ export class AppComponent implements OnInit, DoCheck {
   }
 
   ngOnInit(): void {
+    this.loading = this.waitingStore.loadInfo();
     const savedLogin = this.cookieService.checkUser();
     const savedPassword = this.cookieService.checkPassword();
     if (savedLogin && savedPassword) {
+      this.waitingStore.activateLoading();
       this.userService.loginUser(savedLogin, savedPassword).subscribe(
         data => {
           this.userStore.loginUser(data);
+          this.waitingStore.deactivateLoading();
         },
         () => {
           this.cookieService.deleteCookies();
+          this.waitingStore.deactivateLoading();
         },
       );
     }

@@ -16,6 +16,7 @@ import { UserService } from "./services/user-service/user.service";
 import { appReducers } from "./store/reducers/app.reducers";
 import { ThemeStoreService } from "./store/services/theme-store.service/theme-store.service";
 import { UserStoreService } from "./store/services/user-store.service/user-store.service";
+import { WaitingStoreService } from "./store/services/waiting-store.service/waiting-store.service";
 
 @NgModule({
   declarations: [
@@ -43,6 +44,7 @@ import { UserStoreService } from "./store/services/user-store.service/user-store
     UserService,
     UserStoreService,
     ThemeStoreService,
+    WaitingStoreService,
   ],
   bootstrap: [AppComponent]
 })
