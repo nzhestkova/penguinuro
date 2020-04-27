@@ -11,6 +11,7 @@ import { ProfileComponent } from "./components/profile/profile.component";
 import { SignInFormComponent } from "./components/sign-in-form/sign-in-form.component";
 import { SignUpFormComponent } from "./components/sign-up-form/sign-up-form.component";
 import { ChangeImageDirective } from "./directives/change-image/change-image.directive";
+import { SetStatusDirective } from "./directives/set-status/set-status.directive";
 import { ShowPasswordDirective } from "./directives/show-password/show-password.directive";
 import { UserService } from "./services/user-service/user.service";
 import { appReducers } from "./store/reducers/app.reducers";
@@ -27,6 +28,7 @@ import { WaitingStoreService } from "./store/services/waiting-store.service/wait
     ProfileComponent,
     ShowPasswordDirective,
     ChangeImageDirective,
+    SetStatusDirective,
   ],
   imports: [
     BrowserModule,

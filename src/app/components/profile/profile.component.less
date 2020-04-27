@@ -1,15 +1,53 @@
 @import "../../app.component.less";
+@icon-width: 120px;
+@status-dark-background: #f9f9f9;
+@status-light-background: #5f508d;
+@status-dark-color-text: #532478;
+
+.status-dark-theme {
+  color: @status-dark-color-text;
+  background: @status-dark-background;
+  .smooth-animation;
+}
+
+.status-light-theme {
+  color: @white-text-color;
+  background: @status-light-background;
+  .smooth-animation;
+}
+
+.plate {
+  .font-set;
+  width: 45%;
+  margin-left: @small-space;
+  padding: @space @small-space;
+  border-radius: @border-radius;
+  max-width: 140px;
+}
+
+.status {
+  text-align: center;
+  font-weight: bold;
+  max-width: @icon-width;
+  padding: @smallest-space @space;
+  border-radius: @border-radius;
+  .smooth-animation;
+}
 
 // temporary styles
 .user-data {
   margin-top: @space;
   &-ico {
-    height: 100px;
-    width: 100px;
+    width: @icon-width;
+    margin: @small-space auto;
+    padding: @small-space;
   }
   &-username {
-    padding-top: @small-space;
+    text-align: center;
+    max-width: @icon-width;
+    margin-top: @small-space;
     font-weight: bold;
+    line-height: 1.5;
   }
 }
 

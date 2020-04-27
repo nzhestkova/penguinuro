@@ -1,6 +1,6 @@
 export class User {
   _id: number;
-  teacher: boolean;
+  status: string;
   login: string;
   username: string;
   password: string;

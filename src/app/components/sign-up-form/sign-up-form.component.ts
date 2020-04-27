@@ -60,7 +60,7 @@ export class SignUpFormComponent implements OnInit, DoCheck {
     if (this.registerForm.invalid) { return; }
     const newUser = {
       _id: 0,
-      teacher: false,
+      status: "student",
       login: this.registerForm.get("login").value,
       username: this.registerForm.get("username").value,
       password: this.registerForm.get("password").value
@@ -71,7 +71,7 @@ export class SignUpFormComponent implements OnInit, DoCheck {
       this.cookieService.savePassword(data.password);
       this.userStore.loginUser(data);
       this.waitingStore.deactivateLoading();
-      this.router.navigate([""]).then();
+      this.router.navigate(["", "profile"]).then();
     },
       () => this.waitingStore.deactivateLoading(),
     );

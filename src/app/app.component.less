@@ -13,15 +13,19 @@
 @small-icon-width: 1.3em;
 
 @background-dark-theme: #2b2e30;
-@background-light-theme: #d7d5d5;
+@background-light-theme: #e8e8e8;
 @text-light-color: lighten(black, 10%);
 @text-dark-color: white;
 
-@window-light-theme-background: #f3f3f3;
-@window-dark-theme-background: #777777;
+@window-light-theme-background: #ffffff;
+@window-dark-theme-background: #626262;
 @input-dark-theme-background: #efefef;
 
 @font-family: "Georgia", sans-serif;
+
+.smooth-animation {
+  transition: all 500ms ease;
+}
 
 .font-set {
   font-family: @font-family;
@@ -117,7 +121,7 @@
 }
 
 .left-aligned {
-  margin: auto auto auto 0;
+  margin: 0 auto auto 0;
 }
 
 .column-display {
@@ -193,9 +197,11 @@
 .light-theme {
   background: @background-light-theme;
   color: @text-light-color;
+  .smooth-animation;
   &-button {
     background: darken(@background-dark-theme, 5%);
-    box-shadow: 0 0 0.5em darken(@background-dark-theme, 5%);;
+    box-shadow: 0 0 0.5em darken(@background-dark-theme, 5%);
+    .smooth-animation;
     &:hover {
       background: darken(@background-dark-theme, 10%);
       box-shadow: 0 0 1em darken(@background-dark-theme, 20%);
@@ -205,11 +211,13 @@
 .dark-theme {
   background: @background-dark-theme;
   color: @text-dark-color;
+  .smooth-animation;
   &-button {
-    background: darken(@background-light-theme, 10%);
+    background: lighten(@background-light-theme, 5%);
     box-shadow: 0 0 0.5em darken(@background-light-theme, 10%);
+    .smooth-animation;
     &:hover {
-      background: darken(@background-light-theme, 5%);
+      background: lighten(@background-light-theme, 10%);
       box-shadow: 0 0 1em @background-light-theme;
     }
   }
@@ -217,10 +225,16 @@
 
 .window-light-theme {
   background: @window-light-theme-background;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+  color: @text-light-color;
+  .smooth-animation;
 }
 
 .window-dark-theme {
   background: @window-dark-theme-background;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.26);
+  color: @text-dark-color;
+  .smooth-animation;
 }
 
 ::-webkit-scrollbar {
@@ -228,30 +242,54 @@
 }
 
 .load-popup {
+  .column-display;
   position: fixed;
   top: 0;
   bottom: 0;
   left: 0;
   right: 0;
-  .column-display;
-  background: rgba(243, 243, 243, 0.5);
-  transition: all 500ms ease;
+  .smooth-animation;
 }
 
 .load-icon {
   padding: @space @space + @small-space;
   border-radius: 30px;
-  background: rgba(243, 243, 243, 0.7);
+  .smooth-animation;
 }
 
 .load-image {
   margin: auto;
-  width: 100px;
+  min-width: 30px;
+  max-width: 85px;
+  .smooth-animation;
 }
 
 .load-phrase {
-  font-size: 20px;
+  font-size: 18px;
   font-weight: bold;
-  color: #1e0456;
   padding-top: @small-space;
+}
+
+.popup-transparent-light {
+  background: rgba(213, 213, 213, 0.7);
+}
+
+.popup-transparent-dark {
+  background:  rgba(91, 91, 91, 0.7);
+}
+
+.load-icon-transparent-light {
+  background: rgba(249, 249, 249, 0.7);
+}
+
+.load-icon-transparent-dark {
+  background: rgba(63, 63, 63, 0.7);
+}
+
+.load-phrase-text-light {
+  color: #1e0456;
+}
+
+.load-phrase-text-dark {
+  color: #cad6ff;
 }

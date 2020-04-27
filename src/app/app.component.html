@@ -18,9 +18,13 @@
     <span class="center-aligned">~ {{specialSign}}</span>
   </div>
 </div>
-<div class="load-popup" *ngIf="loading | async">
-  <div class="center-aligned column-display load-icon">
-    <img src="../assets/onload.gif" alt="loading" class="load-image">
-    <span class="center-aligned font-set load-phrase">Подождите</span>
+<div [ngClass]="{'popup-transparent-light': !darkThemeEnable, 'popup-transparent-dark': darkThemeEnable}"
+     *ngIf="loading | async" class="load-popup">
+  <div [ngClass]="{'load-icon-transparent-light': !darkThemeEnable, 'load-icon-transparent-dark': darkThemeEnable}"
+       class="center-aligned column-display load-icon">
+    <img [src]="darkThemeEnable ? '../assets/onload_dark.gif' : '../assets/onload.gif'"
+         alt="loading" class="load-image">
+    <span [ngClass]="{'load-phrase-text-light': !darkThemeEnable, 'load-phrase-text-dark': darkThemeEnable}"
+          class="center-aligned font-set load-phrase">Подождите</span>
   </div>
 </div>

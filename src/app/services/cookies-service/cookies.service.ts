@@ -15,16 +15,18 @@ export class CookiesService {
     this.cookie.set("password", password, new Date(2999, 1, 1));
   }
 
-  checkUser(): string {
-    return this.cookie.get("login");
+  saveInfo(cookieName: string, value: string, timeout?: Date): void {
+    this.cookie.set(cookieName, value, timeout ? timeout : new Date(2999, 1, 1));
   }
 
-  checkPassword(): string {
-    return this.cookie.get("password");
+  checkInfo(cookieName: string): string {
+    return this.cookie.get(cookieName);
   }
-
   deleteCookies(): void {
     this.cookie.delete("login");
     this.cookie.delete("password");
+  }
+  deleteCookie(cookieName: string): void {
+    this.cookie.delete(cookieName);
   }
 }

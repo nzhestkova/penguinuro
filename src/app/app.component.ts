@@ -39,12 +39,13 @@ export class AppComponent implements OnInit, DoCheck {
 
   toggleTheme(): void {
     this.themeStore.toggleTheme();
+    this.cookieService.saveInfo("theme", `${this.darkThemeEnable}`);
   }
 
   ngOnInit(): void {
     this.loading = this.waitingStore.loadInfo();
-    const savedLogin = this.cookieService.checkUser();
-    const savedPassword = this.cookieService.checkPassword();
+    const savedLogin = this.cookieService.checkInfo("login");
+    const savedPassword = this.cookieService.checkInfo("password");
     if (savedLogin && savedPassword) {
       this.waitingStore.activateLoading();
       this.userService.loginUser(savedLogin, savedPassword).subscribe(
@@ -53,18 +54,20 @@ export class AppComponent implements OnInit, DoCheck {
           this.waitingStore.deactivateLoading();
         },
         () => {
-          this.cookieService.deleteCookies();
+          this.cookieService.deleteCookie("login");
+          this.cookieService.deleteCookie("password");
           this.waitingStore.deactivateLoading();
         },
       );
     }
-    // const currentHour = new Date().getHours();
-    // if ((currentHour >= 21 && currentHour < 24) || (0 <= currentHour && currentHour <= 7)) {
-    //   this.themeStore.toggleTheme();
-    // }
+    const currentHour = new Date().getHours();
+    if ((currentHour >= 20 && currentHour < 24) || (0 <= currentHour && currentHour <= 7)) {
+      this.themeStore.toggleTheme();
+    }
   }
 
   ngDoCheck(): void {
+
     this.themeStore.loadThemeInfo().subscribe(mode => this.darkThemeEnable = mode);
 
     this.userStore.loadUserInfo().subscribe(

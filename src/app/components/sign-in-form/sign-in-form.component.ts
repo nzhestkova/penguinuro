@@ -69,7 +69,7 @@ export class SignInFormComponent implements OnInit, DoCheck {
         this.cookieService.saveLogin(data.login);
         this.cookieService.savePassword(data.password);
         this.waitingStore.deactivateLoading();
-        this.router.navigate([""]).then();
+        this.router.navigate(["", "profile"]).then();
       },
       (error) => {
         this.authErrors.getError = true;
