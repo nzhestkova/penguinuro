@@ -1,0 +1,18 @@
+<div [ngClass]="{'light-background': !darkTheme, 'dark-background': darkTheme}" class="load-popup">
+  <div [ngClass]="{'window-light-theme': !darkTheme, 'window-dark-theme': darkTheme}"
+       class="center-aligned column-display confirm-body">
+    <span [ngClass]="{'confirm-light-title': !darkTheme, 'confirm-dark-title': darkTheme}"
+          class="centered-text font-set bold-text confirm-title">{{question}}</span>
+    <div class="center-aligned column-display confirm-info-body">
+      <span class="centered-text font-set confirm-info">{{info}}</span>
+      <div class="row-display">
+        <button [ngClass]="{'simple-light-button': !darkTheme, 'simple-dark-button': darkTheme}"
+                class="center-aligned chose-button simple-light-button"
+                (click)="onCancel()">{{cancel}}</button>
+        <button [ngClass]="{'danger-light-button': !darkTheme, 'danger-dark-button': darkTheme}"
+                class="center-aligned chose-button"
+                (click)="onConfirm()">{{confirm}}</button>
+      </div>
+    </div>
+  </div>
+</div>

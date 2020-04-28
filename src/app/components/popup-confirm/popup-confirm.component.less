@@ -1,0 +1,114 @@
+@import "../../app.component.less";
+
+@max-width: 400px;
+@min-width: 280px;
+@button-width: 110px;
+@button-font-size: 16px;
+@red-color: #a05f5f;
+
+.light-background {
+  background: rgba(192, 192, 192, 0.5);
+}
+
+.dark-background {
+  background: rgba(39, 39, 39, 0.5);
+}
+
+.confirm-body {
+  border-radius: @border-radius;
+  width: 80%;
+  max-width: @max-width;
+  min-width: @min-width;
+}
+
+.confirm-title {
+  padding-top: @small-space;
+  border-top-left-radius: @border-radius;
+  border-top-right-radius: @border-radius;
+}
+
+.confirm-light-title {
+  color: #710202;
+}
+
+.confirm-dark-title {
+  color: #f9bfbf;
+}
+
+.confirm-info {
+  padding: @space @small-space;
+}
+
+.confirm-info-body {
+  padding: 0 @space @small-space @space;
+}
+
+.danger-light-button {
+  background: @window-light-theme-background;
+  color: #640000;
+
+  &:hover {
+    cursor: pointer;
+    background: saturate(darken(@red-color, 10%), 10%);
+    color: white;
+  }
+
+  &:active {
+    background: saturate(darken(@red-color, 2%), 10%);
+  }
+}
+
+.danger-dark-button {
+  background: @window-dark-theme-background;
+  color: #f9bfbf;
+
+  &:hover {
+    cursor: pointer;
+    background: darken(@window-dark-theme-background, 15%);
+  }
+
+  &:active {
+    background: darken(@window-dark-theme-background, 10%);
+  }
+}
+
+.simple-light-button {
+  background: @window-light-theme-background;
+  color: black;
+
+  &:hover {
+    cursor: pointer;
+    background: #e5e5e5;
+  }
+
+  &:active {
+    background: darken(#e5e5e5, 10%);
+  }
+}
+
+.simple-dark-button {
+  background: @window-dark-theme-background;
+  color: white;
+
+  &:hover {
+    cursor: pointer;
+    background: darken(@window-dark-theme-background, 15%);
+  }
+
+  &:active {
+    background: darken(@window-dark-theme-background, 10%);
+  }
+}
+
+.chose-button {
+  .button;
+  .smooth-fast-animation;
+  text-align: center;
+  border-radius: @border-radius;
+  border: none;
+  min-width: @button-width;
+  width: 35%;
+  font-size: @button-font-size;
+  height: 2.3em;
+  padding: @smallest-space @space;
+}

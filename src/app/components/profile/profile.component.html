@@ -1,18 +1,44 @@
 <div *ngIf="userExist" class="row-display user-data">
 <!--      <a class="link center-aligned" routerLink="">← вернуться</a>-->
-  <div [ngClass]="{'window-light-theme': !darkTheme, 'window-dark-theme': darkTheme}"
-       class="column-display right-aligned plate">
-    <div class="column-display">
-      <img src="../../../assets/cat_avatar.png" alt="women" class="user-data-ico">
-      <span [appSetStatus]="{status: user.status, darkTheme: darkTheme}" class="center-aligned status">{{user.status}}</span>
+  <div class="column-display">
+    <div [ngClass]="{'window-light-theme': !darkTheme, 'window-dark-theme': darkTheme}"
+         class="column-display right-aligned plate avatar">
+      <img src="../../../assets/cat_avatar.png" alt="cat" class="user-data-ico">
+      <span [appSetStatus]="{status: user.status, darkTheme: darkTheme}"
+            class="center-aligned status">{{user.status}}</span>
       <span class="user-data-username center-aligned">{{user.username}}</span>
     </div>
+    <div [ngClass]="{'window-light-theme': !darkTheme, 'window-dark-theme': darkTheme}"
+         class="column-display edit-plate avatar small-top-margin">
+      <div [ngClass]="{'button-light-theme': !darkTheme, 'button-dark-theme': darkTheme}"
+           class="relative-position row-display control-button first-button">
+        <img src="../../../assets/settings.png" alt="edit" class="center-aligned smallest-icon button-icon">
+        <span class="flex-grow button-title">Настройки</span>
+      </div>
+      <div [ngClass]="{'button-light-theme': !darkTheme, 'button-dark-theme': darkTheme}"
+           class="relative-position row-display control-button">
+        <img src="../../../assets/notification.png" alt="notification" class="center-aligned smallest-icon button-icon">
+        <span class="flex-grow button-title">События</span>
+      </div>
+      <div [ngClass]="{'button-light-theme': !darkTheme, 'button-dark-theme': darkTheme}" (click)="logout()"
+           class="relative-position row-display control-button last-button">
+        <img src="../../../assets/logout.png" alt="notification" class="center-aligned smallest-icon button-icon">
+        <span class="flex-grow button-title red-button">Выход</span>
+      </div>
+<!--      <div (click)="showPopup()" [ngClass]="{'button-light-theme': !darkTheme, 'button-dark-theme': darkTheme}"-->
+<!--           class="row-display control-button last-button">-->
+<!--        <span class="flex-grow centered-text">Удалить</span>-->
+<!--&lt;!&ndash;        <img src="../../../assets/edit.png" alt="edit" class="small-icon">&ndash;&gt;-->
+<!--      </div>-->
+    </div>
   </div>
-<!--  <div [ngClass]="{'window-light-theme': !darkTheme, 'window-dark-theme': darkTheme}"-->
-<!--       class="column-display left-aligned plate">-->
-<!--    <span class="flex-grow">Увы :(</span>-->
-<!--    <span class="flex-grow">Ты ничего не можешь изменить</span>-->
-<!--    <span class="flex-grow part">не расстраивайся, дело не в тебе</span>-->
-<!--    <span class="flex-grow">скоро все будет</span>-->
-<!--  </div>-->
+  <app-popup-confirm *ngIf="askConfirm" (chosen)="deleteUser($event)"
+                     [question]="confirmMessages.deleteAccountQuestion"
+                     [info]="confirmMessages.deleteAccountInfo"
+                     [confirm]="confirmMessages.deleteAccountConfirm"
+                     [cancel]="confirmMessages.deleteAccountCancel">
+  </app-popup-confirm>
+  <div [ngClass]="{'window-light-theme': !darkTheme, 'window-dark-theme': darkTheme}"
+       class="column-display left-aligned plate flex-grow">
+  </div>
 </div>

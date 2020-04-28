@@ -3,14 +3,13 @@
     <div class="right-aligned">
       <button *ngIf="showSign" class="sign-up" routerLink="register">Sign up</button>
       <button *ngIf="showSign" class="sign-in" routerLink="login">Sign in</button>
-      <button *ngIf="!showSign" class="sign-up" (click)="logout()">Sign out</button>
     </div>
-    <button class="theme"
-            [ngClass]="{'light-theme-button': !darkThemeEnable, 'dark-theme-button': darkThemeEnable}"
-            (click)="toggleTheme()">
-      <span class="theme-icon" *ngIf="darkThemeEnable">💡</span>
-      <span class="theme-icon" *ngIf="!darkThemeEnable">🌙</span>
-    </button>
+<!--    <button class="theme"-->
+<!--            [ngClass]="{'light-theme-button': !darkThemeEnable, 'dark-theme-button': darkThemeEnable}"-->
+<!--            (click)="toggleTheme()">-->
+<!--      <span class="theme-icon" *ngIf="darkThemeEnable">💡</span>-->
+<!--      <span class="theme-icon" *ngIf="!darkThemeEnable">🌙</span>-->
+<!--    </button>-->
   </div>
   <router-outlet>
   </router-outlet>

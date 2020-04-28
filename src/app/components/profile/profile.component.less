@@ -4,6 +4,35 @@
 @status-light-background: #5f508d;
 @status-dark-color-text: #532478;
 
+.red-button {
+  color: #a40800;
+}
+
+.button-title {
+  margin-left: @space + @smallest-space;
+}
+
+.set-font-size {
+  font-size: 17px;
+}
+
+.hover-effect {
+  &:hover {
+    .button-icon {
+      visibility: visible;
+    }
+  }
+}
+
+.button-icon {
+  position: absolute;
+  padding: @smallest-space @small-space @smallest-space @smallest-space;
+  left: @smallest-space;
+  top: 0;
+  bottom: 0;
+  border-right: 1px solid #797979;
+}
+
 .status-dark-theme {
   color: @status-dark-color-text;
   background: @status-dark-background;
@@ -16,13 +45,54 @@
   .smooth-animation;
 }
 
+.avatar {
+  max-width: 150px;
+}
+
+.edit-plate {
+  .font-set;
+  min-width: 170px;
+  margin-left: @small-space;
+  border-radius: @border-radius;
+}
+
+.first-button {
+  border-top-left-radius: @border-radius;
+  border-top-right-radius: @border-radius;
+}
+
+.last-button {
+  border-bottom-left-radius: @border-radius;
+  border-bottom-right-radius: @border-radius;
+}
+
+.control-button {
+  .font-set;
+  cursor: pointer;
+  padding: @smallest-space @space;
+  outline: none;
+  font-size: 17px;
+  background: transparent;
+}
+
+.button-dark-theme {
+  &:hover {
+    background: darken(@status-dark-background, 25%);
+    color: @text-light-color;
+  }
+}
+
+.button-light-theme {
+  &:hover {
+    background: darken(@window-light-theme-background, 7%);
+  }
+}
+
 .plate {
   .font-set;
-  width: 45%;
   margin-left: @small-space;
   padding: @space @small-space;
   border-radius: @border-radius;
-  max-width: 140px;
 }
 
 .status {

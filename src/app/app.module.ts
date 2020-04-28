@@ -7,6 +7,7 @@ import { StoreModule } from "@ngrx/store";
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
 import { HomePageComponent } from "./components/home-page/home-page.component";
+import { PopupConfirmComponent } from "./components/popup-confirm/popup-confirm.component";
 import { ProfileComponent } from "./components/profile/profile.component";
 import { SignInFormComponent } from "./components/sign-in-form/sign-in-form.component";
 import { SignUpFormComponent } from "./components/sign-up-form/sign-up-form.component";
@@ -29,6 +30,7 @@ import { WaitingStoreService } from "./store/services/waiting-store.service/wait
     ShowPasswordDirective,
     ChangeImageDirective,
     SetStatusDirective,
+    PopupConfirmComponent,
   ],
   imports: [
     BrowserModule,

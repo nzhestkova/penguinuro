@@ -17,6 +17,7 @@ export class SetStatusDirective implements AfterViewChecked {
     violet: "#532478",
     green: "#3f7e3a",
     yellow: "#707034",
+    black: "#000000",
   };
 
   constructor(private elementRef: ElementRef) {
@@ -42,6 +43,7 @@ export class SetStatusDirective implements AfterViewChecked {
       }
       default: {
         this.elementRef.nativeElement.style[changingProperty] = this[changingProperty].white;
+        this.elementRef.nativeElement.style.color = this.color.black;
         break;
       }
     }

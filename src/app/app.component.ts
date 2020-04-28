@@ -39,7 +39,12 @@ export class AppComponent implements OnInit, DoCheck {
 
   toggleTheme(): void {
     this.themeStore.toggleTheme();
-    this.cookieService.saveInfo("theme", `${this.darkThemeEnable}`);
+
+    const now = new Date();
+    const cookieLife = new Date(
+      now.getFullYear(), now.getMonth(), now.getDate(),
+      now.getHours() + 1, now.getMinutes(), now.getSeconds());
+    this.cookieService.saveInfo("theme", `${this.darkThemeEnable}`, cookieLife);
   }
 
   ngOnInit(): void {
@@ -52,6 +57,7 @@ export class AppComponent implements OnInit, DoCheck {
         data => {
           this.userStore.loginUser(data);
           this.waitingStore.deactivateLoading();
+          // this.router.navigate(["", "profile"]).then();
         },
         () => {
           this.cookieService.deleteCookie("login");
@@ -59,6 +65,13 @@ export class AppComponent implements OnInit, DoCheck {
           this.waitingStore.deactivateLoading();
         },
       );
+    }
+    if (this.cookieService.checkInfo("theme")) {
+      if (this.cookieService.checkInfo("theme") === "true") {
+        console.log(this.cookieService.checkInfo("theme"));
+        this.themeStore.toggleTheme();
+      }
+      return;
     }
     const currentHour = new Date().getHours();
     if ((currentHour >= 20 && currentHour < 24) || (0 <= currentHour && currentHour <= 7)) {
