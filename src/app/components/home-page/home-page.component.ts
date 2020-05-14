@@ -20,7 +20,7 @@ export class HomePageComponent implements DoCheck, OnDestroy {
     this.subscriber = this.userStore.loadUserInfo().subscribe(
       (user) => {
         this.user = user;
-        this.userExist = !!Object.keys(user).length;
+        this.userExist = !!user;
         this.cdr.markForCheck();
       });
   }

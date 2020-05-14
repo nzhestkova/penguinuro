@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { Store } from "@ngrx/store";
 import { Observable } from "rxjs";
 import { User } from "../../../model/user";
-import { userLogin, userLogout } from "../../actions/user.actions";
+import { markNotificationsAsChecked, userLogin, userLogout } from "../../actions/user.actions";
 import { selectUserInfo } from "../../selectors/user.selectors";
 import { AppState } from "../../state/app.state";
 
@@ -12,8 +12,12 @@ import { AppState } from "../../state/app.state";
 export class UserStoreService {
   constructor(private store$: Store<AppState>) {}
 
-  loadUserInfo(): Observable<User | {}> {
+  loadUserInfo(): Observable<User> {
     return this.store$.select(selectUserInfo);
+  }
+
+  markNotificationsAsChecked(): void {
+    this.store$.dispatch(markNotificationsAsChecked());
   }
 
   loginUser(user: User): void {

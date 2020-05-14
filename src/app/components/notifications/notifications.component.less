@@ -1,0 +1,53 @@
+@import "../../app.component.less";
+@font-size: 16px;
+@15px-space: 15px;
+
+.content-plate {
+  margin: @smallest-space @small-space;
+}
+
+.unread {
+  background: #2f70a7;
+  margin: auto;
+  width: 10px;
+  height: 10px;
+  border-radius: 100%;
+}
+
+.read {
+  .smooth-fast-animation;
+  background: #2f70a7;
+  margin: auto;
+  width: 0;
+  height: 0;
+  border-radius: 100%;
+}
+
+.notification {
+  .smooth-animation;
+  padding: 15px 0;
+  margin: 0 @small-space;
+  border-width: 0.01em;
+  border-style: solid;
+  border-color:transparent transparent #d3d3d3 transparent;
+}
+
+.date-time {
+  color: #5b3434;
+  margin: auto @smallest-space auto auto;
+}
+
+.notification-message {
+  margin-right: @space;
+  line-height: 1.2em;
+}
+
+.owner {
+  .bold-text;
+}
+
+.notification-icon {
+  height: 50px;
+  width: 50px;
+  margin: auto @space;
+}

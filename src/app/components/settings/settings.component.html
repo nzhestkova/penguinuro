@@ -1,0 +1,21 @@
+<div class="column-display" [formGroup]="settingsForm">
+  <span>Изменение пароля</span>
+  <div class="column-display" formGroupName="passwordChange">
+    <div>
+      <span>Старый пароль</span>
+      <input formControlName="oldPassword">
+    </div>
+    <div>
+      <span>Новый пароль</span>
+      <input formControlName="newPassword">
+    </div>
+    <div>
+      <span></span>
+    </div>
+    <input formControlName="newPasswordConfirm">
+    <div>
+      <input type="submit" formControlName="submit">
+      <input type="button" formControlName="cancel">
+    </div>
+  </div>
+</div>

@@ -1,0 +1,12 @@
+<div class="column-display content-plate">
+  <span *ngIf="!notificationList.length">{{notificationMessages.haveNotNewNotifications}}</span>
+  <div *ngFor="let notification of notificationList" class="row-display notification">
+    <div *ngIf="!notification.checked" class="unread"></div>
+    <img [src]="'../../../assets/' + notification.owner + 'Notification.svg'" alt="welcome" class="notification-icon">
+    <div class="column-display flex-grow notification-message">
+      <span class="owner">{{notification.owner}}</span>
+      <span class="message">{{notification.message}}</span>
+    </div>
+    <span class="date-time">{{dateTime(notification.datetime)}}</span>
+  </div>
+</div>

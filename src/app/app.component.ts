@@ -25,6 +25,7 @@ export class AppComponent implements OnInit, DoCheck {
               private cdr: ChangeDetectorRef) {
   }
 
+  requestCount: number = 0;
   specialSign: string = environment.versionSign;
   user: User | {};
   showSign: boolean;
@@ -48,6 +49,16 @@ export class AppComponent implements OnInit, DoCheck {
   }
 
   ngOnInit(): void {
+    setInterval(() => {
+      const subs = this.userService.forCheck().subscribe((data) => {
+        if (data) {
+          this.requestCount += 1;
+          this.cdr.markForCheck();
+          subs.unsubscribe();
+        }
+      });
+    }, 300000);
+
     this.loading = this.waitingStore.loadInfo();
     const savedLogin = this.cookieService.checkInfo("login");
     const savedPassword = this.cookieService.checkInfo("password");
@@ -66,17 +77,17 @@ export class AppComponent implements OnInit, DoCheck {
         },
       );
     }
-    if (this.cookieService.checkInfo("theme")) {
-      if (this.cookieService.checkInfo("theme") === "true") {
-        console.log(this.cookieService.checkInfo("theme"));
-        this.themeStore.toggleTheme();
-      }
-      return;
-    }
-    const currentHour = new Date().getHours();
-    if ((currentHour >= 20 && currentHour < 24) || (0 <= currentHour && currentHour <= 7)) {
-      this.themeStore.toggleTheme();
-    }
+    // if (this.cookieService.checkInfo("theme")) {
+    //   if (this.cookieService.checkInfo("theme") === "true") {
+    //     console.log(this.cookieService.checkInfo("theme"));
+    //     this.themeStore.toggleTheme();
+    //   }
+    //   return;
+    // }
+    // const currentHour = new Date().getHours();
+    // if ((currentHour >= 20 && currentHour < 24) || (0 <= currentHour && currentHour <= 7)) {
+    //   this.themeStore.toggleTheme();
+    // }
   }
 
   ngDoCheck(): void {
@@ -86,7 +97,7 @@ export class AppComponent implements OnInit, DoCheck {
     this.userStore.loadUserInfo().subscribe(
       user => {
         this.user = user;
-        this.showSign = !Object.keys(user).length;
+        this.showSign = !user;
         this.cdr.markForCheck();
       },
     );

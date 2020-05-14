@@ -10,8 +10,9 @@
 @error-text-color: #1e0456;
 @border-radius: 5px;
 @form-width: 240px;
-@small-icon-width: 1.3em;
-@smallest-icon-width: 0.8em;
+@small-icon-width: 1.2em;
+@huge-icon-width: 70px;
+@smallest-icon-width: 0.7em;
 
 @background-dark-theme: #2b2e30;
 @background-light-theme: #e8e8e8;
@@ -23,6 +24,32 @@
 @input-dark-theme-background: #efefef;
 
 @font-family: "Georgia", sans-serif;
+
+.blind-text {
+  color: #b3b3b3;
+  font-style: italic;
+}
+
+.no-select {
+  user-select: none;
+}
+
+.italic {
+  font-style: italic;
+}
+
+.h-center-align {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.fullscreen {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
 
 .centered-text {
   text-align: center;
@@ -117,6 +144,10 @@
   margin: auto @small-space auto 0;
 }
 
+.small-right-margin {
+  margin-right: @small-space;
+}
+
 .horizontal-small-left-margin {
   margin: auto 0 auto @small-space;
 }
@@ -168,6 +199,10 @@
 
 .small-icon {
   width: @small-icon-width;
+}
+
+.large-icon {
+  width: @huge-icon-width;
 }
 
 .sign-in {

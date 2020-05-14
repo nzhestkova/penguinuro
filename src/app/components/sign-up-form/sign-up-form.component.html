@@ -8,9 +8,9 @@
         <input formControlName="login" (change)="checkLogin()" (input)="resetLoadSigns()"
                class="right-icon flex-grow">
         <label class="relative-position column-display right-icon-container remove-left-border">
-          <img *ngIf="loginCheckStatus.pending" src="../../../assets/loading_light.gif" alt="load" class="small-icon vertical-auto-margin">
-          <img *ngIf="loginCheckStatus.free" src="../../../assets/success_light.ico" alt="load" class="small-icon vertical-auto-margin">
-          <img *ngIf="loginCheckStatus.exist" src="../../../assets/error_light.ico" alt="load" class="small-icon vertical-auto-margin">
+          <img *ngIf="loginCheckStatus.pending" src="../../../assets/loading/loading_light.gif" alt="load" class="small-icon vertical-auto-margin">
+          <img *ngIf="loginCheckStatus.free" src="../../../assets/statuses/success_light.ico" alt="load" class="small-icon vertical-auto-margin">
+          <img *ngIf="loginCheckStatus.exist" src="../../../assets/statuses/error_light.ico" alt="load" class="small-icon vertical-auto-margin">
         </label>
       </label>
     </label>
@@ -34,9 +34,9 @@
       <span class="form-field-text center-aligned bold-text">Password</span>
       <label class="row-display relative-position">
         <input formControlName="password" type="password" class="form-field-input flex-grow">
-        <label [appChangeImage]="['../../../assets/show_password.png', '../../../assets/hide_password.png']"
+        <label [appChangeImage]="['../../../assets/show-password.svg', '../../../assets/show-password.svg']"
                class="relative-position column-display right-icon-container set-left-border pointer">
-          <img appShowPassword src="../../../assets/hide_password.png"
+          <img appShowPassword src="../../../assets/password/hide-password.svg"
                alt="show password" class="small-icon vertical-auto-margin">
         </label>
       </label>
@@ -44,9 +44,9 @@
       <label class="form-field">
         <label class="row-display relative-position">
           <input formControlName="passwordAgain" type="password" class="form-field-input flex-grow">
-          <label [appChangeImage]="['../../../assets/show_password.png', '../../../assets/hide_password.png']"
-                 class="relative-position column-display right-icon-container set-left-border pointer">
-            <img appShowPassword src="../../../assets/hide_password.png"
+          <label [appChangeImage]="['../../../assets/show-password.svg', '../../../assets/show-password.svg']"
+                 class="relative-positio column-display right-icon-container set-left-border pointer">
+            <img appShowPassword src="../../../assets/password/show-password.svg"
                  alt="hide password" class="small-icon vertical-auto-margin">
           </label>
         </label>

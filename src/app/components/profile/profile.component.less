@@ -3,13 +3,24 @@
 @status-dark-background: #f9f9f9;
 @status-light-background: #5f508d;
 @status-dark-color-text: #532478;
+@medial-space: 7px;
+
+.notification-sign {
+  font-size: 16px;
+}
+
+.active {
+  &:active {
+    background: #5f508d;
+  }
+}
 
 .red-button {
   color: #a40800;
 }
 
 .button-title {
-  margin-left: @space + @smallest-space;
+  margin-left: @space;
 }
 
 .set-font-size {
@@ -26,11 +37,13 @@
 
 .button-icon {
   position: absolute;
+  width: 1em;
+  height: 1em;
   padding: @smallest-space @small-space @smallest-space @smallest-space;
   left: @smallest-space;
   top: 0;
   bottom: 0;
-  border-right: 1px solid #797979;
+  border-right: 0.001em solid #797979;
 }
 
 .status-dark-theme {
@@ -69,7 +82,7 @@
 .control-button {
   .font-set;
   cursor: pointer;
-  padding: @smallest-space @space;
+  padding: @medial-space @space;
   outline: none;
   font-size: 17px;
   background: transparent;
@@ -86,6 +99,12 @@
   &:hover {
     background: darken(@window-light-theme-background, 7%);
   }
+}
+
+.router {
+  .font-set;
+  margin-left: @small-space;
+  border-radius: @border-radius;
 }
 
 .plate {

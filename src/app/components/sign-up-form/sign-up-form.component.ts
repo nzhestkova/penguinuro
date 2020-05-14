@@ -3,6 +3,7 @@ import { AbstractControl, FormControl, FormGroup, Validators } from "@angular/fo
 import { Router } from "@angular/router";
 import { passwordMatch } from "../../custom-validators/password-match.validator";
 import { messages } from "../../model/messages";
+import { welcomeNotification } from "../../model/notification";
 import { CookiesService } from "../../services/cookies-service/cookies.service";
 import { UserService } from "../../services/user-service/user.service";
 import { ThemeStoreService } from "../../store/services/theme-store.service/theme-store.service";
@@ -63,7 +64,12 @@ export class SignUpFormComponent implements OnInit, DoCheck {
       status: "student",
       login: this.registerForm.get("login").value,
       username: this.registerForm.get("username").value,
-      password: this.registerForm.get("password").value
+      password: this.registerForm.get("password").value,
+      education: {
+        materials: [],
+        tasks: []
+      },
+      notifications: [welcomeNotification],
     };
     this.waitingStore.activateLoading();
     this.userService.registerNewUser(newUser).subscribe(data => {

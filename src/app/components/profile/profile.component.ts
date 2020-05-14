@@ -22,6 +22,7 @@ export class ProfileComponent implements OnInit, DoCheck, OnDestroy {
               private router: Router,
               private cdr: ChangeDetectorRef) { }
   userExist: boolean;
+  unreadNotification: number;
   subscriber: Subscription;
   user: User;
   darkTheme: boolean;
@@ -67,8 +68,17 @@ export class ProfileComponent implements OnInit, DoCheck, OnDestroy {
     this.themeStore.loadThemeInfo().subscribe((theme) => this.darkTheme = theme);
     this.subscriber = this.userStore.loadUserInfo().subscribe(
       (user) => {
-        this.userExist = !!Object.keys(user).length;
+        this.userExist = !!user;
         this.user = <User>user;
+
+        let count: number = 0;
+        if (user && this.user.notifications) {
+          this.user.notifications.forEach((item) => {
+            if (!item.checked) { count += 1; }
+          });
+          this.unreadNotification = count;
+        }
+
         this.cdr.markForCheck();
       },
     );

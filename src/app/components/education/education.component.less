@@ -1,0 +1,277 @@
+@import "../../app.component.less";
+@format-color: #87afd1;
+@btn-border-style: 2px solid red;
+@slim-border: 0.01em solid #c9c9c9;
+
+.tile {
+  .relative-position;
+  min-width: 80px;
+  width: 10%;
+  max-width: 110px;
+  height: 140px;
+  float: left;
+  margin: @smallest-space @small-space;
+  padding: @space @small-space;
+}
+
+.tile-title {
+  word-break: break-all;
+  line-height: 1.25em;
+  height: 2.5em;
+  overflow-y: hidden;
+  max-width: 100px;
+  width: 90%;
+  min-width: 80px;
+  text-align: justify;
+  margin: auto;
+}
+
+.tile-format {
+  padding: @smallest-space @small-space;
+  position: absolute;
+  top: 55px;
+  left: 20%;
+  min-width: 20px;
+  right: 20%;
+}
+
+.px50-padding-left {
+  padding-left: 50px;
+}
+
+.margin-left {
+  margin-left: auto;
+}
+
+.px10margin-right {
+  margin-right: 10px;
+}
+
+.chosen-view-mark {
+  .smooth-animation;
+  border-radius: @border-radius;
+  position: absolute;
+  z-index: 0;
+  background: #c9c9c9;
+  height: 36px;
+  width: 36px;
+}
+
+.table-view {
+  left: 50%;
+  right: 0;
+}
+
+.tile-view {
+  left: 0;
+  right: 50%;
+}
+
+.view {
+  .relative-position;
+  cursor: pointer;
+  margin: auto @space auto 3 * @space;
+}
+
+.grey-text {
+  color: grey;
+}
+
+.table {
+  margin: @small-space @space;
+  border-collapse: separate;
+  border-spacing: 0 @small-space;
+}
+
+.left-cell {
+  width: 4em;
+  padding: @smallest-space @small-space;
+}
+
+.medial-cell {
+  width: 10em;
+  text-align: center;
+  padding: 0 @small-space;
+}
+
+.small-cell {
+  width: 1.2em;
+  padding-left: @small-space;
+}
+
+.align-cell {
+  margin: auto @space auto auto;
+}
+
+.table-left-cell {
+  margin-left: @space;
+}
+
+.head {
+  color: grey;
+  font-style: italic;
+  text-decoration: none;
+}
+
+.table-simple-cell {
+  margin: auto @space;
+  min-width: 200px;
+  max-width: 700px;
+}
+
+.author {
+  color: grey;
+  width: 10em;
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.date-time {
+  color: grey;
+  margin: auto 3 * @space auto @space;
+}
+
+.table-right-cell {
+  margin: auto @space auto auto;
+}
+
+.table-row {
+  .relative-position;
+  cursor: pointer;
+}
+
+.empty {
+  width: 5em;
+  padding: @smallest-space @small-space;
+}
+
+.file-format {
+  text-align: center;
+  border-radius: @border-radius;
+  background: #90b2c7;
+  color: white;
+  .smooth-animation;
+}
+
+.fixed-width {
+  min-width: 180px;
+  flex-grow: 1;
+}
+
+.button {
+  font-size: 16px;
+  font-family: @font-family;
+  outline: none;
+}
+
+.merge-to-right {
+  height: 1em;
+  width: 1em;
+  margin: auto @smallest-space auto auto;
+}
+
+.margin-newest {
+  margin-right: @smallest-space;
+  margin-left: @small-space;
+}
+
+.margin-oldest {
+  margin-right: @small-space;
+  margin-left: @smallest-space;
+}
+
+.sort-phrase {
+  color: grey;
+  font-style: italic;
+  text-align: center;
+  width: 130px;
+}
+
+.search-input {
+  .button;
+  border: none;
+  padding: 0 @smallest-space 0 @small-space;
+  text-align: left;
+  font-style: italic;
+  color: grey;
+  width: 130px;
+}
+
+.panel {
+  .relative-position;
+}
+
+.panel-function {
+  .smooth-animation;
+  .relative-position;
+  padding: @small-space;
+  user-select: none;
+}
+
+.clickable {
+  &:hover {
+    background: #ececec;
+    cursor: pointer;
+    .search-input {
+      background: #ececec;
+    }
+  }
+}
+
+.aligned-icon {
+  margin-left: auto;
+}
+
+.function-icon {
+  height: 1em;
+  width: 1em;
+  margin: auto;
+}
+
+.add-button {
+  .button;
+  width: 185px;
+  border: none;
+  background: transparent;
+  padding: @small-space @space;
+  margin: auto @space;
+  &:hover {
+    background: #ececec;
+    cursor: pointer;
+  }
+}
+
+.first-link {
+  border-top-left-radius: @border-radius;
+}
+
+.last-link {
+  border-top-right-radius: @border-radius;
+}
+
+.chosen-link {
+  border-top: none;
+  border-right: none;
+  border-bottom: 2px solid darkred;
+  border-left: none;
+}
+
+.not-chosen-link {
+  border-top: none;
+  border-right: none;
+  border-bottom: 2px solid transparent;
+  border-left: none;
+  &:hover {
+    border-bottom-color: darken(@window-light-theme-background, 10%);
+  }
+}
+
+.link-button {
+  .smooth-fast-animation;
+  .button;
+  width: 7em;
+  padding: 15px 0 @smallest-space 0;
+  margin: 0 @space @small-space @space;
+  background: @window-light-theme-background;
+}

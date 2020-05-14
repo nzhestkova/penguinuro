@@ -1,9 +1,9 @@
 import { User } from "../../model/user";
 
 export interface UserState {
-  userInfo: User | {};
+  userInfo: User;
 }
 
 export const initialUserState: UserState = {
-  userInfo: {},
+  userInfo: undefined,
 };

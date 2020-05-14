@@ -1,0 +1,131 @@
+@import "../../app.component.less";
+@font-size: 16px;
+@max-creator-width: 700px;
+@half-visible-black: rgba(0, 0, 0, 0.51);
+@grey-tips-text: #aeaeae;
+@grey-border-button: #d8d8d8;
+@green-button-color: #578d50;
+@green-input-color: #628d50;
+@red-button-color: #8d5050;
+
+.button {
+  .smooth-fast-animation;
+  font-size: @font-size;
+  font-family: @font-family;
+  outline: none;
+  cursor: pointer;
+}
+
+.clickable-radio {
+  &:hover {
+    &::after {
+      visibility: visible;
+    }
+  }
+}
+
+.chosen-radio {
+  &::after {
+    visibility: visible;
+  }
+}
+
+.simple-radio {
+  &::after {
+    visibility: hidden;
+  }
+}
+
+.choice-square {
+  .button;
+  .relative-position;
+  padding: 0.5em;
+  border: 1px solid transparent;
+  border-radius: 100%;
+  margin-top: auto;
+  margin-right: @small-space;
+  &::after {
+    content: "";
+    position: absolute;
+    margin: 3px;
+    border-radius: 100%;
+    background: @green-input-color;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+  }
+}
+
+.save-answer-button {
+  .button;
+  margin: auto @space auto auto;
+  padding: @small-space @small-space + @smallest-space;
+  border-radius: @border-radius;
+  border: 2px solid transparent;
+  color: darken(@green-button-color, 20%);
+  background: @window-light-theme-background;
+  &:hover {
+    color: white;
+    background: @green-button-color;
+  }
+}
+
+.answer-options-table {
+  height: 160px;
+  overflow: scroll;
+}
+
+.add-field-button {
+  .smooth-fast-animation;
+  .column-display;
+  .button;
+  border: 2px solid transparent;
+  border-radius: @border-radius;
+  margin: @small-space 0 auto auto;
+  padding: @small-space @small-space + @smallest-space;
+  background: @window-light-theme-background;
+  &:hover {
+    background: lighten(@grey-border-button, 7%);
+  }
+}
+
+.creator-field {
+  max-width: @max-creator-width;
+  width: 75%;
+  margin: 0 auto auto @small-space;
+  padding: @small-space @space;
+}
+
+.test-data-input {
+  .font-set;
+  .flex-grow;
+  font-size: @font-size;
+  padding-top: @small-space;
+  padding-left: @smallest-space;
+  padding-right: @small-space;
+  outline: none;
+  border: none;
+  color: @grey-tips-text;
+}
+
+.remove-button {
+  .smooth-fast-animation;
+  .relative-position;
+  .button;
+  font-size: 14px;
+  border: none;
+  margin: auto;
+  border-radius: @border-radius;
+  background: @window-light-theme-background; //
+  color: @half-visible-black; //
+  padding: @small-space;
+  &:hover {
+    background: @red-button-color;
+    color: white;
+  }
+  &::before {
+    content: "✕";
+    .fullscreen;
+  }
+}
