@@ -27,7 +27,7 @@ export class AppComponent implements OnInit, DoCheck {
 
   requestCount: number = 0;
   specialSign: string = environment.versionSign;
-  user: User | {};
+  user: User;
   showSign: boolean;
   darkThemeEnable: boolean;
   loading: Observable<boolean>;

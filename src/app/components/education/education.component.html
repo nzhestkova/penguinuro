@@ -1,77 +1,47 @@
-<div class="row-display">
-  <button [ngClass]="{'chosen-link': chosenSection.number === 0, 'not-chosen-link': chosenSection.number !== 0}"
-          (click)="choseSection(0)"
-          class="left-link link-button first-link">Материалы</button>
-  <button [ngClass]="{'chosen-link': chosenSection.number === 1, 'not-chosen-link': chosenSection.number !== 1}"
-          (click)="choseSection(1)"
-          class="right-link link-button last-link">Задания</button>
-</div>
-<div class="column-display">
-  <div class="row-display panel">
-    <button class="add-button">+ {{educationMessages[chosenSection.title + 'AddPhrase']}}</button>
-    <div class="row-display panel-function margin-left clickable" (click)="sort()">
-      <span *ngIf="sortOnNewest" class="margin-newest sort-phrase">{{educationMessages.sortOrder[0]}}</span>
-      <span *ngIf="!sortOnNewest" class="margin-oldest sort-phrase">{{educationMessages.sortOrder[1]}}</span>
-      <img src="../../../assets/actions/sort.svg" alt="sort" class="function-icon">
-    </div>
-    <div class="row-display panel-function clickable" (click)="filter()">
-      <span *ngIf="displayMode" class="margin-newest sort-phrase">{{educationMessages[chosenSection.title + 'Filter'][displayMode]}}</span>
-      <img src="../../../assets/actions/filter.svg" alt="filter" class="function-icon">
-    </div>
-    <div class="row-display panel-function clickable">
-      <img src="../../../assets/actions/search.svg" alt="filter" class="function-icon">
-<!--      <input [(ngModel)]="searchRequest" (input)="search()" class="margin-newest search-input">-->
-    </div>
-    <div class="column-display panel-function clickable" (click)="clear()">
-      <img src="../../../assets/actions/reset-settings.svg" alt="reset" class="function-icon">
-    </div>
-    <div class="row-display view">
-      <div [ngClass]="{'table-view': tableView, 'tile-view': !tableView}" class="chosen-view-mark"></div>
-      <div class="column-display panel-function" (click)="toTile()">
-        <img src="../../../assets/actions/tile.svg" alt="tileView" class="function-icon">
-      </div>
-      <div class="column-display panel-function" (click)="toTable()">
-        <img src="../../../assets/actions/list.svg" alt="listView" class="function-icon">
-      </div>
-    </div>
+<div class="row-display right-margin-auto">
+  <div routerLink="materials" routerLinkActive="chosen-link"
+       [queryParams]="queryParams"
+       class="row-display first-link link">
+    <button class="link-button">Материалы</button>
   </div>
-  <span *ngIf="!userEducationInfoDisplay[chosenSection.title].length" class="center-aligned small-top-margin">
-    <i>{{educationMessages[chosenSection.title + 'Empty']}}</i>
-  </span>
-  <table *ngIf="userEducationInfoDisplay[chosenSection.title].length && tableView" class="flex-grow table">
-    <tbody>
-    <tr>
-      <td class="left-cell"></td>
-      <td class="blind-text px50-padding-left">Название</td>
-      <td class="blind-text medial-cell">Автор</td>
-      <td class="blind-text centered-text medial-cell">Дата добавления</td>
-      <td class="small-cell"></td>
-      <td class="small-cell"></td>
-    </tr>
-    <tr *ngFor="let item of userEducationInfoDisplay[chosenSection.title]" class="table-row">
-      <td class="left-cell file-format">docx</td>
-      <td class="horizontal-padding">{{item.title}}</td>
-      <td class="medial-cell author">{{item['authorID'] === 18 ? 'Natalia' : 'diper'}}</td>
-      <td class="centered-text medial-cell grey-text">{{dateTimeDisplay(item['addDate'])}}</td>
-      <td class="small-cell">
-        <img src="../../../assets/actions/options.svg" alt="options" class="small-icon">
-      </td>
-      <td class="small-cell">
-        <img src="../../../assets/actions/remove.svg" alt="options" class="small-icon small-cell">
-      </td>
-    </tr>
-    </tbody>
-  </table>
-  <div *ngIf="userEducationInfoDisplay[chosenSection.title].length && !tableView" class="horizontal-padding">
-    <div *ngFor="let item of userEducationInfoDisplay[chosenSection.title]" class="column-display tile">
-      <img src="../../../assets/other/document.svg" alt="document" class="large-icon center-aligned">
-      <img src="../../../assets/actions/options.svg" alt="options" class="small-icon margin-left px10margin-right">
-      <span class="tile-title">{{item.title}}</span>
-      <span class="file-format tile-format">docx</span>
-    </div>
+  <div routerLink="tasks" routerLinkActive="chosen-link"
+       [queryParams]="queryParams"
+       class="row-display last-link link">
+    <button class="link-button">Задания</button>
   </div>
 </div>
-<form [formGroup]="fileUploadForm" class="row-display" enctype="multipart/form-data">
-  <input type="file" (input)="fileUpload($event)">
-  <input formControlName="submit" type="submit">
-</form>
+<div class="content paint-light-theme">
+  <div class="panel">
+    <div class="settings flex-grow">
+      <div class="settings-control">
+        <img src="../../../assets/actions/controls.svg" alt="settings" class="settings-control-img">
+      </div>
+      <div class="settings-control left-margin-20px">
+        <img src="../../../assets/actions/filter.svg" alt="filter" class="settings-control-img">
+      </div>
+      <div class="settings-control">
+        <img src="../../../assets/actions/sort.svg" alt="sort" class="settings-control-img">
+      </div>
+      <div class="settings-control">
+        <img src="../../../assets/actions/search.svg" alt="search" class="settings-control-img">
+      </div>
+      <div class="settings left-margin-auto right-margin-20px">
+        <div [ngClass]="options.view + '-view'" class="chosen-view-mark"></div>
+        <div class="settings-views" (click)="toTile()">
+          <img src="../../../assets/actions/tile.svg" alt="tile" class="settings-control-img">
+        </div>
+        <div class="settings-views" (click)="toTable()">
+          <img src="../../../assets/actions/list.svg" alt="list" class="settings-control-img">
+        </div>
+      </div>
+    </div>
+    <button class="add-button left-margin-auto" (click)="create()">
+      <span class="button-action">{{educationMessages[section]["add"]}}</span>
+    </button>
+  </div>
+  <router-outlet></router-outlet>
+</div>
+<!--<form [formGroup]="fileUploadForm" class="row-display" enctype="multipart/form-data">-->
+<!--  <input type="file" (input)="fileUpload($event)">-->
+<!--  <input formControlName="submit" type="submit">-->
+<!--</form>-->

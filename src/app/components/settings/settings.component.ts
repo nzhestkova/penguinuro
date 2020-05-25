@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
+import { passwordMatch } from "../../custom-validators/password-match.validator";
 import { UserService } from "../../services/user-service/user.service";
 import { UserStoreService } from "../../store/services/user-store.service/user-store.service";
 
@@ -27,7 +28,7 @@ export class SettingsComponent implements OnInit {
       ]),
       submit: new FormControl("Сохранить"),
       cancel: new FormControl("Отменить")
-    })
+    }, passwordMatch("newPassword", "newPasswordConfirm"))
   });
 
   ngOnInit(): void {

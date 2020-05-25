@@ -1,5 +1,6 @@
 @smallest-space: 5px;
 @small-space: 10px;
+@medial-space: 7px;
 @space: 20px;
 @white-text-color: white;
 @grey-color: #d7d7d7;
@@ -14,16 +15,245 @@
 @huge-icon-width: 70px;
 @smallest-icon-width: 0.7em;
 
-@background-dark-theme: #2b2e30;
+@background-dark-theme: #1d1d1d;
 @background-light-theme: #e8e8e8;
 @text-light-color: lighten(black, 10%);
 @text-dark-color: white;
 
 @window-light-theme-background: #ffffff;
-@window-dark-theme-background: #4a4a4a;
+@window-dark-theme-background: #262829;
 @input-dark-theme-background: #efefef;
 
+@light-theme-border-color: saturate(darken(@window-light-theme-background, 20%), 3%);
+
 @font-family: "Georgia", sans-serif;
+@font-size: 16px;
+
+// content
+.page {
+  .column-display;
+  min-width: 280px;
+  min-height: 250px;
+  font-family: @font-family;
+  font-size: @font-size;
+  border-radius: @border-radius;
+}
+
+.page-user-defined {
+  .right-margin-auto;
+  margin-left: @small-space;
+  width: 72%;
+}
+
+.page-user-undefined {
+  .horizontal-margin-auto;
+  width: 72%;
+}
+
+.control-button {
+  .relative-position;
+  .row-display;
+  .font-set;
+  cursor: pointer;
+  padding: @medial-space @space;
+  outline: none;
+  font-size: 17px;
+  background: transparent;
+  border-radius: @border-radius;
+  &:hover {
+    background: rgba(0, 0, 0, 0.13);
+  }
+}
+
+.button-title {
+  margin-left: 10%;
+}
+
+.red-button {
+  color: #a40800;
+}
+
+.edit-plate {
+  .column-display;
+  .font-set;
+  border-radius: @border-radius;
+  min-width: 150px;
+  width: 15%;
+  max-width: 160px;
+  margin-left: @small-space;
+  margin-top: @space;
+}
+
+.box-shadow {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+}
+
+// depends on theme
+.paint-light-theme {
+  background: @window-light-theme-background;
+  border-color: @light-theme-border-color;
+  color: @text-light-color;
+}
+
+// types
+.form-button {
+  .smooth-animation;
+  border-radius: @border-radius;
+  border: none;
+  height: 2.3em;
+  font-size: @font-size;
+  font-family: @font-family;
+  outline: none;
+  padding: @smallest-space @small-space;
+  &:hover {
+    cursor: pointer;
+  }
+  &:disabled {
+    cursor: auto;
+  }
+}
+
+.input {
+  outline: none;
+  border-radius: @border-radius;
+  border-width: 1px;
+  border-style: solid;
+  height: 2em;
+  font-size: @font-size;
+  text-align: center;
+  padding-left: @smallest-space;
+  padding-right: @smallest-space;
+}
+
+.password {
+  &-button {
+    .column-display;
+    .pointer;
+    .no-select;
+    border-width: 0.09em;
+    border-style: solid;
+    border-top-right-radius: @border-radius;
+    border-bottom-right-radius: @border-radius;
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    z-index: 1;
+    padding: 0 @small-space;
+    width: @small-icon-width;
+  }
+
+  &-input {
+    .input;
+    flex-grow: 1;
+  }
+}
+
+.field {
+  .column-display;
+  position: relative;
+  padding-top: @small-space;
+  &-name {
+    margin-bottom: @small-space;
+    font-weight: bold;
+  }
+}
+
+// margin section
+.right-margin-auto {
+  margin-right: auto;
+}
+
+.right-margin-10percent {
+  margin-right: 10%;
+}
+
+.right-margin-10px {
+  margin-right: @small-space;
+}
+
+.right-margin-20px {
+  margin-right: @space;
+}
+
+.left-margin-auto {
+  margin-left: auto;
+}
+
+.left-margin-10percent {
+  margin-left: 10%;
+}
+
+.left-margin-10px {
+  margin-left: @small-space;
+}
+
+.left-margin-5percent {
+  margin-left: 5%;
+}
+
+.left-margin-20px {
+  margin-left: @space;
+}
+
+.left-margin-40px {
+  margin-left: 40px;
+}
+
+.left-margin-10px {
+  margin-left: @small-space;
+}
+
+.left-padding-10px {
+  padding-left: @small-space;
+}
+
+.left-padding-20px {
+  padding-left: @space;
+}
+
+.margin-auto {
+  margin: auto;
+}
+
+.horizontal-margin-auto {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.vertical-margin-auto {
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.top-margin-10px {
+  margin-top: @small-space;
+}
+
+.top-margin-20px {
+  margin-top: @space;
+}
+
+.bottom-margin-10px {
+  margin-bottom: @small-space;
+}
+
+// padding section
+.standard-padding-all {
+  padding: @space @small-space;
+}
+
+.vertical-padding-10px {
+  padding: @small-space 0;
+}
+
+.pointer {
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+// all must be done
 
 .blind-text {
   color: #b3b3b3;
@@ -32,6 +262,7 @@
 
 .no-select {
   user-select: none;
+  -webkit-user-drag: none;
 }
 
 .italic {
@@ -64,7 +295,7 @@
 }
 
 .smooth-fast-animation {
-  transition: all 100ms ease;
+  transition: all 200ms ease;
 }
 
 .font-set {
@@ -103,10 +334,6 @@
   padding: @space 0;
 }
 
-.vertical-small-padding {
-  padding: @small-space 0;
-}
-
 .horizontal-padding {
   padding: 0 @space;
 }
@@ -119,6 +346,7 @@
   padding: 0 @space 0 0;
 }
 
+// done | horizontal-margin-auto
 .horizontal-auto-margin {
   margin-left: auto;
   margin-right: auto;
@@ -160,6 +388,7 @@
   margin: @space 0;
 }
 
+// done | vertical-margin-auto
 .vertical-auto-margin {
   margin-top: auto;
   margin-bottom: auto;
@@ -189,7 +418,6 @@
 .button {
   font-family: @font-family;
   outline: none;
-  padding: @smallest-space @small-space;
 }
 
 .smallest-icon {
@@ -202,6 +430,7 @@
 }
 
 .large-icon {
+  .no-select;
   width: @huge-icon-width;
 }
 
@@ -240,16 +469,35 @@
   overflow-y: scroll;
 }
 
+.username {
+  .smooth-animation;
+  position: relative;
+  font-family: @font-family;
+  padding: 0 @small-space;
+  height: 2.7em;
+  width: 2.7em;
+  border: 1px solid transparent;
+  border-radius: 30px;
+  outline: none;
+  background: @window-light-theme-background;
+  &-img {
+    position: absolute;
+    top: 0.6em;
+    left: 0.6em;
+    bottom: 0.6em;
+    right: 0.6em;
+    width: 1.3em;
+    margin: auto;
+    .no-select;
+  }
+}
+
 .theme {
-  position: fixed;
   width: 2.7em;
   height: 2.7em;
-  left: 0.7em;
-  top: 0.7em;
   border: 1px solid transparent;
   border-radius: 100%;
   outline: none;
-  z-index: 1;
   &-icon {
     line-height: 0.7em;
     font-size: 1.2em;
@@ -353,4 +601,26 @@
 
 .load-phrase-text-dark {
   color: #cad6ff;
+}
+
+.user-panel {
+  .column-display;
+  position: fixed;
+  top: @small-space;
+  right: @small-space;
+  z-index: 1;
+}
+
+.profile-light {
+  box-shadow: 0 0 0.5em rgba(0, 0, 0, 0.31);
+  &:hover {
+    box-shadow: 0 0 1em darken(rgba(0, 0, 0, 0.51), 10%);
+  }
+}
+
+.profile-dark {
+  box-shadow: 0 0 0.5em rgba(232, 232, 232, 0.71);
+  &:hover {
+    box-shadow: 0 0 1em darken(rgba(232, 232, 232, 0.71), 10%);
+  }
 }

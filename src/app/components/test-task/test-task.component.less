@@ -1,0 +1,121 @@
+@import "../../app.component.less";
+
+.content {
+  .column-display;
+  padding: @small-space @space;
+  border-radius: @border-radius;
+  min-width: 300px;
+  min-height: 470px;
+}
+
+.step {
+  .column-display;
+
+  &-title {
+    .no-select;
+    margin: @small-space auto auto 0;
+    font-weight: bold;
+    font-size: @font-size + 2px;
+  }
+
+  &-content {
+    .row-display;
+    flex-grow: 1;
+  }
+
+}
+
+.button {
+  .smooth-animation;
+  .no-select;
+  .pointer;
+  outline: none;
+  font-size: @font-size;
+  font-family: @font-family;
+  text-align: center;
+  border-radius: @border-radius;
+  border: none;
+  background: transparent;
+  &:hover {
+    background: rgba(0, 0, 0, 0.15);
+  }
+}
+
+.add-answer-option {
+  .button;
+  padding: @small-space @space;
+  margin: 0 0 auto auto;
+  min-width: 173px;
+}
+
+.add-question {
+  .button;
+  .column-display;
+  padding: @small-space @space;
+  background: rgba(61, 75, 60, 0.1);
+  &:hover {
+    background: rgba(61, 75, 60, 0.3);
+  }
+}
+
+.question-creator {
+  .column-display;
+  .flex-grow;
+  padding: 0 @small-space;
+}
+
+.structure {
+  .relative-position;
+  .column-display;
+  flex-grow: 0;
+  flex-shrink: 0;
+  height: 470px;
+  border-left: 0.05em solid rgba(0, 0, 0, 0.15);
+  padding: 0 0 0 @space;
+  margin-bottom: @space;
+
+  &-info {
+    .column-display;
+    padding: @small-space 0;
+    margin-top: @space;
+    min-height: 300px;
+    height: 85%;
+    overflow-y: scroll;
+
+    &::-webkit-scrollbar {
+      width: 7px;
+    }
+
+    &::-webkit-scrollbar-track {
+      border-radius: @border-radius;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: rgba(61, 75, 60, 0.1);
+      border-radius: @border-radius;
+    }
+
+    &-question {
+      .row-display;
+      .button;
+      padding: @smallest-space @small-space;
+      margin-right: @small-space;
+      &-remove {
+        .button;
+        .row-display;
+        padding: @smallest-space;
+        background: rgba(61, 75, 60, 0.1);
+
+        &-icon {
+          .no-select;
+          width: 14px;
+          margin: auto;
+        }
+
+        &:hover {
+          background: rgba(134, 1, 1, 0.3);
+        }
+      }
+    }
+  }
+}

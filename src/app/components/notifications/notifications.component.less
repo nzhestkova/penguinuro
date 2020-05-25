@@ -2,8 +2,9 @@
 @font-size: 16px;
 @15px-space: 15px;
 
-.content-plate {
-  margin: @smallest-space @small-space;
+.empty {
+  .horizontal-margin-auto;
+  .italic;
 }
 
 .unread {
@@ -24,17 +25,16 @@
 }
 
 .notification {
+  .row-display;
   .smooth-animation;
-  padding: 15px 0;
-  margin: 0 @small-space;
-  border-width: 0.01em;
-  border-style: solid;
-  border-color:transparent transparent #d3d3d3 transparent;
+  padding: @space 0;
+  margin: @smallest-space 0;
+  border-radius: @border-radius;
 }
 
 .date-time {
   color: #5b3434;
-  margin: auto @smallest-space auto auto;
+  margin: auto @space auto auto;
 }
 
 .notification-message {
@@ -47,6 +47,7 @@
 }
 
 .notification-icon {
+  .no-select;
   height: 50px;
   width: 50px;
   margin: auto @space;

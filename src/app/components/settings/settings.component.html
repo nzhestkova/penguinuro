@@ -1,21 +1,41 @@
 <div class="column-display" [formGroup]="settingsForm">
-  <span>Изменение пароля</span>
-  <div class="column-display" formGroupName="passwordChange">
-    <div>
-      <span>Старый пароль</span>
-      <input formControlName="oldPassword">
+  <div class="row-display simple section-highlight top-margin-10px">
+    <span class="left-margin-10percent right-margin-auto">Изменение пароля</span>
+  </div>
+  <div class="form" formGroupName="passwordChange">
+    <div class="field">
+      <span class="field-name">Старый пароль</span>
+      <div class="row-display relative-position">
+        <input type="password" formControlName="oldPassword" class="password-input paint-light-theme">
+        <div class="password-button paint-light-theme"
+          [appChangeImage]="['../../../assets/password/hide-password.svg', '../../../assets/password/show-password.svg']">
+          <img appShowPassword src="../../../assets/password/show-password.svg"
+               alt="hide password" class="small-icon vertical-auto-margin">
+        </div>
+      </div>
     </div>
-    <div>
-      <span>Новый пароль</span>
-      <input formControlName="newPassword">
+    <div class="field">
+      <span class="field-name">Новый пароль</span>
+      <div class="row-display relative-position">
+        <input formControlName="newPassword" class="password-input paint-light-theme">
+        <div class="password-button paint-light-theme"
+          [appChangeImage]="['../../../assets/password/hide-password.svg', '../../../assets/password/show-password.svg']">
+          <img appShowPassword src="../../../assets/password/show-password.svg"
+               alt="hide password" class="small-icon vertical-auto-margin">
+        </div>
+      </div>
+      <div class="row-display relative-position top-margin-10px">
+        <input formControlName="newPasswordConfirm" class="password-input paint-light-theme">
+        <div class="password-button paint-light-theme"
+          [appChangeImage]="['../../../assets/password/hide-password.svg', '../../../assets/password/show-password.svg']">
+          <img appShowPassword src="../../../assets/password/show-password.svg"
+               alt="hide password" class="small-icon vertical-auto-margin">
+        </div>
+      </div>
     </div>
-    <div>
-      <span></span>
-    </div>
-    <input formControlName="newPasswordConfirm">
-    <div>
-      <input type="submit" formControlName="submit">
-      <input type="button" formControlName="cancel">
+    <div class="row-display top-margin-20px">
+      <input type="button" formControlName="cancel" class="form-button right-margin-auto">
+      <input type="submit" formControlName="submit" class="form-button left-margin-auto">
     </div>
   </div>
 </div>

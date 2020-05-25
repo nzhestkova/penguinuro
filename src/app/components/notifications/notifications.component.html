@@ -1,8 +1,9 @@
-<div class="column-display content-plate">
-  <span *ngIf="!notificationList.length">{{notificationMessages.haveNotNewNotifications}}</span>
-  <div *ngFor="let notification of notificationList" class="row-display notification">
+<div class="column-display">
+  <span *ngIf="!notificationList.length" class="empty">{{notificationMessages.haveNotNewNotifications}}</span>
+  <div *ngFor="let notification of notificationList" class="notification paint-light-theme">
     <div *ngIf="!notification.checked" class="unread"></div>
-    <img [src]="'../../../assets/' + notification.owner + 'Notification.svg'" alt="welcome" class="notification-icon">
+    <img [src]="'../../../assets/notification-icons/' + notification.owner + 'Notification.svg'"
+         alt="welcome" class="notification-icon">
     <div class="column-display flex-grow notification-message">
       <span class="owner">{{notification.owner}}</span>
       <span class="message">{{notification.message}}</span>

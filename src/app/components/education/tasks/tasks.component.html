@@ -1,0 +1,53 @@
+<div *ngIf="!displayedInfo.length" class="empty-phrase">{{messages.empty}}</div>
+<table *ngIf="displayedInfo.length && panelOptions.view === 'table'" class="flex-grow table">
+  <tbody>
+  <tr>
+    <td class="left-cell"></td>
+    <td class="blind-text px50-padding-left">Название</td>
+    <td class="blind-text medial-cell">Автор</td>
+    <td class="blind-text centered-text medial-cell">Дата добавления</td>
+    <td class="small-cell"></td>
+    <td class="small-cell"></td>
+  </tr>
+  <tr *ngFor="let item of displayedInfo" class="table-row">
+    <td class="left-cell file-format vertical-margin-auto">docx</td>
+    <td class="horizontal-padding">{{item.title}}</td>
+    <td class="medial-cell author">{{item['authorID'] === 18 ? 'Natalia' : 'diper'}}</td>
+    <td class="centered-text medial-cell grey-text">{{dateTimeDisplay(item['addDate'])}}</td>
+    <td class="small-cell">
+      <img src="../../../../assets/actions/options.svg" alt="options" class="small-icon">
+    </td>
+    <td class="small-cell">
+      <img src="../../../../assets/actions/remove.svg" alt="options" class="small-icon small-cell">
+    </td>
+  </tr>
+  </tbody>
+</table>
+<div *ngIf="displayedInfo.length && panelOptions.view === 'tile'" class="horizontal-padding">
+  <div *ngFor="let item of displayedInfo" class="column-display tile">
+    <img src="../../../../assets/other/document.svg" alt="document" class="large-icon center-aligned">
+    <img src="../../../../assets/actions/options.svg" alt="options" class="small-icon margin-left px10margin-right">
+    <span class="tile-title">{{item.title}}</span>
+    <span class="file-format tile-format">docx</span>
+  </div>
+</div>
+<div class="popup" *ngIf="askingForType">
+  <div class="popup-content">
+    <button class="popup-close left-margin-auto" (click)="cancel()">
+      <img src="../../../../assets/actions/close.svg" alt="close" class="popup-close-icon">
+    </button>
+    <div class="task">
+      <div (mouseenter)="focus('simple')" (mouseleave)="focus('')" class="task-type">
+        <img src="../../../../assets/other/copybook.svg" alt="simpleTask" class="task-type-icon">
+        <span class="task-type-title top-margin-10px">{{messages.types.simple}}</span>
+      </div>
+      <div (mouseenter)="focus('test')" (mouseleave)="focus('')" routerLink="/create/test" class="task-type">
+        <img src="../../../../assets/other/test.svg" alt="testTask" class="task-type-icon">
+        <span class="task-type-title top-margin-10px">{{messages.types.control}}</span>
+      </div>
+    </div>
+    <div class="description margin-auto">
+      <span class="description-text">{{description}}</span>
+    </div>
+  </div>
+</div>

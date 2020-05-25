@@ -1,0 +1,26 @@
+<div class="content paint-light-theme">
+  <div class="step">
+    <span class="step-title">Шаг 1: Структура</span>
+  </div>
+  <div class="step-content">
+    <div class="question-creator">
+      <span class="margin-auto italic">Выберите элемент из панели справа</span>
+<!--      <button class="add-answer-option">Добавить вариант ответа</button>-->
+    </div>
+    <div class="structure">
+      <div class="add-question" (click)="addQuestion('free')">
+        <span>Добавить вопрос</span>
+        <div></div>
+      </div>
+      <div class="structure-info">
+        <span *ngIf="!testStructure.length" class="margin-auto italic">&lt;пусто&gt;</span>
+        <div *ngFor="let question of testStructure; let i = index" class="structure-info-question">
+          <span class="flex-grow vertical-margin-auto">вопрос #{{i + 1}}</span>
+          <button class="structure-info-question-remove" (click)="removeQuestion(question)">
+            <img src="../../../assets/actions/close.svg" alt="remove" class="structure-info-question-remove-icon">
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

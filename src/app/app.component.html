@@ -1,19 +1,52 @@
 <div class="background" [ngClass]="{'light-theme': !darkThemeEnable, 'dark-theme': darkThemeEnable}">
-  <div class="row-display bottom-margin">
-    <div class="right-aligned">
-      <button *ngIf="showSign" class="sign-up" routerLink="register">Sign up</button>
-      <button *ngIf="showSign" class="sign-in" routerLink="login">Sign in</button>
+  <div class="user-panel">
+    <div class="row-display">
+      <button routerLink="profile" *ngIf="user" class="username right-margin-10px"
+              [ngClass]="{'profile-light': !darkThemeEnable, 'profile-dark': darkThemeEnable}">
+        <img src="../assets/user-light.svg" alt="profile" class="username-img">
+      </button>
+      <button routerLink="" *ngIf="user" class="username right-margin-10px"
+              [ngClass]="{'profile-light': !darkThemeEnable, 'profile-dark': darkThemeEnable}">
+        <img src="../assets/home.svg" alt="profile" class="username-img">
+      </button>
+      <button class="theme"
+              [ngClass]="{'light-theme-button': !darkThemeEnable, 'dark-theme-button': darkThemeEnable}"
+              (click)="toggleTheme()">
+        <span class="theme-icon" *ngIf="darkThemeEnable">💡</span>
+        <span class="theme-icon" *ngIf="!darkThemeEnable">🌙</span>
+      </button>
     </div>
-<!--    <button class="theme"-->
-<!--            [ngClass]="{'light-theme-button': !darkThemeEnable, 'dark-theme-button': darkThemeEnable}"-->
-<!--            (click)="toggleTheme()">-->
-<!--      <span class="theme-icon" *ngIf="darkThemeEnable">💡</span>-->
-<!--      <span class="theme-icon" *ngIf="!darkThemeEnable">🌙</span>-->
-<!--    </button>-->
   </div>
-  <router-outlet>
-  </router-outlet>
-  <div class="fixed-bottom vertical-small-padding row-display">
+  <div class="row-display relative-position top-margin-20px">
+    <div class="edit-plate" *ngIf="!showSign">
+      <div routerLink="education/tasks" class="control-button">
+        <span class="flex-grow button-title">Обучение</span>
+      </div>
+      <div routerLink="notifications"
+           class="relative-position row-display control-button">
+        <span class="flex-grow button-title">События</span>
+        <div class="notification-sign row-display">
+          <span></span>
+        </div>
+      </div>
+      <div class="control-button">
+        <span class="flex-grow button-title">Настройки</span>
+      </div>
+      <div routerLink="login" (click)="logout()"
+           class="control-button">
+        <span class="flex-grow button-title red-button">Выход</span>
+      </div>
+      <!--      <div (click)="showPopup()" [ngClass]="{'button-light-theme': !darkTheme, 'button-dark-theme': darkTheme}"-->
+      <!--           class="row-display control-button last-button">-->
+      <!--        <span class="flex-grow centered-text">Удалить</span>-->
+      <!--&lt;!&ndash;        <img src="../../../assets/edit.png" alt="edit" class="small-icon">&ndash;&gt;-->
+      <!--      </div>-->
+    </div>
+    <div class="page" [ngClass]="{'page-user-defined': !showSign, 'page-user-undefined': showSign}">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+  <div class="fixed-bottom vertical-padding-10px row-display">
     <span class="center-aligned">~ {{specialSign}}</span>
   </div>
 </div>
@@ -21,7 +54,7 @@
      *ngIf="loading | async" class="load-popup">
   <div [ngClass]="{'load-icon-transparent-light': !darkThemeEnable, 'load-icon-transparent-dark': darkThemeEnable}"
        class="center-aligned column-display load-icon">
-    <img [src]="darkThemeEnable ? '../assets/onload_dark.gif' : '../assets/onload.gif'"
+    <img [src]="darkThemeEnable ? '../assets/loading/onload_dark.gif' : '../assets/loading/onload.gif'"
          alt="loading" class="load-image">
     <span [ngClass]="{'load-phrase-text-light': !darkThemeEnable, 'load-phrase-text-dark': darkThemeEnable}"
           class="center-aligned font-set load-phrase">Подождите</span>

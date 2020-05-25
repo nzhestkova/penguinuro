@@ -1,0 +1,84 @@
+@import "../../../app.component.less";
+@import "../education.component.less";
+
+.popup {
+  .column-display;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.29);
+  z-index: 2;
+
+  &-close {
+    .smooth-animation;
+    .no-select;
+    .row-display;
+    outline: none;
+    border: none;
+    border-bottom-left-radius: @border-radius;
+    border-top-right-radius: @border-radius;
+    background: transparent;
+    padding: @small-space;
+    &:hover {
+      background: rgba(0, 0, 0, 0.15);
+    }
+
+    &-icon {
+      .no-select;
+      .margin-auto;
+      width: 1.1em;
+    }
+  }
+
+  &-content {
+    .column-display;
+    min-width: 300px;
+    width: 35%;
+    min-height: 325px;
+    background: white;
+    border-radius: @border-radius;
+    margin: auto;
+  }
+}
+
+.task {
+  .row-display;
+  padding: @small-space 0 @space 0;
+  &-type {
+    .smooth-animation;
+    .no-select;
+    .column-display;
+    .horizontal-margin-auto;
+    min-width: 120px;
+    width: 25%;
+    border-radius: @border-radius;
+    padding: @small-space;
+
+    &-title {
+      font-size: @font-size;
+      text-align: center;
+    }
+
+    &-icon {
+      .no-select;
+      .large-icon;
+      .margin-auto;
+    }
+
+    &:hover {
+      background: rgba(0, 0, 0, 0.15);
+    }
+  }
+}
+
+.description {
+  .row-display;
+  padding: @small-space @space @space @space;
+  text-align: center;
+  &-text {
+    margin: auto;
+    width: 80%;
+  }
+}

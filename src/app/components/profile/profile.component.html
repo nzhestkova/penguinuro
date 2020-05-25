@@ -3,39 +3,22 @@
   <div class="column-display">
     <div [ngClass]="{'window-light-theme': !darkTheme, 'window-dark-theme': darkTheme}"
          class="column-display right-aligned plate avatar">
-      <img [src]="user.status === 'god' ? '../../../assets/standard-avatars/god-avatar.svg' : '../../../assets/standard-avatars/cat-avatar.svg'"
-           alt="cat" class="user-data-ico">
+      <img [src]="user.status === 'god'
+       ? '../../../assets/standard-avatars/doggy.svg'
+       : user.status === 'developer'
+        ? '../../../assets/standard-avatars/developer.svg'
+        : '../../../assets/standard-avatars/simple.svg'"
+           alt="cat" class="user-data-ico no-select">
       <span [appSetStatus]="{status: user.status, darkTheme: darkTheme}"
             class="center-aligned status">{{user.status}}</span>
       <span class="user-data-username center-aligned">{{user.username}}</span>
     </div>
-    <div [ngClass]="{'window-light-theme': !darkTheme, 'window-dark-theme': darkTheme}"
-         class="column-display edit-plate avatar small-top-margin">
-      <div [ngClass]="{'button-light-theme': !darkTheme, 'button-dark-theme': darkTheme}" routerLink="education"
-           class="relative-position row-display control-button first-button">
-        <span class="flex-grow button-title">Обучение</span>
-      </div>
-      <div [ngClass]="{'button-light-theme': !darkTheme, 'button-dark-theme': darkTheme}" routerLink="notifications"
-           class="relative-position row-display control-button">
-        <span class="flex-grow button-title">События</span>
-        <div *ngIf="unreadNotification" class="notification-sign row-display">
-          <span>{{unreadNotification}}</span>
-        </div>
-      </div>
-      <div [ngClass]="{'button-light-theme': !darkTheme, 'button-dark-theme': darkTheme}" routerLink="settings"
-           class="relative-position row-display control-button">
-        <span class="flex-grow button-title">Настройки</span>
-      </div>
-      <div [ngClass]="{'button-light-theme': !darkTheme, 'button-dark-theme': darkTheme}" (click)="logout()"
-           class="relative-position row-display control-button last-button">
-        <span class="flex-grow button-title red-button">Выход</span>
-      </div>
+
 <!--      <div (click)="showPopup()" [ngClass]="{'button-light-theme': !darkTheme, 'button-dark-theme': darkTheme}"-->
 <!--           class="row-display control-button last-button">-->
 <!--        <span class="flex-grow centered-text">Удалить</span>-->
 <!--&lt;!&ndash;        <img src="../../../assets/edit.png" alt="edit" class="small-icon">&ndash;&gt;-->
 <!--      </div>-->
-    </div>
   </div>
   <app-popup-confirm *ngIf="askConfirm" (chosen)="deleteUser($event)"
                      [question]="confirmMessages.deleteAccountQuestion"

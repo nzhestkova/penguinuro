@@ -25,9 +25,14 @@ export class NotificationsComponent implements OnInit, AfterViewInit, OnDestroy 
   }
 
   ngOnInit(): void {
+    this.notificationList = [];
     this.userStore.loadUserInfo().subscribe((user: User) => {
       if (user) {
-        this.notificationList = user.notifications.reverse();
+
+        // ??? какого черта
+        this.notificationList = user.notifications.filter((item) => item);
+        this.notificationList.reverse();
+
         this.cdr.markForCheck();
       }
     });
