@@ -7,8 +7,10 @@ export class Question {
   constructor(type: string, wording?: string, answers?: string[], correctAnswers?: string[]) {
     this.type = type;
     this.wording = wording;
-    if (answers) { this.answers = answers; }
-    if (correctAnswers) { this.correctAnswers = correctAnswers; }
+    this.answers = [];
+    if (answers) { this.setAnswers(answers); }
+    this.correctAnswers = [];
+    if (correctAnswers) { this.setCorrectAnswers(answers); }
   }
 
   setWording(wording: string): void {
@@ -16,10 +18,10 @@ export class Question {
   }
 
   setAnswers(answers: string[]): void {
-    this.answers = answers.map((answer) => answer);
+    this.answers = this.answers.concat(answers);
   }
 
   setCorrectAnswers(answers: string[]): void {
-    this.correctAnswers = answers.map((answer) => answer);
+    this.correctAnswers = this.correctAnswers.concat(answers);
   }
 }

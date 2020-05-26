@@ -23,7 +23,6 @@ import { ChangeImageDirective } from "./directives/change-image/change-image.dir
 import { ClearInputTipsDirective } from "./directives/clear-input-tips/clear-input-tips.directive";
 import { SetStatusDirective } from "./directives/set-status/set-status.directive";
 import { ShowPasswordDirective } from "./directives/show-password/show-password.directive";
-import { TooltipDirective } from "./directives/tooltip/tooltip.directive";
 import { MaterialService } from "./services/material-service/material.service";
 import { UserService } from "./services/user-service/user.service";
 import { appReducers } from "./store/reducers/app.reducers";
@@ -32,6 +31,7 @@ import { UserStoreService } from "./store/services/user-store.service/user-store
 import { WaitingStoreService } from "./store/services/waiting-store.service/waiting-store.service";
 import { ProgressComponent } from './components/education/progress/progress.component';
 import { TestTaskComponent } from './components/test-task/test-task.component';
+import { ResizeDirective } from './directives/resize/resize.directive';
 
 @NgModule({
   declarations: [
@@ -48,7 +48,6 @@ import { TestTaskComponent } from './components/test-task/test-task.component';
     TestCreatorComponent,
     ClosedTestCreateComponent,
     ClearInputTipsDirective,
-    TooltipDirective,
     EducationComponent,
     NotificationsComponent,
     TaskCreatorComponent,
@@ -56,6 +55,7 @@ import { TestTaskComponent } from './components/test-task/test-task.component';
     TasksComponent,
     ProgressComponent,
     TestTaskComponent,
+    ResizeDirective,
   ],
     imports: [
         BrowserModule,

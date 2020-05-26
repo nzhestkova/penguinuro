@@ -46,11 +46,11 @@ export class TasksComponent implements OnInit, OnDestroy {
   focus(type: string): void {
     switch (type) {
       case "simple": {
-        this.description = this.messages.types.simpleDescription;
+        this.description = this.messages.types.simple.description;
         break;
       }
       case "test": {
-        this.description = this.messages.types.controlDescription;
+        this.description = this.messages.types.test.description;
         console.log("work");
         break;
       }

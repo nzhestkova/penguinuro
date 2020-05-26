@@ -39,11 +39,12 @@
     <div class="task">
       <div (mouseenter)="focus('simple')" (mouseleave)="focus('')" class="task-type">
         <img src="../../../../assets/other/copybook.svg" alt="simpleTask" class="task-type-icon">
-        <span class="task-type-title top-margin-10px">{{messages.types.simple}}</span>
+        <span class="task-type-title top-margin-10px">{{messages.types.simple.title}}</span>
       </div>
-      <div (mouseenter)="focus('test')" (mouseleave)="focus('')" routerLink="/create/test" class="task-type">
+      <div (mouseenter)="focus('test')" (mouseleave)="focus('')"
+           routerLink="/create/test" class="task-type">
         <img src="../../../../assets/other/test.svg" alt="testTask" class="task-type-icon">
-        <span class="task-type-title top-margin-10px">{{messages.types.control}}</span>
+        <span class="task-type-title top-margin-10px">{{messages.types.test.title}}</span>
       </div>
     </div>
     <div class="description margin-auto">

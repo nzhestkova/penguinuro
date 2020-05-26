@@ -3,9 +3,32 @@
     <span class="step-title">Шаг 1: Структура</span>
   </div>
   <div class="step-content">
-    <div class="question-creator">
-      <span class="margin-auto italic">Выберите элемент из панели справа</span>
-<!--      <button class="add-answer-option">Добавить вариант ответа</button>-->
+    <div class="question" [formGroup]="questionForm">
+      <span class="margin-auto italic" *ngIf="!selectedQuestion">Выберите элемент из списка справа</span>
+      <div *ngIf="selectedQuestion" class="column-display max-height-80prc">
+        <div class="question-wording">
+          <span class="right-margin-10px">Вопрос #{{testStructure.indexOf(selectedQuestion) + 1}}:</span>
+          <textarea formControlName="wording" class="question-wording-input" appResize
+                    [placeholder]="messages.wordingQuestion" (focusout)="saveWording()">
+        </textarea>
+        </div>
+        <button class="add-answer-option" (click)="addAnswer()">{{messages.test.addAnswer}}</button>
+        <div class="answers" (focusout)="saveAnswers()">
+          <span class="italic margin-auto" *ngIf="!answers.length">{{messages.test.emptyAnswers}}</span>
+          <div *ngFor="let input of answers; let i = index" formGroupName="answers" class="answer">
+            <button class="structure-info-question-remove mark">
+              <img src="../../../assets/other/checkmark-empty.svg" alt="remove" class="structure-info-question-remove-icon">
+            </button>
+            <span class="right-margin-10px">{{i + 1}})</span>
+            <textarea [formControlName]="input" class="question-wording-input" appResize
+                      [placeholder]="messages.wordingAnswer + (i + 1)">
+            </textarea>
+            <button class="structure-info-question-remove answer-remove" (click)="removeAnswer(input, i)">
+              <img src="../../../assets/actions/remove.svg" alt="remove" class="structure-info-question-remove-icon">
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
     <div class="structure">
       <div class="add-question" (click)="addQuestion('free')">
@@ -13,14 +36,16 @@
         <div></div>
       </div>
       <div class="structure-info">
-        <span *ngIf="!testStructure.length" class="margin-auto italic">&lt;пусто&gt;</span>
-        <div *ngFor="let question of testStructure; let i = index" class="structure-info-question">
+        <span *ngIf="!testStructure.length" class="structure-info-empty">{{messages.test.emptyStructure}}</span>
+        <div *ngFor="let question of testStructure; let i = index" class="structure-info-question"
+             [ngClass]="{ 'structure-info-chosen-question': question === selectedQuestion }" (click)="selectQuestion(question)">
           <span class="flex-grow vertical-margin-auto">вопрос #{{i + 1}}</span>
           <button class="structure-info-question-remove" (click)="removeQuestion(question)">
-            <img src="../../../assets/actions/close.svg" alt="remove" class="structure-info-question-remove-icon">
+            <img src="../../../assets/actions/remove.svg" alt="remove" class="structure-info-question-remove-icon">
           </button>
         </div>
       </div>
+      <input type="button" class="next" disabled value="Следующий шаг">
     </div>
   </div>
 </div>
