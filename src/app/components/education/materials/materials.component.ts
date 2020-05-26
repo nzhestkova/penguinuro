@@ -75,32 +75,6 @@ export class MaterialsComponent implements OnInit, OnDestroy {
           // this.userMaterials = user.education.materials;
         }
       });
-    this.userMaterials.push( //
-      {
-        authorID: 18,
-        title: "Лекция по электродинамике",
-        path: "[href://localhost:4200/here].docx",
-        addDate: new Date("2019-12-05"),
-      },
-      {
-        authorID: 13,
-        title: "Лекция по математике",
-        path: "[href://localhost:4200/here].mp3",
-        addDate: new Date(),
-      },
-      {
-        authorID: 18,
-        title: "Лекция по электронике",
-        path: "[href://localhost:4200/here].json",
-        addDate: new Date("2019-11-03 12:01"),
-      },
-      {
-        authorID: 12,
-        title: "Методичка 'Программирование'",
-        path: "[href://localhost:4200/here].docx",
-        addDate: new Date("2014-07-15 0:0"),
-      },
-    );
     this.displayAll();
     this.newestFirst();
   }

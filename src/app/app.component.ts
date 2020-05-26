@@ -62,6 +62,9 @@ export class AppComponent implements OnInit, DoCheck {
     this.loading = this.waitingStore.loadInfo();
     const savedLogin = this.cookieService.checkInfo("login");
     const savedPassword = this.cookieService.checkInfo("password");
+    if (!savedLogin && !savedPassword) {
+      this.router.navigate([this.router.url + "/login"]).then();
+    }
     if (savedLogin && savedPassword) {
       this.waitingStore.activateLoading();
       this.userService.loginUser(savedLogin, savedPassword).subscribe(

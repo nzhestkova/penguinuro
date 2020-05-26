@@ -41,7 +41,7 @@ export class SignInFormComponent implements OnInit, DoCheck {
       Validators.required,
       Validators.minLength(8),
     ]),
-    submitButton: new FormControl("Submit"),
+    submitButton: new FormControl("Войти"),
   });
 
   resetErrorSigns(): void {

@@ -52,7 +52,7 @@ export class SignUpFormComponent implements OnInit, DoCheck {
       Validators.required,
       Validators.minLength(8),
     ]),
-    submitButton: new FormControl("Submit"),
+    submitButton: new FormControl("Зарегистрироваться"),
   }, passwordMatch("password", "passwordAgain"));
 
   submitForm(): void {

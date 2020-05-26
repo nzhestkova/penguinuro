@@ -17,7 +17,6 @@ export class TestTaskComponent implements OnInit {
   testStructure: Question[];
   selectedQuestion: Question;
   answers: string[];
-  correctAnswers: string[];
 
   questionForm = new FormGroup({
     wording: new FormControl("", [
@@ -50,7 +49,9 @@ export class TestTaskComponent implements OnInit {
   }
 
   removeAnswer(controlName: string, removingElementIndex: number): void {
-    if (this.selectedQuestion.answers[removingElementIndex]) {
+    const answer = this.selectedQuestion.answers[removingElementIndex];
+    if (answer) {
+      this.selectedQuestion.correctAnswers = this.selectedQuestion.correctAnswers.filter((correctAnswer) => correctAnswer !== answer);
       this.selectedQuestion.answers.splice(removingElementIndex, 1);
     }
 
@@ -77,6 +78,10 @@ export class TestTaskComponent implements OnInit {
   }
 
   saveAnswers(): void {
+    const indexes = [];
+    this.selectedQuestion.correctAnswers.forEach(
+      (correctAnswer) => indexes.push(this.selectedQuestion.answers.indexOf(correctAnswer)));
+
     const form = <FormGroup> this.questionForm.get("answers");
     this.selectedQuestion.answers = [];
     Object.keys(form.controls).forEach(
@@ -85,6 +90,9 @@ export class TestTaskComponent implements OnInit {
           this.selectedQuestion.answers.push(form.get(controlName).value);
         }
       });
+
+    this.selectedQuestion.correctAnswers = [];
+    indexes.forEach((i) => this.selectedQuestion.correctAnswers.push(this.selectedQuestion.answers[i]));
   }
 
   saveWording(): void {
@@ -101,17 +109,24 @@ export class TestTaskComponent implements OnInit {
     }
   }
 
-  checkCorrectAnswers(): void {
+  checkCorrectAnswers(index: number): boolean {
+    const element = this.selectedQuestion.answers[index];
+    return this.selectedQuestion.correctAnswers.includes(element);
+  }
 
+  markAs(index: number): void {
+    const element = this.selectedQuestion.answers[index];
+    if (!element) { return; }
+
+    if (this.selectedQuestion.correctAnswers.includes(element)) {
+      this.selectedQuestion.correctAnswers = this.selectedQuestion.correctAnswers.filter(
+        (correctAnswer) => correctAnswer !== element);
+      return;
+    }
+    this.selectedQuestion.correctAnswers.push(element);
   }
 
   ngOnInit(): void {
-    this.testStructure = [
-      new Question("simple", "Сколько планет в солнечной системе?"),
-      new Question("simple", "Когда появились первые люди?"),
-    ];
-    this.testStructure[0].setAnswers(["7 планет", "8 планет", "9 планет"]);
-    this.testStructure[0].setCorrectAnswers([this.testStructure[0].answers[0]]);
-    this.selectQuestion(this.testStructure[0]);
+    this.testStructure = [];
   }
 }

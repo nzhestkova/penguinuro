@@ -51,7 +51,6 @@ export class TasksComponent implements OnInit, OnDestroy {
       }
       case "test": {
         this.description = this.messages.types.test.description;
-        console.log("work");
         break;
       }
       default: {

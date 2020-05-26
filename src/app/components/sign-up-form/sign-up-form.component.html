@@ -3,7 +3,7 @@
         [ngClass]="{ 'window-light-theme': !darkThemeEnable, 'window-dark-theme': darkThemeEnable }"
         class="form column-display center-aligned">
     <label class="form-field">
-      <span class="form-field-text center-aligned bold-text">Login</span>
+      <span class="form-field-text center-aligned bold-text">Логин</span>
       <label class="row-display relative-position">
         <input formControlName="login" (change)="checkLogin()" (input)="resetLoadSigns()"
                class="right-icon flex-grow">
@@ -23,7 +23,7 @@
       <span class="left-aligned message">{{invalidError.loginExistError}}</span>
     </label>
     <label class="form-field">
-      <span class="form-field-text center-aligned bold-text">Username</span>
+      <span class="form-field-text center-aligned bold-text">Ваше имя</span>
       <input formControlName="username" class="form-field-input">
     </label>
     <label class="row-display error" *ngIf="registerForm.get('username').invalid && registerForm.get('username').touched">
@@ -31,7 +31,7 @@
       <span class="left-aligned message">{{invalidError[controlStatus(registerForm.get('username'), "username")]}}</span>
     </label>
     <label class="form-field">
-      <span class="form-field-text center-aligned bold-text">Password</span>
+      <span class="form-field-text center-aligned bold-text">Пароль</span>
       <label class="row-display relative-position">
         <input formControlName="password" type="password" class="form-field-input flex-grow">
         <label [appChangeImage]="['../../../assets/password/hide-password.svg', '../../../assets/password/show-password.svg']"
@@ -61,4 +61,5 @@
     </label>
     <input formControlName="submitButton" type="submit" class="form-submit">
   </form>
+  <span routerLink="/login" class="link">Войти</span>
 </div>

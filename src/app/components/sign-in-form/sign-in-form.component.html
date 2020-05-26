@@ -8,11 +8,11 @@
         [ngClass]="{ 'window-light-theme': !darkThemeEnable, 'window-dark-theme': darkThemeEnable }"
         class="form column-display center-aligned">
     <label class="form-field">
-      <span class="form-field-text center-aligned bold-text">Login</span>
+      <span class="form-field-text center-aligned bold-text">Логин</span>
       <input formControlName="login" class="form-field-input">
     </label>
     <label class="form-field">
-      <span class="form-field-text center-aligned bold-text">Password</span>
+      <span class="form-field-text center-aligned bold-text">Пароль</span>
       <label class="row-display relative-position">
         <input formControlName="password" type="password" class="form-field-input flex-grow">
         <label [appChangeImage]="['../../../assets/password/hide-password.svg', '../../../assets/password/show-password.svg']"
@@ -24,4 +24,5 @@
     </label>
     <input formControlName="submitButton" type="submit" class="form-submit">
   </form>
+  <span routerLink="/register" class="link">Зарегистрироваться</span>
 </div>

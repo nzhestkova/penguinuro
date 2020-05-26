@@ -1,10 +1,14 @@
 <div class="content paint-light-theme">
   <div class="step">
     <span class="step-title">Шаг 1: Структура</span>
+    <button class="help">
+      <img src="../../../assets/other/help.svg" alt="remove" class="help-icon">
+    </button>
   </div>
   <div class="step-content">
     <div class="question" [formGroup]="questionForm">
-      <span class="margin-auto italic" *ngIf="!selectedQuestion">Выберите элемент из списка справа</span>
+      <span class="margin-auto italic" *ngIf="!selectedQuestion && !testStructure.length">Добавьте вопрос</span>
+      <span class="margin-auto italic" *ngIf="!selectedQuestion && testStructure.length">Выберите вопрос в меню справа</span>
       <div *ngIf="selectedQuestion" class="column-display max-height-80prc">
         <div class="question-wording">
           <span class="right-margin-10px">Вопрос #{{testStructure.indexOf(selectedQuestion) + 1}}:</span>
@@ -15,11 +19,15 @@
         <button class="add-answer-option" (click)="addAnswer()">{{messages.test.addAnswer}}</button>
         <div class="answers" (focusout)="saveAnswers()">
           <span class="italic margin-auto" *ngIf="!answers.length">{{messages.test.emptyAnswers}}</span>
-          <div *ngFor="let input of answers; let i = index" formGroupName="answers" class="answer">
-            <button class="structure-info-question-remove mark">
-              <img src="../../../assets/other/checkmark-empty.svg" alt="remove" class="structure-info-question-remove-icon">
+          <div *ngFor="let input of answers; let i = index" formGroupName="answers" class="answer"
+               [ngClass]="{'answer-correct': checkCorrectAnswers(i)}">
+            <button class="structure-info-question-remove mark" [ngClass]="{'mark-empty': !checkCorrectAnswers(i)}"
+                    (click)="markAs(i)">
+              <img alt="mark" class="structure-info-question-remove-icon"
+                [src]="checkCorrectAnswers(i) ? '../../../assets/other/mark-done.svg'
+                 : '../../../assets/other/mark-empty.svg'">
             </button>
-            <span class="right-margin-10px">{{i + 1}})</span>
+            <span class="answer-number">{{i + 1}})</span>
             <textarea [formControlName]="input" class="question-wording-input" appResize
                       [placeholder]="messages.wordingAnswer + (i + 1)">
             </textarea>
