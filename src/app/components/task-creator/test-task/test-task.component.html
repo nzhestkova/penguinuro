@@ -2,11 +2,11 @@
   <div class="step">
     <span class="step-title">Шаг 1: Структура</span>
     <button class="help">
-      <img src="../../../assets/other/help.svg" alt="remove" class="help-icon">
+      <img src="../../../../assets/other/help.svg" alt="remove" class="help-icon">
     </button>
   </div>
-  <div class="step-content">
-    <div class="question" [formGroup]="questionForm">
+  <div class="step-content" [formGroup]="questionForm">
+    <div class="question">
       <span class="margin-auto italic" *ngIf="!selectedQuestion && !testStructure.length">Добавьте вопрос</span>
       <span class="margin-auto italic" *ngIf="!selectedQuestion && testStructure.length">Выберите вопрос в меню справа</span>
       <div *ngIf="selectedQuestion" class="column-display max-height-80prc">
@@ -32,10 +32,13 @@
                       [placeholder]="messages.wordingAnswer + (i + 1)">
             </textarea>
             <button class="structure-info-question-remove answer-remove" (click)="removeAnswer(input, i)">
-              <img src="../../../assets/actions/remove.svg" alt="remove" class="structure-info-question-remove-icon">
+              <img src="../../../../assets/actions/remove.svg" alt="remove" class="structure-info-question-remove-icon">
             </button>
           </div>
         </div>
+        <button class="structure-info-question-remove answer-remove">
+          <img src="../../../../assets/actions/save.svg" alt="remove" class="structure-info-question-remove-icon">
+        </button>
       </div>
     </div>
     <div class="structure">
@@ -49,11 +52,11 @@
              [ngClass]="{ 'structure-info-chosen-question': question === selectedQuestion }" (click)="selectQuestion(question)">
           <span class="flex-grow vertical-margin-auto">вопрос #{{i + 1}}</span>
           <button class="structure-info-question-remove" (click)="removeQuestion(question)">
-            <img src="../../../assets/actions/remove.svg" alt="remove" class="structure-info-question-remove-icon">
+            <img src="../../../../assets/actions/remove.svg" alt="remove" class="structure-info-question-remove-icon">
           </button>
         </div>
       </div>
-      <input type="button" class="next" disabled value="Следующий шаг">
+      <input formControlName="submit" type="button" class="next" (click)="nextStep()">
     </div>
   </div>
 </div>

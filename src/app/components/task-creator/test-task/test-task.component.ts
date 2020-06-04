@@ -1,7 +1,12 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from "@angular/core";
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, DoCheck, OnInit } from "@angular/core";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
-import { messages } from "../../model/messages";
-import { Question } from "../../model/question";
+import { Router } from "@angular/router";
+import { messages } from "../../../model/messages";
+import { Question } from "../../../model/question";
+import { Test } from "../../../model/test";
+import { OnEditTasksService } from "../../../services/on-edit-tasks-service/on-edit-tasks.service";
+import { OnEditTasksStoreService } from "../../../store/services/on-edit-tasks-store.service/on-edit-tasks-store.service";
+import { UserStoreService } from "../../../store/services/user-store.service/user-store.service";
 
 @Component({
   selector: "app-test-task",
@@ -9,8 +14,12 @@ import { Question } from "../../model/question";
   styleUrls: ["./test-task.component.less"],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class TestTaskComponent implements OnInit {
-  constructor(private cdr: ChangeDetectorRef) {
+export class TestTaskComponent implements OnInit, DoCheck {
+  constructor(private userStore: UserStoreService,
+              private taskStore: OnEditTasksStoreService,
+              private taskService: OnEditTasksService,
+              private router: Router,
+              private cdr: ChangeDetectorRef) {
   }
 
   messages = messages.education.tasks.types;
@@ -23,8 +32,16 @@ export class TestTaskComponent implements OnInit {
       Validators.required,
     ]),
     answers: new FormGroup({}),
-    submit: new FormControl(this.messages.saveQuestion),
+    submit: new FormControl(this.messages.nextStep),
   });
+
+  buttonAble(): void {
+    this.questionForm.get("submit").disable();
+    if (!this.testStructure.length) { return; }
+    const check = this.testStructure.filter((question) => !question.wording || !question.answers.length || !question.correctAnswers.length).length;
+    if (check) { return; }
+    this.questionForm.get("submit").enable();
+  }
 
   refreshControls(): void {
     const form = <FormGroup> this.questionForm.get("answers");
@@ -126,7 +143,28 @@ export class TestTaskComponent implements OnInit {
     this.selectedQuestion.correctAnswers.push(element);
   }
 
+  nextStep(): void {
+    this.userStore.userID().subscribe((id) => {
+      const task = new Test(this.testStructure, id);
+      this.taskService.saveTest(task).subscribe((taskID) => {
+        this.router.navigate([`create/params/${taskID}`] ).then();
+      });
+    });
+  }
+
   ngOnInit(): void {
-    this.testStructure = [];
+    this.testStructure = [
+      new Question("test", "Куда?",
+        ["куда сюда туда туда", "сюда куда туда сюда", "туда туда куда куда"],
+        ["куда сюда туда туда"]),
+      new Question("test", "Когда?",
+        ["сегодня", "сейчас, но попозже", "завтра"],
+        ["сейчас, но попозже"]),
+    ];
+    this.selectQuestion(this.testStructure[0]);
+  }
+
+  ngDoCheck(): void {
+    this.buttonAble();
   }
 }

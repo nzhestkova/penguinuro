@@ -12,7 +12,9 @@ export class TaskCreatorComponent implements OnInit {
   }
 
   redirect(): void {
-    this.router.navigate([this.router.url + "/test"]).then();
+    if (!this.activatedRoute.snapshot.children.length && !this.activatedRoute.queryParams) {
+      this.router.navigate([this.router.url + "/test"]).then();
+    }
   }
 
   ngOnInit(): void {

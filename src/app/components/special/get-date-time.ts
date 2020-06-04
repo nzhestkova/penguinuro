@@ -64,3 +64,33 @@ function monthConverter(num: number): string {
     }
   }
 }
+
+export function converseDate(date: Date): string {
+  const year = date.getFullYear().toString();
+  const month = (date.getMonth() + 1).toString();
+  const day = date.getDate().toString();
+  const hours = date.getHours().toString();
+  const minutes = date.getMinutes().toString();
+  let formattedDate = `${year}-${month.length < 2 ? `0${month}` : month}-${day.length < 2 ? `0${day}` : day}`;
+  if (hours && minutes) {
+    formattedDate += `T${hours.length < 2 ? `0${hours}` : hours}:${minutes.length < 2 ? `0${minutes}` : minutes}`;
+  }
+  return formattedDate;
+}
+
+export function nextDate(firstDate: Date,
+                         yearInterval: number,
+                         monthInterval: number,
+                         dayInterval: number,
+                         hourInterval: number,
+                         minutesInterval: number,
+                         secondsInterval: number,
+                         subtract?: boolean): Date {
+  return new Date(firstDate.getFullYear() + (subtract ? -yearInterval : yearInterval),
+    firstDate.getMonth() + (subtract ? -monthInterval : monthInterval),
+    firstDate.getDate() + (subtract ? -dayInterval : dayInterval),
+    firstDate.getHours() + (subtract ? -hourInterval : hourInterval),
+    firstDate.getMinutes() + (subtract ? -minutesInterval : minutesInterval),
+    firstDate.getSeconds() + (subtract ? -secondsInterval : secondsInterval),
+  );
+}

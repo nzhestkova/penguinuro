@@ -1,8 +1,10 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { Subscription } from "rxjs";
-import { Material } from "../../../model/material";
 import { messages } from "../../../model/messages";
+import { Test } from "../../../model/test";
+import { OnEditTasksService } from "../../../services/on-edit-tasks-service/on-edit-tasks.service";
+import { UserStoreService } from "../../../store/services/user-store.service/user-store.service";
 import { strictDateTime } from "../../special/get-date-time";
 
 const defaultOptions = {
@@ -19,7 +21,9 @@ const defaultOptions = {
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TasksComponent implements OnInit, OnDestroy {
-  constructor(private activatedRoute: ActivatedRoute,
+  constructor(private userStore: UserStoreService,
+              private taskService: OnEditTasksService,
+              private activatedRoute: ActivatedRoute,
               private router: Router,
               private cdr: ChangeDetectorRef) {
     this.panelOptions = defaultOptions;
@@ -28,8 +32,9 @@ export class TasksComponent implements OnInit, OnDestroy {
 
   messages = messages.education.tasks;
   dateTimeDisplay = strictDateTime;
-  userTasks: Material[];
-  displayedInfo: Material[];
+  userTasks: Test[];
+  userID: number;
+  displayedInfo: Test[];
   subscriber: Subscription;
 
   panelOptions: {
@@ -42,6 +47,10 @@ export class TasksComponent implements OnInit, OnDestroy {
   newTaskType: string;
   askingForType: boolean;
   description: string;
+
+  setting(id: number): void {
+    this.router.navigate([`/create/params/${id}`]).then();
+  }
 
   focus(type: string): void {
     switch (type) {
@@ -68,6 +77,23 @@ export class TasksComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.userTasks = [];
+    this.userStore.loadUserInfo().subscribe((user) => {
+      if (user) {
+        this.userID = user._id;
+        user.education.createdTasks.forEach((task) => {
+          this.taskService.loadTask(task).subscribe((test) => {
+            this.userTasks.push(test);
+            this.cdr.markForCheck();
+          });
+        });
+        user.education.assignedTasks.forEach((task) => {
+          this.taskService.loadTask(task).subscribe((test) => {
+            this.userTasks.push(test);
+            this.cdr.markForCheck();
+          });
+        });
+      }
+      });
     this.displayedInfo = this.userTasks;
     this.description = this.messages.types.hint;
 

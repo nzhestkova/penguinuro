@@ -24,11 +24,54 @@
   </tbody>
 </table>
 <div *ngIf="displayedInfo.length && panelOptions.view === 'tile'" class="horizontal-padding">
-  <div *ngFor="let item of displayedInfo" class="column-display tile">
-    <img src="../../../../assets/other/document.svg" alt="document" class="large-icon center-aligned">
-    <img src="../../../../assets/actions/options.svg" alt="options" class="small-icon margin-left px10margin-right">
-    <span class="tile-title">{{item.title}}</span>
-    <span class="file-format tile-format">docx</span>
+  <div *ngFor="let item of displayedInfo" class="task-tile">
+    <div class="task-tile-info">
+      <img src="../../../../assets/other/test.svg" alt="task" class="task-tile-info-icon">
+      <span class="task-tile-status"
+            [ngClass]="{
+            'red-back': !item.ready,
+            'yellow-back': item.ready && !item.assigned.length,
+            'green-back': item.assigned.length}">
+        <img *ngIf="!item.ready" src="../../../../assets/test-task/statuses/need-settings.svg" alt="needSettings"
+             class="task-tile-status-icon">
+        <img *ngIf="item.ready && !item.assigned.length" src="../../../../assets/test-task/statuses/need-share.svg"
+             alt="needShare" class="task-tile-status-icon">
+        <img *ngIf="item.assigned.length" src="../../../../assets/test-task/statuses/stats.svg"
+             alt="stats" class="task-tile-status-icon">
+      </span>
+      <div class="task-tile-params">
+        <div class="task-tile-params-item">
+          <img src="../../../../assets/test-task/question-count.svg" alt="time" class="task-tile-params-item-icon">
+          <span>{{item.questions.length}}</span>
+        </div>
+        <div class="task-tile-params-item">
+          <img src="../../../../assets/test-task/timer.svg" alt="time" class="task-tile-params-item-icon">
+          <span *ngIf="item.passProcess && item.passProcess.isOnTime">{{item.passProcess.timeToPass}}</span>
+          <span *ngIf="item.passProcess && !item.passProcess.isOnTime">∞</span>
+          <span *ngIf="!item.passProcess">—</span>
+        </div>
+        <div class="task-tile-params-item">
+          <img src="../../../../assets/test-task/attempts.svg" alt="time" class="task-tile-params-item-icon">
+          <span
+            *ngIf="item.rePassAbility && item.rePassAbility.attemptNotLimited">{{item.rePassAbility.attemptCount}}</span>
+          <span *ngIf="item.rePassAbility && !item.rePassAbility.attemptNotLimited">∞</span>
+          <span *ngIf="!item.rePassAbility">—</span>
+        </div>
+        <div class="task-tile-params-item">
+          <img src="../../../../assets/test-task/lock.svg" alt="lock" class="task-tile-params-item-icon">
+          <span *ngIf="item.lifeCycle && item.lifeCycle.isTemporary">21.09</span>
+          <span *ngIf="item.lifeCycle && !item.lifeCycle.isTemporary">∞</span>
+          <span *ngIf="!item.lifeCycle">—</span>
+        </div>
+      </div>
+    </div>
+    <span *ngIf="item.title" class="task-tile-title">{{item.title}}</span>
+    <button *ngIf="!item.ready && item.authorID === userID" class="task-tile-button red-hover"
+            (click)="setting(item._id)">Настроить</button>
+    <button *ngIf="item.ready && !item.assigned.length && item.authorID === userID"
+            class="task-tile-button yellow-hover">Назначить</button>
+    <button *ngIf="item.ready && item.assigned.length && item.authorID === userID"
+            class="task-tile-button green-hover">Статистика</button>
   </div>
 </div>
 <div class="popup" *ngIf="askingForType">

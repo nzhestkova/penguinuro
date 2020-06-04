@@ -1,5 +1,129 @@
 @import "../../../app.component.less";
 @import "../education.component.less";
+@red: #c79090;
+@yellow: #c4c790;
+@green: #91c790;
+
+.red-back {
+  background: @red;
+}
+
+.red-hover {
+  &:hover {
+    .red-back;
+  }
+}
+
+.green-back {
+  background: @green;
+}
+
+.green-hover {
+  &:hover {
+    .green-back;
+  }
+}
+
+.yellow-back {
+  background: @yellow;
+}
+
+.yellow-hover {
+  &:hover {
+    .yellow-back;
+  }
+}
+
+.task-tile {
+  .relative-position;
+  .column-display;
+  width: 130px;
+  height: 180px;
+  float: left;
+  margin: @smallest-space @small-space;
+
+  &:hover {
+    .pointer;
+
+    & .task-tile-params {
+      visibility: visible;
+    }
+  }
+
+  &-params {
+    .column-display;
+    position: absolute;
+    visibility: hidden;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: @border-radius;
+
+    &-item {
+      .row-display;
+      margin-left: @space;
+      margin-bottom: @smallest-space;
+
+      &-icon {
+        .width-1em;
+        margin-right: @small-space;
+      }
+    }
+  }
+
+  &-info {
+    .row-display;
+    .relative-position;
+    margin: @small-space auto;
+    height: 90px;
+    width: 90px;
+
+    &-icon {
+      .large-icon;
+      margin: 0 auto;
+    }
+  }
+
+  &-status {
+    .row-display;
+    padding: @smallest-space;
+    position: absolute;
+    right: 5px;
+    bottom: 0;
+    min-width: 20px;
+    border-radius: @border-radius;
+    border: 2px solid black;
+
+    &-icon {
+      .no-select;
+      width: 1.5em;
+    }
+  }
+
+  &-title {
+    overflow-y: hidden;
+    height: 3em;
+    text-align: center;
+    margin: @smallest-space auto;
+  }
+
+  &-button {
+    .smooth-fast-animation;
+    .button;
+    font-size: 16px;
+    padding: @medial-space;
+    margin: 0 @smallest-space;
+    border: 2px solid rgba(0, 0, 0, 0.2);
+    border-radius: @border-radius;
+    background: rgba(0, 0, 0, 0.05);
+
+    &:hover {
+      border-color: black;
+    }
+  }
+}
 
 .popup {
   .column-display;

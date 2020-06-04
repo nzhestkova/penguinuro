@@ -20,7 +20,6 @@ export class UserService {
   }
 
   saveUserInfo(): Observable<boolean> {
-    console.log(this.userInfo);
     return this._http.put(this.usersURL + `${this.userInfo._id}`, this.userInfo).pipe(
       map(() => true),
       catchError((err) => throwError(err)),

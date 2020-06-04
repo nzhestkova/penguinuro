@@ -11,7 +11,8 @@ import { SettingsComponent } from "./components/settings/settings.component";
 import { SignInFormComponent } from "./components/sign-in-form/sign-in-form.component";
 import { SignUpFormComponent } from "./components/sign-up-form/sign-up-form.component";
 import { TaskCreatorComponent } from "./components/task-creator/task-creator.component";
-import { TestTaskComponent } from "./components/test-task/test-task.component";
+import { TestOptionsComponent } from "./components/task-creator/test-options/test-options.component";
+import { TestTaskComponent } from "./components/task-creator/test-task/test-task.component";
 
 
 const routes: Routes = [
@@ -27,8 +28,10 @@ const routes: Routes = [
     ] },
   { path: "create", component: TaskCreatorComponent, children: [
       { path: "test", component: TestTaskComponent },
+      { path: "params/:id", component: TestOptionsComponent },
     ] },
   { path: "notifications", component: NotificationsComponent },
+  { path: "**", component: HomePageComponent },
 ];
 
 @NgModule({

@@ -1,6 +1,7 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from "@angular/core";
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit } from "@angular/core";
 import { FormControl, FormGroup } from "@angular/forms";
 import { ActivatedRoute, NavigationEnd, Router } from "@angular/router";
+import { Subscription } from "rxjs";
 import { Material } from "../../model/material";
 import { messages } from "../../model/messages";
 import { User } from "../../model/user";
@@ -15,7 +16,8 @@ import { newestSort, oldestSort } from "../special/sort";
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 
-export class EducationComponent implements OnInit {
+export class EducationComponent implements OnInit, OnDestroy {
+  routerSubscriber: Subscription;
   constructor(private userStore: UserStoreService,
               private materialService: MaterialService,
               private router: Router,
@@ -24,7 +26,7 @@ export class EducationComponent implements OnInit {
     if (!this.activateRoute.children.length) {
       this.router.navigate([`${this.router.url}/tasks`]).then();
     }
-    this.router.events.subscribe(object => {
+    this.routerSubscriber = this.router.events.subscribe(object => {
       if (object instanceof NavigationEnd) {
         const path = object.url.match(/\/[A-z]+($|[?]+)/)[0];
         this.section = path.match(/[A-z]+/)[0];
@@ -254,5 +256,9 @@ export class EducationComponent implements OnInit {
     this.tableView = false;
     this.displayAll();
     this.newestFirst();
+  }
+
+  ngOnDestroy(): void {
+    this.routerSubscriber.unsubscribe();
   }
 }

@@ -4,6 +4,7 @@ import { Router } from "@angular/router";
 import { passwordMatch } from "../../custom-validators/password-match.validator";
 import { messages } from "../../model/messages";
 import { welcomeNotification } from "../../model/notification";
+import { User } from "../../model/user";
 import { CookiesService } from "../../services/cookies-service/cookies.service";
 import { UserService } from "../../services/user-service/user.service";
 import { ThemeStoreService } from "../../store/services/theme-store.service/theme-store.service";
@@ -59,7 +60,7 @@ export class SignUpFormComponent implements OnInit, DoCheck {
     this.registerForm.get("submitButton").disable();
     this.registerForm.markAsUntouched();
     if (this.registerForm.invalid) { return; }
-    const newUser = {
+    const newUser: User = {
       _id: 0,
       status: "student",
       login: this.registerForm.get("login").value,
@@ -67,7 +68,8 @@ export class SignUpFormComponent implements OnInit, DoCheck {
       password: this.registerForm.get("password").value,
       education: {
         materials: [],
-        tasks: []
+        createdTasks: [],
+        assignedTasks: [],
       },
       notifications: [welcomeNotification],
     };

@@ -18,8 +18,9 @@ import { SettingsComponent } from "./components/settings/settings.component";
 import { SignInFormComponent } from "./components/sign-in-form/sign-in-form.component";
 import { SignUpFormComponent } from "./components/sign-up-form/sign-up-form.component";
 import { TaskCreatorComponent } from "./components/task-creator/task-creator.component";
+import { TestOptionsComponent } from "./components/task-creator/test-options/test-options.component";
+import { TestTaskComponent } from "./components/task-creator/test-task/test-task.component";
 import { TestCreatorComponent } from "./components/test-creator/test-creator.component";
-import { TestTaskComponent } from "./components/test-task/test-task.component";
 import { ChangeImageDirective } from "./directives/change-image/change-image.directive";
 import { ResizeDirective } from "./directives/resize/resize.directive";
 import { SetStatusDirective } from "./directives/set-status/set-status.directive";
@@ -52,6 +53,7 @@ import { WaitingStoreService } from "./store/services/waiting-store.service/wait
     ProgressComponent,
     TestTaskComponent,
     ResizeDirective,
+    TestOptionsComponent,
   ],
     imports: [
         BrowserModule,

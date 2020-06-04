@@ -1,0 +1,35 @@
+<div class="content paint-light-theme">
+  <div class="content" [formGroup]="optionsForm" (change)="changeAvailable()">
+    <div class="column-display">
+      <span>Название:<input formControlName="title"></span>
+      <span>Вопросов: {{task ? task.questions.length : 0}}</span>
+      <span>Проходной балл<input formControlName="passingScore"></span>
+      <span>Количество попыток прохождения:</span>
+      <span><input type="radio" formControlName="attemptNotLimited"
+                   [value]="true">без ограничений</span>
+      <span>
+        <input type="radio" formControlName="attemptNotLimited"
+               [value]="false">количество:<input formControlName="attemptCount">
+      </span>
+    </div>
+    <div class="column-display">
+      <span>Время на прохождение:</span>
+      <span><input type="radio" formControlName="isOnTime"
+                   [value]="false">без ограничений</span>
+      <span>
+        <input type="radio" formControlName="isOnTime"
+               [value]="true">ограничение<input formControlName="timeToPass">
+      </span>
+    </div>
+    <div class="column-display">
+      <span>Срок действия теста</span>
+      <span><input type="radio" formControlName="isTemporary"
+                   [value]="false">без ограничений</span>
+      <span><input type="radio" formControlName="isTemporary"
+                   [value]="true">ограничение: c <input formControlName="openTime" type="datetime-local">
+        по <input formControlName="closeTime"  type="datetime-local">
+      </span>
+    </div>
+    <button (click)="save()" class="left-margin-auto">Готово</button>
+  </div>
+</div>

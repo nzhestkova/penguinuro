@@ -10,7 +10,7 @@ export class Question {
     this.answers = [];
     if (answers) { this.setAnswers(answers); }
     this.correctAnswers = [];
-    if (correctAnswers) { this.setCorrectAnswers(answers); }
+    if (correctAnswers) { this.setCorrectAnswers(correctAnswers); }
   }
 
   setWording(wording: string): void {

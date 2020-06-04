@@ -9,7 +9,8 @@ export class User {
   password: string;
   education: {
     materials: Material[];
-    tasks: any[]
+    createdTasks: number[];
+    assignedTasks: number[];
   };
   notifications: Notification[];
 }
