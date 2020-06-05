@@ -12,5 +12,17 @@ export class User {
     createdTasks: number[];
     assignedTasks: number[];
   };
+  results: {
+    taskID: number;
+    point: number;
+    attempt: number;
+    timeSpend: number;
+  }[];
   notifications: Notification[];
+}
+
+export class UserInfo {
+  _id: number;
+  status: string;
+  username: string;
 }

@@ -10,7 +10,7 @@ import { UserStoreService } from "../../store/services/user-store.service/user-s
   providedIn: "root"
 })
 export class UserService {
-  usersURL = environment.url + "users/";
+  usersURL = environment.url + "users";
   userInfo: User;
   constructor(private _http: HttpClient,
               private userStore: UserStoreService) {
@@ -19,22 +19,28 @@ export class UserService {
     });
   }
 
+  onlyStudents(): Observable<User[]> {
+    return this._http.get(`${this.usersURL}/students`).pipe(
+      map((students: User[]) => students),
+    );
+  }
+
   saveUserInfo(): Observable<boolean> {
-    return this._http.put(this.usersURL + `${this.userInfo._id}`, this.userInfo).pipe(
+    return this._http.put(`${this.usersURL}/${this.userInfo._id}`, this.userInfo).pipe(
       map(() => true),
       catchError((err) => throwError(err)),
     );
   }
 
   forCheck(): Observable<boolean> {
-    return this._http.get(this.usersURL + `natalia`).pipe(
+    return this._http.get(`${this.usersURL}/natalia`).pipe(
       map(() => true),
       catchError((err) => throwError(err)),
     );
   }
 
   checkLogin(login: string): Observable<boolean> {
-    return this._http.get(this.usersURL + login).pipe(
+    return this._http.get(`${this.usersURL}/${login}`).pipe(
       map(() => true),
       catchError(err => throwError(err)),
     );
@@ -47,13 +53,13 @@ export class UserService {
   }
 
   loginUser(login: string, password: string): Observable<User> {
-    return this._http.get(this.usersURL + login, { params: { password: password } } ).pipe(
+    return this._http.get(`${this.usersURL}/${login}`, { params: { password: password } } ).pipe(
       map( (data: User) => data ),
     );
   }
 
   deleteAccount(userID: number): Observable<User> {
-    return this._http.delete(this.usersURL + `${userID}`).pipe(
+    return this._http.delete(`${this.usersURL}/${userID}`).pipe(
       map((data: User) => data),
     );
   }

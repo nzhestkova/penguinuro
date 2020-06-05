@@ -52,6 +52,14 @@ export class TasksComponent implements OnInit, OnDestroy {
     this.router.navigate([`/create/params/${id}`]).then();
   }
 
+  assign(id: number): void {
+    this.router.navigate([`/create/assign/${id}`]).then();
+  }
+
+  pass(id: number): void {
+    this.router.navigate([`/pass/${id}`]).then();
+  }
+
   focus(type: string): void {
     switch (type) {
       case "simple": {

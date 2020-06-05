@@ -57,21 +57,22 @@
           <span *ngIf="item.rePassAbility && !item.rePassAbility.attemptNotLimited">∞</span>
           <span *ngIf="!item.rePassAbility">—</span>
         </div>
-        <div class="task-tile-params-item">
-          <img src="../../../../assets/test-task/lock.svg" alt="lock" class="task-tile-params-item-icon">
-          <span *ngIf="item.lifeCycle && item.lifeCycle.isTemporary">21.09</span>
-          <span *ngIf="item.lifeCycle && !item.lifeCycle.isTemporary">∞</span>
-          <span *ngIf="!item.lifeCycle">—</span>
+        <div *ngIf="item.authorID === userID" class="task-tile-params-item">
+          <img src="../../../../assets/test-task/students-count.svg" alt="lock" class="task-tile-params-item-icon">
+          <span *ngIf="item.assigned && item.assigned.length">{{item.assigned.length}}</span>
+          <span *ngIf="!item.assigned || !item.assigned.length">—</span>
         </div>
       </div>
     </div>
     <span *ngIf="item.title" class="task-tile-title">{{item.title}}</span>
     <button *ngIf="!item.ready && item.authorID === userID" class="task-tile-button red-hover"
             (click)="setting(item._id)">Настроить</button>
-    <button *ngIf="item.ready && !item.assigned.length && item.authorID === userID"
+    <button *ngIf="item.ready && !item.assigned.length && item.authorID === userID" (click)="assign(item._id)"
             class="task-tile-button yellow-hover">Назначить</button>
     <button *ngIf="item.ready && item.assigned.length && item.authorID === userID"
             class="task-tile-button green-hover">Статистика</button>
+    <button *ngIf="item.ready && item.authorID !== userID" (click)="pass(item._id)"
+            class="task-tile-button green-hover">Пройти</button>
   </div>
 </div>
 <div class="popup" *ngIf="askingForType">

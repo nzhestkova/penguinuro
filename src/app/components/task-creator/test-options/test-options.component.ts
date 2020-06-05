@@ -120,7 +120,7 @@ export class TestOptionsComponent implements OnInit {
     this.taskService.updateTest(this.task).subscribe(
       (response) => {
         if (response) {
-          this.router.navigate(["education/tasks"], { queryParams: { view: "tile" } }).then();
+          this.router.navigate([`/create/assign/${this.task._id}`], ).then();
         }
       },
     );
@@ -128,9 +128,6 @@ export class TestOptionsComponent implements OnInit {
 
   ngOnInit(): void {
     this.changeAvailable();
-    this.taskStore.loadTasks().subscribe(
-      (tasks) => console.log(tasks),
-    );
     this.taskService.loadTask(this.activatedRoute.snapshot.params.id).subscribe((loadedTask) => {
       this.task = loadedTask;
       this.initOptions(this.task);

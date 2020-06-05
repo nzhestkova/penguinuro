@@ -71,6 +71,7 @@ export class SignUpFormComponent implements OnInit, DoCheck {
         createdTasks: [],
         assignedTasks: [],
       },
+      results: [],
       notifications: [welcomeNotification],
     };
     this.waitingStore.activateLoading();
