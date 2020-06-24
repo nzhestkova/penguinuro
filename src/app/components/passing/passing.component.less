@@ -1,0 +1,103 @@
+@import "../../app.component.less";
+
+.question-body {
+  .column-display;
+  .flex-grow;
+  overflow-y: scroll;
+  margin-left: @small-space;
+
+  &-answers {
+    .column-display;
+    margin: @small-space @space;
+
+    &-item {
+      .row-display;
+      margin-bottom: @smallest-space;
+
+      &-choice {
+        .smooth-fast-animation;
+        .no-select;
+        .pointer;
+        border: 1px solid rgba(0, 0, 0, 0.16);
+        border-radius: 100%;
+        width: 1.5em;
+        height: 1.5em;
+      }
+    }
+  }
+}
+
+.test-title {
+  .bold-text;
+  margin: @smallest-space auto;
+  font-size: @font-size + 2px;
+}
+
+.selected {
+  background: rgba(167, 180, 199, 0.50);
+}
+
+.pass-window {
+  .row-display;
+  height: 300px;
+  margin: 1.5 * @space 0;
+}
+
+.question-list {
+  .column-display;
+  padding: @smallest-space @small-space;
+  margin-left: @small-space;
+  border-left: 0.05em solid rgba(0, 0, 0, 0.16);
+
+  &-item {
+    .smooth-fast-animation;
+    .row-display;
+    .no-select;
+    .pointer;
+    padding: @small-space 2 * @space;
+    margin-bottom: @smallest-space;
+    border-radius: @border-radius;
+    overflow-y: scroll;
+  }
+}
+
+.content {
+  .column-display;
+  padding: @space @smallest-space @space @space;
+  border-radius: @border-radius;
+  min-width: 470px;
+  min-height: 470px;
+}
+
+.marked {
+  background: #4a824a;
+}
+
+.control {
+  .smooth-fast-animation;
+  .no-select;
+  .pointer;
+  font-size: @font-size;
+  font-family: @font-family;
+  margin: 0 @smallest-space;
+  padding: @small-space;
+  width: 130px;
+  border-radius: @border-radius;
+  border: none;
+}
+
+.grey-button {
+  background: rgba(0, 0, 0, 0.05);
+
+  &:hover {
+    background: rgba(0, 0, 0, 0.15);
+  }
+}
+
+.blue-button {
+  background: rgba(167, 180, 199, 0.90);
+
+  &:hover {
+    background: rgba(167, 180, 199, 1);
+  }
+}

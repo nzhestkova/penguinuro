@@ -3,14 +3,14 @@
   <div class="column-display">
     <div [ngClass]="{'window-light-theme': !darkTheme, 'window-dark-theme': darkTheme}"
          class="column-display right-aligned plate avatar">
-      <img [src]="user.status === 'god'
+      <img [src]="user.type === 'god'
        ? '../../../assets/standard-avatars/doggy.svg'
-       : user.status === 'developer'
+       : user.type === 'developer'
         ? '../../../assets/standard-avatars/developer.svg'
-        : '../../../assets/standard-avatars/simple.svg'"
+        : '../../../assets/standard-avatars/student.svg'"
            alt="cat" class="user-data-ico no-select">
-      <span [appSetStatus]="{status: user.status, darkTheme: darkTheme}"
-            class="center-aligned status">{{user.status}}</span>
+      <span [appSetStatus]="{status: user.type, darkTheme: darkTheme}"
+            class="center-aligned status">{{user.type}}</span>
       <span class="user-data-username center-aligned">{{user.username}}</span>
     </div>
 
@@ -28,6 +28,15 @@
   </app-popup-confirm>
   <div [ngClass]="{'window-light-theme': !darkTheme, 'window-dark-theme': darkTheme}"
        class="column-display router flex-grow small-right-margin">
-    <router-outlet></router-outlet>
+    <div class="tasks-count top-margin-auto">
+      <span *ngIf="user.assignedTasks">Всего заданий: {{user.assignedTasks.length}}</span>
+      <span *ngIf="user.createdTasks">Создано заданий: {{user.createdTasks.length}}</span>
+    </div>
+    <div *ngIf="user.type === 'student' && user.results" class="tasks-count with-bottom">
+      <span>Решено заданий: {{user.results.length}}</span>
+    </div>
+    <div *ngIf="user" class="tasks-count with-bottom bottom-margin-auto">
+      <span>Дата регистрации: {{ since() }}</span>
+    </div>
   </div>
 </div>

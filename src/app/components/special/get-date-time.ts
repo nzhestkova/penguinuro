@@ -1,3 +1,7 @@
+export function registerDate(date: Date): string {
+  return `${date.getDate()} ${monthConverter(date.getMonth() + 1)} ${date.getFullYear()} г.`;
+}
+
 export function stringDateTime(date: Date): string {
   const datetime = new Date(date);
   const now = new Date();

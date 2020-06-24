@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from "@angular/core";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
+import { messages } from "../../../model/messages";
 import { Test } from "../../../model/test";
 import { OnEditTasksService } from "../../../services/on-edit-tasks-service/on-edit-tasks.service";
 import { OnEditTasksStoreService } from "../../../store/services/on-edit-tasks-store.service/on-edit-tasks-store.service";
@@ -21,6 +22,7 @@ export class TestOptionsComponent implements OnInit {
               private cdr: ChangeDetectorRef) {
   }
 
+  messages = messages.taskEditor.params;
   defaultOptions = {
     attemptCount: 1,
     timeToPass: 60,
@@ -120,7 +122,7 @@ export class TestOptionsComponent implements OnInit {
     this.taskService.updateTest(this.task).subscribe(
       (response) => {
         if (response) {
-          this.router.navigate([`/create/assign/${this.task._id}`], ).then();
+          this.router.navigate([`/create/assign/${this.task._id}`] ).then();
         }
       },
     );

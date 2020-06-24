@@ -60,6 +60,10 @@ export class TasksComponent implements OnInit, OnDestroy {
     this.router.navigate([`/pass/${id}`]).then();
   }
 
+  stats(id: number): void {
+    this.router.navigate([`/stats/${id}`]).then();
+  }
+
   focus(type: string): void {
     switch (type) {
       case "simple": {
@@ -85,24 +89,20 @@ export class TasksComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.userTasks = [];
+    this.displayedInfo = this.userTasks;
     this.userStore.loadUserInfo().subscribe((user) => {
       if (user) {
         this.userID = user._id;
-        user.education.createdTasks.forEach((task) => {
-          this.taskService.loadTask(task).subscribe((test) => {
-            this.userTasks.push(test);
-            this.cdr.markForCheck();
-          });
-        });
-        user.education.assignedTasks.forEach((task) => {
-          this.taskService.loadTask(task).subscribe((test) => {
-            this.userTasks.push(test);
-            this.cdr.markForCheck();
+        this.userStore.loadTasks().subscribe((tasks) => {
+          tasks.forEach((id) => {
+            this.taskService.loadTask(id).subscribe((task) => {
+              this.userTasks.push(task);
+              this.cdr.markForCheck();
+            });
           });
         });
       }
       });
-    this.displayedInfo = this.userTasks;
     this.description = this.messages.types.hint;
 
     this.subscriber = this.activatedRoute.queryParams.subscribe((params) => {
@@ -110,7 +110,9 @@ export class TasksComponent implements OnInit, OnDestroy {
       this.panelOptions.filter = params["filter"] ? params["filter"] : defaultOptions.filter;
       this.panelOptions.sort = params["sort"] ? params["sort"] : defaultOptions.sort;
       this.panelOptions.search = params["search"] ? params["search"] : defaultOptions.search;
-      this.askingForType = !!params["create"];
+      if (params["create"]) {
+        this.router.navigate([`/create/test`]).then();
+      }
       this.cdr.markForCheck();
     });
   }

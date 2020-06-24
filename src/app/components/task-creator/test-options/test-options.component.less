@@ -1,6 +1,90 @@
 @import "../test-task/test-task.component.less";
+@brown-text-color: #801717;
+
+.brown-bold {
+  color: @brown-text-color;
+  font-weight: bold;
+}
+
+.range {
+  width: 30%;
+  min-width: 100px;
+  margin: @small-space;
+}
+
+.hint {
+  font-style: italic;
+  font-size: @font-size - 1px;
+  margin: @smallest-space 0 @smallest-space @smallest-space;
+}
+
+.pass-score {
+  .no-select;
+  width: 2em;
+  border: none;
+  font-style: italic;
+  font-family: @font-family;
+  font-size: @font-size;
+  text-align: right;
+  margin-left: @smallest-space;
+}
+
+.section-title {
+  margin: @small-space auto;
+  font-weight: bold;
+  font-size: @font-size + 2px;
+  font-family: @font-family;
+}
 
 .content {
   .column-display;
   flex-grow: 1;
+}
+
+.option {
+  .row-display;
+  margin-top: @smallest-space;
+  margin-bottom: @smallest-space;
+
+  &-list {
+    .column-display;
+    margin-bottom: @small-space;
+  }
+
+  &-title {
+    color: @brown-text-color;
+    font-weight: bold;
+    margin: 0 0 @small-space 0;
+  }
+}
+
+.section {
+  padding: @smallest-space 0;
+  border-bottom: 0.05em solid rgba(0, 0, 0, 0.16);
+}
+
+.input {
+  .flex-grow;
+  border: none;
+  font-style: italic;
+  font-family: @font-family;
+  font-size: @font-size;
+  text-align: left;
+  padding-left: @small-space;
+}
+
+.next {
+  .button;
+  margin: auto 0 @small-space auto;
+  padding: @small-space @space;
+  background: rgba(145, 71, 71, 0.91);
+  color: white;
+
+  &:hover {
+    background: #914747;
+  }
+
+  &:disabled {
+    background: rgba(74, 130, 74, 0.5);
+  }
 }

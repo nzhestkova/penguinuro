@@ -1,8 +1,8 @@
 import { createReducer, on } from "@ngrx/store";
-import { removeTaskInfo, saveTaskInfo } from "../actions/on-edit-tasks.actions";
-import { initialOnEditTasksState } from "../state/on-edit-tasks.state";
+import { removeTaskInfo, saveTaskInfo } from "../actions/tasks.actions";
+import { initialOnEditTasksState } from "../state/tasks.state";
 
-export const onEditTasksReducer = createReducer(
+export const tasksReducer = createReducer(
   initialOnEditTasksState,
   on(saveTaskInfo, (state, action) => ({
     ...state,

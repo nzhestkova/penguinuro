@@ -4,9 +4,7 @@ import { Notification } from "./notification";
 export class User {
   _id: number;
   status: string;
-  login: string;
   username: string;
-  password: string;
   education: {
     materials: Material[];
     createdTasks: number[];
@@ -19,6 +17,51 @@ export class User {
     timeSpend: number;
   }[];
   notifications: Notification[];
+}
+
+export class Student {
+  type: string;
+  _id: number;
+  registerSince: string;
+  username: string;
+  assignedTasks: number[];
+  results: Result[];
+
+  constructor(idNumber: number, username: string, since: string,
+              assignedTasksIDS: number[], results: Result[]) {
+    this._id = idNumber;
+    this.type = "student";
+    this.username = username;
+    this.registerSince = since;
+    this.assignedTasks = assignedTasksIDS.filter((task) => task);
+    this.results = results.filter((result) => result);
+  }
+}
+
+export class Teacher {
+  type: string;
+  _id: number;
+  registerSince: string;
+  username: string;
+  createdTasks: number[];
+  results: Result[];
+
+  constructor(idNumber: number, username: string, type: string, since: string,
+              createdTasksIDS: number[], results: Result[]) {
+    this._id = idNumber;
+    this.username = username;
+    this.type = type;
+    this.registerSince = since;
+    this.createdTasks = createdTasksIDS.filter((task) => task);
+    this.results = results.filter((result) => result);
+  }
+}
+
+export class Result {
+  taskID: number;
+  point: number;
+  attempt: number;
+  timeSpend: number;
 }
 
 export class UserInfo {

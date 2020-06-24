@@ -1,7 +1,7 @@
-import { User } from "../../model/user";
+import { Student, Teacher } from "../../model/user";
 
 export interface UserState {
-  userInfo: User;
+  userInfo: Student | Teacher;
 }
 
 export const initialUserState: UserState = {

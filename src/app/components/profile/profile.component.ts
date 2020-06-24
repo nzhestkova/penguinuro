@@ -2,11 +2,12 @@ import { ChangeDetectionStrategy, ChangeDetectorRef, Component, DoCheck, OnDestr
 import { Router } from "@angular/router";
 import { Subscription } from "rxjs";
 import { messages } from "../../model/messages";
-import { User } from "../../model/user";
+import { Student, Teacher, User } from "../../model/user";
 import { CookiesService } from "../../services/cookies-service/cookies.service";
 import { UserService } from "../../services/user-service/user.service";
 import { ThemeStoreService } from "../../store/services/theme-store.service/theme-store.service";
 import { UserStoreService } from "../../store/services/user-store.service/user-store.service";
+import { registerDate, strictDateTime, stringDateTime } from "../special/get-date-time";
 
 @Component({
   selector: "app-profile",
@@ -24,11 +25,15 @@ export class ProfileComponent implements OnInit, DoCheck, OnDestroy {
   userExist: boolean;
   unreadNotification: number;
   subscriber: Subscription;
-  user: User;
+  user: Student | Teacher;
   darkTheme: boolean;
 
   askConfirm: boolean;
   confirmMessages = messages.confirmation;
+
+  since(): string {
+    return registerDate(new Date(this.user.registerSince));
+  }
 
   logout(): void {
     this.userStore.logout();
@@ -69,15 +74,16 @@ export class ProfileComponent implements OnInit, DoCheck, OnDestroy {
     this.subscriber = this.userStore.loadUserInfo().subscribe(
       (user) => {
         this.userExist = !!user;
-        this.user = <User>user;
+        this.user = user;
+        console.log(user);
 
-        let count: number = 0;
-        if (user && this.user.notifications) {
-          this.user.notifications.forEach((item) => {
-            if (!item.checked) { count += 1; }
-          });
-          this.unreadNotification = count;
-        }
+        // let count: number = 0;
+        // if (user && this.user.notifications) {
+        //   this.user.notifications.forEach((item) => {
+        //     if (!item.checked) { count += 1; }
+        //   });
+        //   this.unreadNotification = count;
+        // }
 
         this.cdr.markForCheck();
       },

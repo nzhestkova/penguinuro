@@ -4,6 +4,7 @@ export class Test {
   _id: number;
   title: string;
   authorID: number;
+  created: string;
   questions: Question[];
   ready: boolean;
   passingScore: number;
@@ -26,6 +27,7 @@ export class Test {
     this.authorID = authorID;
     this.questions = questions.filter((question) => question);
     this.passingScore = this.questions.length;
+    this.created = new Date().toJSON();
     this.ready = false;
   }
 }

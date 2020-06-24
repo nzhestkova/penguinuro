@@ -3,6 +3,7 @@ import { ActivatedRoute } from "@angular/router";
 import { Subscription } from "rxjs";
 import { Material } from "../../../model/material";
 import { messages } from "../../../model/messages";
+import { MaterialService } from "../../../services/material-service/material.service";
 import { UserStoreService } from "../../../store/services/user-store.service/user-store.service";
 import { strictDateTime } from "../../special/get-date-time";
 import { newestSort, oldestSort } from "../../special/sort";
@@ -22,6 +23,7 @@ const defaultOptions = {
 })
 export class MaterialsComponent implements OnInit, OnDestroy {
   constructor(private userStore: UserStoreService,
+              private materialService: MaterialService,
               private activatedRoute: ActivatedRoute,
               private cdr: ChangeDetectorRef) {
     this.panelOptions = defaultOptions;
@@ -30,6 +32,7 @@ export class MaterialsComponent implements OnInit, OnDestroy {
   userMaterials: Material[];
   displayedInfo: Material[];
   subscriber: Subscription;
+  file: File;
 
   dateTimeDisplay = strictDateTime;
   panelOptions: {
@@ -53,6 +56,12 @@ export class MaterialsComponent implements OnInit, OnDestroy {
 
   oldestFirst(): void {
     oldestSort(this.displayedInfo);
+  }
+
+  upload(event: Event): void {
+    const body = new FormData();
+    body.set("file", event.target["files"][0]);
+    this.materialService.upload(18, body).subscribe();
   }
 
   displayAll(): void {

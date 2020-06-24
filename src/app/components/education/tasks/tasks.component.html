@@ -31,7 +31,8 @@
             [ngClass]="{
             'red-back': !item.ready,
             'yellow-back': item.ready && !item.assigned.length,
-            'green-back': item.assigned.length}">
+            'green-back': item.assigned.length
+            }">
         <img *ngIf="!item.ready" src="../../../../assets/test-task/statuses/need-settings.svg" alt="needSettings"
              class="task-tile-status-icon">
         <img *ngIf="item.ready && !item.assigned.length" src="../../../../assets/test-task/statuses/need-share.svg"
@@ -53,8 +54,8 @@
         <div class="task-tile-params-item">
           <img src="../../../../assets/test-task/attempts.svg" alt="time" class="task-tile-params-item-icon">
           <span
-            *ngIf="item.rePassAbility && item.rePassAbility.attemptNotLimited">{{item.rePassAbility.attemptCount}}</span>
-          <span *ngIf="item.rePassAbility && !item.rePassAbility.attemptNotLimited">∞</span>
+            *ngIf="item.rePassAbility && !item.rePassAbility.attemptNotLimited">{{item.rePassAbility.attemptCount}}</span>
+          <span *ngIf="item.rePassAbility && item.rePassAbility.attemptNotLimited">∞</span>
           <span *ngIf="!item.rePassAbility">—</span>
         </div>
         <div *ngIf="item.authorID === userID" class="task-tile-params-item">
@@ -70,7 +71,7 @@
     <button *ngIf="item.ready && !item.assigned.length && item.authorID === userID" (click)="assign(item._id)"
             class="task-tile-button yellow-hover">Назначить</button>
     <button *ngIf="item.ready && item.assigned.length && item.authorID === userID"
-            class="task-tile-button green-hover">Статистика</button>
+            class="task-tile-button green-hover" (click)="stats(item._id)">Статистика</button>
     <button *ngIf="item.ready && item.authorID !== userID" (click)="pass(item._id)"
             class="task-tile-button green-hover">Пройти</button>
   </div>

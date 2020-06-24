@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, ChangeDetectorRef, Component, DoCheck, OnInit 
 import { Router } from "@angular/router";
 import { Observable } from "rxjs";
 import { environment } from "../environments/environment";
-import { User } from "./model/user";
+import { Student, Teacher, User } from "./model/user";
 import { CookiesService } from "./services/cookies-service/cookies.service";
 import { UserService } from "./services/user-service/user.service";
 import { ThemeStoreService } from "./store/services/theme-store.service/theme-store.service";
@@ -25,17 +25,20 @@ export class AppComponent implements OnInit, DoCheck {
               private cdr: ChangeDetectorRef) {
   }
 
+  socket;
   requestCount: number = 0;
   specialSign: string = environment.versionSign;
-  user: User;
+  user: Student | Teacher;
   showSign: boolean;
   darkThemeEnable: boolean;
   loading: Observable<boolean>;
 
   logout(): void {
+    // this.socket.emit("logout", { userID: this.user._id });
     this.cookieService.deleteCookies();
     this.userStore.logout();
     this.cdr.markForCheck();
+    this.router.navigate(["/login"]).then();
   }
 
   toggleTheme(): void {
@@ -49,15 +52,22 @@ export class AppComponent implements OnInit, DoCheck {
   }
 
   ngOnInit(): void {
-    setInterval(() => {
-      const subs = this.userService.forCheck().subscribe((data) => {
-        if (data) {
-          this.requestCount += 1;
-          this.cdr.markForCheck();
-          subs.unsubscribe();
-        }
-      });
-    }, 300000);
+    // this.socket = SocketIO(environment.url);
+    // this.socket.on("successful", () => {
+    //   if (this.user) {
+    //     this.socket.emit("login", { userID: this.user._id });
+    //   }
+    // });
+    // this.socket.on("userLogout", () => this.logout());
+    // setInterval(() => {
+    //   const subs = this.userService.forCheck().subscribe((data) => {
+    //     if (data) {
+    //       this.requestCount += 1;
+    //       this.cdr.markForCheck();
+    //       subs.unsubscribe();
+    //     }
+    //   });
+    // }, 300000);
 
     this.loading = this.waitingStore.loadInfo();
     const savedLogin = this.cookieService.checkInfo("login");
@@ -71,12 +81,14 @@ export class AppComponent implements OnInit, DoCheck {
         data => {
           this.userStore.loginUser(data);
           this.waitingStore.deactivateLoading();
+          // this.socket.emit("login", { userID: data._id });
           // this.router.navigate(["", "profile"]).then();
         },
         () => {
           this.cookieService.deleteCookie("login");
           this.cookieService.deleteCookie("password");
           this.waitingStore.deactivateLoading();
+          this.router.navigate([`${this.router.url[0]}/login`]).then();
         },
       );
     }

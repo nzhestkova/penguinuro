@@ -1,35 +1,48 @@
 <div class="content paint-light-theme">
+  <div class="section-title">
+    <span>{{messages.sectionTitle}}</span>
+  </div>
   <div class="content" [formGroup]="optionsForm" (change)="changeAvailable()">
     <div class="column-display">
-      <span>Название:<input formControlName="title"></span>
-      <span>Вопросов: {{task ? task.questions.length : 0}}</span>
-      <span>Проходной балл<input formControlName="passingScore"></span>
-      <span>Количество попыток прохождения:</span>
-      <span><input type="radio" formControlName="attemptNotLimited"
-                   [value]="true">без ограничений</span>
-      <span>
+      <div class="row-display">
+        <span class="brown-bold vertical-margin-auto">Название:</span>
+        <input class="input" formControlName="title" [placeholder]="'Придумайте название для теста..'">
+      </div>
+      <div class="option-list">
+        <span class="option-title section">Проходной балл</span>
+        <span class="hint">* Минимальное количество баллов, необходимое для успешного прохождения теста.</span>
+        <input *ngIf="task" type="range" step="1" min="1" [max]="task.questions.length"
+               formControlName="passingScore" class="range" list="tickmarks">
+        <datalist *ngIf="task" id="tickmarks">
+          <option *ngFor="let question of task.questions; let i = index"
+                  [value]="i + 1">
+        </datalist>
+        <div class="row-display">
+          <span class="right-margin-10px vertical-margin-auto">Порог:</span>
+          <span class="vertical-margin-auto">{{optionsForm.get('passingScore').value}}</span>
+          <span class="vertical-margin-auto brown-bold">/{{task ? task.questions.length : 0}}</span>
+        </div>
+      </div>
+      <div class="option-list">
+        <span class="option-title section">Количество попыток прохождения:</span>
+        <span class="hint">* Количество возможных прохождений теста.</span>
+        <span class="option"><input type="radio" formControlName="attemptNotLimited"
+                                    [value]="true">без ограничений</span>
+        <span>
         <input type="radio" formControlName="attemptNotLimited"
-               [value]="false">количество:<input formControlName="attemptCount">
+               [value]="false">количество:<input class="pass-score" formControlName="attemptCount">
       </span>
+      </div>
     </div>
     <div class="column-display">
-      <span>Время на прохождение:</span>
-      <span><input type="radio" formControlName="isOnTime"
+      <span class="option-title section">Время на прохождение:</span>
+      <span class="option"><input type="radio" formControlName="isOnTime"
                    [value]="false">без ограничений</span>
       <span>
         <input type="radio" formControlName="isOnTime"
-               [value]="true">ограничение<input formControlName="timeToPass">
+               [value]="true">ограничение (мин.):<input class="pass-score" formControlName="timeToPass">
       </span>
     </div>
-    <div class="column-display">
-      <span>Срок действия теста</span>
-      <span><input type="radio" formControlName="isTemporary"
-                   [value]="false">без ограничений</span>
-      <span><input type="radio" formControlName="isTemporary"
-                   [value]="true">ограничение: c <input formControlName="openTime" type="datetime-local">
-        по <input formControlName="closeTime"  type="datetime-local">
-      </span>
-    </div>
-    <button (click)="save()" class="left-margin-auto">Готово</button>
+    <button (click)="save()" class="next">К назначениям →</button>
   </div>
 </div>

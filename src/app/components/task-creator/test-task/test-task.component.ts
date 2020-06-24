@@ -5,6 +5,7 @@ import { messages } from "../../../model/messages";
 import { Question } from "../../../model/question";
 import { Test } from "../../../model/test";
 import { OnEditTasksService } from "../../../services/on-edit-tasks-service/on-edit-tasks.service";
+import { UserService } from "../../../services/user-service/user.service";
 import { OnEditTasksStoreService } from "../../../store/services/on-edit-tasks-store.service/on-edit-tasks-store.service";
 import { UserStoreService } from "../../../store/services/user-store.service/user-store.service";
 
@@ -16,6 +17,7 @@ import { UserStoreService } from "../../../store/services/user-store.service/use
 })
 export class TestTaskComponent implements OnInit, DoCheck {
   constructor(private userStore: UserStoreService,
+              private userService: UserService,
               private taskStore: OnEditTasksStoreService,
               private taskService: OnEditTasksService,
               private router: Router,
@@ -147,21 +149,17 @@ export class TestTaskComponent implements OnInit, DoCheck {
     this.userStore.userID().subscribe((id) => {
       const task = new Test(this.testStructure, id);
       this.taskService.saveTest(task).subscribe((taskID) => {
+        this.userService.refreshInfo(id).subscribe((userInfo) => {
+          this.userStore.loginUser(userInfo);
+          this.cdr.markForCheck();
+        });
         this.router.navigate([`create/params/${taskID}`] ).then();
       });
     });
   }
 
   ngOnInit(): void {
-    this.testStructure = [
-      new Question("test", "Куда?",
-        ["куда сюда туда туда", "сюда куда туда сюда", "туда туда куда куда"],
-        ["куда сюда туда туда"]),
-      new Question("test", "Когда?",
-        ["сегодня", "сейчас, но попозже", "завтра"],
-        ["сейчас, но попозже"]),
-    ];
-    this.selectQuestion(this.testStructure[0]);
+    this.testStructure = [];
   }
 
   ngDoCheck(): void {

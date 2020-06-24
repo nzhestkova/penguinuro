@@ -19,16 +19,16 @@
   </div>
   <div class="row-display relative-position top-margin-20px">
     <div class="edit-plate" *ngIf="!showSign">
-      <div routerLink="education/tasks" class="control-button">
+      <div routerLink="education/tasks" [queryParams]="{ view: 'tile' }" class="control-button">
         <span class="flex-grow button-title">Обучение</span>
       </div>
-      <div routerLink="notifications"
-           class="relative-position row-display control-button">
-        <span class="flex-grow button-title">События</span>
-        <div class="notification-sign row-display">
-          <span></span>
-        </div>
-      </div>
+<!--      <div routerLink="notifications"-->
+<!--           class="relative-position row-display control-button">-->
+<!--        <span class="flex-grow button-title">События</span>-->
+<!--        <div class="notification-sign row-display">-->
+<!--          <span></span>-->
+<!--        </div>-->
+<!--      </div>-->
       <div class="control-button">
         <span class="flex-grow button-title">Настройки</span>
       </div>
@@ -47,7 +47,7 @@
     </div>
   </div>
   <div class="fixed-bottom vertical-padding-10px row-display">
-    <span class="center-aligned">~ {{specialSign}}</span>
+<!--    <span class="center-aligned">~ {{specialSign}}</span>-->
   </div>
 </div>
 <div [ngClass]="{'popup-transparent-light': !darkThemeEnable, 'popup-transparent-dark': darkThemeEnable}"

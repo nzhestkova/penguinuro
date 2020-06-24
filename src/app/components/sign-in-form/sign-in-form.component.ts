@@ -61,13 +61,13 @@ export class SignInFormComponent implements OnInit, DoCheck {
     this.resetErrorSigns();
 
     const login = this.loginForm.get("login").value;
-    const password = this.loginForm.get("password").value;
+    const psw = this.loginForm.get("password").value;
     this.waitingStore.activateLoading();
-    this.userService.loginUser(login, password).subscribe(
+    this.userService.loginUser(login, psw).subscribe(
       data => {
         this.userStore.loginUser(data);
-        this.cookieService.saveLogin(data.login);
-        this.cookieService.savePassword(data.password);
+        this.cookieService.saveLogin(login);
+        this.cookieService.savePassword(psw);
         this.waitingStore.deactivateLoading();
         this.router.navigate(["", "profile"]).then();
       },

@@ -4,7 +4,6 @@ import { ActivatedRoute, NavigationEnd, Router } from "@angular/router";
 import { Subscription } from "rxjs";
 import { Material } from "../../model/material";
 import { messages } from "../../model/messages";
-import { User } from "../../model/user";
 import { MaterialService } from "../../services/material-service/material.service";
 import { UserStoreService } from "../../store/services/user-store.service/user-store.service";
 import { newestSort, oldestSort } from "../special/sort";
@@ -34,6 +33,7 @@ export class EducationComponent implements OnInit, OnDestroy {
     });
   }
 
+  userType: string;
   userEducationInfo: { materials: Material[] };
   section: string;
   userEducationInfoNative = {
@@ -75,19 +75,6 @@ export class EducationComponent implements OnInit, OnDestroy {
       { queryParams: {
         create: true,
         } }).then();
-  }
-
-  fileUpload(event: Event): void {
-    const file = event.target["files"][0];
-    this.fileUploadForm.get("file").setValue(file);
-    if (file) { console.log(file.name.match(/.[a-zA-Z]+$/)[0]); }
-
-    const formData = new FormData();
-    formData.append("material", file, file.name);
-
-    // this.materialService.upload(18, formData).subscribe(
-    //   (data) => console.log(data),
-    // );
   }
 
   add(sectionNumber: number): void {
@@ -208,48 +195,10 @@ export class EducationComponent implements OnInit, OnDestroy {
     }
     this.userStore.loadUserInfo().subscribe((user) => {
       if (user) {
-        const userExisted = <User>user;
-        this.userEducationInfo = userExisted.education;
+        this.userType = user.type;
         this.cdr.markForCheck();
       }
     });
-    this.userEducationInfoNative.materials.push(
-      {
-        authorID: 18,
-        title: "Лекция по электродинамике",
-        link: "[href://localhost:4200/here].docx",
-        addDate: new Date("2019-12-05"),
-      },
-      {
-        authorID: 13,
-        title: "Лекция по математике",
-        link: "[href://localhost:4200/here].mp3",
-        addDate: new Date(),
-      },
-      {
-        authorID: 18,
-        title: "Лекция по электронике",
-        link: "[href://localhost:4200/here].json",
-        addDate: new Date("2019-11-03 12:01"),
-      },
-      {
-        authorID: 12,
-        title: "Методичка 'Программирование'",
-        link: "[href://localhost:4200/here].docx",
-        addDate: new Date("2014-07-15 0:0"),
-      },
-      {
-        authorID: 12,
-        title: "Методичка",
-        link: "[href://localhost:4200/here].docx",
-        addDate: new Date("2014-07-15 0:0"),
-      },
-      {
-        authorID: 12,
-        title: "Методичка 'Программирование'",
-        link: "[href://localhost:4200/here].docx",
-        addDate: new Date("2014-07-15 0:0"),
-      });
 
     this.displayMode = 0;
     this.sortOnNewest = true;

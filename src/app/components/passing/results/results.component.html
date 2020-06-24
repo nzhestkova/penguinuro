@@ -1,1 +1,13 @@
-<p>results works!</p>
+<div class="content paint-light-theme">
+  <div *ngIf="task" class="column-display flex-grow">
+    <div *ngIf="totalScore >= task.passingScore" class="column-display top-margin-auto horizontal-margin-auto">
+      <img src="../../../../assets/test-task/results/good.svg" alt="pass" class="result-icon">
+      <span class="good">Тест пройден</span>
+    </div>
+    <div *ngIf="totalScore < task.passingScore" class="column-display bottom-margin-10px">
+      <img src="../../../../assets/test-task/results/bad.svg" alt="not pass" class="result-icon">
+      <span class="bad">Тест не пройден</span>
+    </div>
+    <span class="horizontal-margin-auto bottom-margin-auto">Верных ответов: {{totalScore}}/{{task.questions.length}}</span>
+  </div>
+</div>

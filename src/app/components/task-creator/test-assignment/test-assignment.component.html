@@ -1,17 +1,26 @@
 <div class="content paint-light-theme">
-  <div class="row-display">
-    <div class="column-display flex-grow">
-      <div *ngFor="let student of studentsList" class="row-display flex-grow">
-        <span>{{student.status}}</span>
-        <span (click)="assign(student._id)">{{student.username}}</span>
+  <div class="main-info">
+    <div class="main-info-list">
+      <div *ngFor="let student of studentsList" class="main-info-list-record"
+           (click)="assign(student)" [ngClass]="{'assigned': checkAssign(student)}">
+        <div class="main-info-list-record-mark">
+          <img alt="add" class="main-info-list-record-mark-icon"
+               [src]="checkAssign(student)
+              ? '../../../../assets/actions/plussed.svg'
+              : '../../../../assets/actions/plus.svg'">
+        </div>
+        <span class="main-info-list-record-username">{{student.username}}</span>
       </div>
     </div>
-    <div class="column-display">
-      <span *ngIf="!assignedList.length">не выбрано</span>
-      <div *ngFor="let student of assignedList">
-        <span (click)="disAssign(student._id)">{{student.username}}</span>
+    <div class="main-info-assignments">
+      <span *ngIf="!assignedList.length" class="main-info-assignments-record-text">-не выбрано-</span>
+      <div *ngFor="let student of assignedList" class="main-info-assignments-record">
+        <span class="main-info-assignments-record-text">{{student.username}}</span>
+        <div class="main-info-assignments-record-delete" (click)="disAssign(student._id)">
+          <img src="../../../../assets/actions/close.svg" alt="remove" class="main-info-assignments-record-delete-ico">
+        </div>
       </div>
     </div>
   </div>
-  <button (click)="complete()" class="left-margin-auto">Сохранить</button>
+  <button (click)="complete()" class="next">Сохранить</button>
 </div>

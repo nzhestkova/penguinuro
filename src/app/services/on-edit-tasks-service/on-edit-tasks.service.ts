@@ -21,7 +21,8 @@ export class OnEditTasksService {
 
   updateTest(body: Test): Observable<boolean> {
     return this._http.put(`${this.tasksURL}${body._id}`, body).pipe(
-      map(() => true),
+      map((response) => {
+        return true; }),
     );
   }
 

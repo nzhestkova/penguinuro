@@ -1,12 +1,7 @@
 <div class="row-display right-margin-auto">
-  <div routerLink="materials" routerLinkActive="chosen-link"
-       [queryParams]="queryParams"
-       class="row-display first-link link">
-    <button class="link-button">Материалы</button>
-  </div>
   <div routerLink="tasks" routerLinkActive="chosen-link"
        [queryParams]="queryParams"
-       class="row-display last-link link">
+       class="row-display last-link first-link link">
     <button class="link-button">Задания</button>
   </div>
 </div>
@@ -35,7 +30,7 @@
         </div>
       </div>
     </div>
-    <button class="add-button left-margin-auto" (click)="create()">
+    <button *ngIf="userType && userType !== 'student'" class="add-button left-margin-auto" (click)="create()">
       <span class="button-action">{{educationMessages[section]["add"]}}</span>
     </button>
   </div>

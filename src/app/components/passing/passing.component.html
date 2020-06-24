@@ -1,1 +1,30 @@
-<p>passing works!</p>
+<div class="content paint-light-theme">
+  <span *ngIf="task" class="test-title">Тест: {{task.title}}</span>
+  <div *ngIf="task" class="pass-window">
+    <div class="question-body">
+      <span>Вопрос #{{task.questions.indexOf(currentQuestion) + 1}}: {{currentQuestion.wording}}</span>
+      <div class="question-body-answers">
+        <div *ngFor="let answer of currentQuestion.answers" class="question-body-answers-item">
+          <button (click)="answerControl(answer)" class="question-body-answers-item-choice"
+                  [ngClass]="{'marked': marked(answer)}"></button>
+          <span class="left-margin-20px">{{answer}}</span>
+        </div>
+      </div>
+    </div>
+    <div class="question-list">
+      <div *ngFor="let question of task.questions; let i = index" class="question-list-item"
+           [ngClass]="{'selected': currentQuestion === question}"
+           (click)="selectQuestion(question)">
+        <span>Вопрос #{{i + 1}}</span>
+      </div>
+    </div>
+  </div>
+  <div class="margin-auto">
+    <button class="control grey-button" (click)="previousQuestion()">← Назад</button>
+    <button *ngIf="task" class="control blue-button">
+      <span *ngIf="userAnswers.length === task.questions.length" (click)="calculatePoint()">Завершить</span>
+      <span *ngIf="userAnswers.length !== task.questions.length" (click)="nextQuestion()">Дальше →</span>
+    </button>
+  </div>
+</div>
+<router-outlet></router-outlet>

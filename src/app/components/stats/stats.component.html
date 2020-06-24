@@ -1,0 +1,12 @@
+<div class="content paint-light-theme">
+  <span class="bottom-margin-10px">Результаты прохождения теста "{{testTitle}}":</span>
+  <div *ngFor="let result of results" class="cell"
+       [ngClass]="{
+       'pass': result.score >= testPassScore,
+       'no-pass': result.score < testPassScore,
+       'undefined': !result.score}">
+    <span class="text">{{result.student}}</span>
+    <span class="text" *ngIf="result.score">{{result.score}}/{{testQuestionCount}}</span>
+    <span *ngIf="!result.score" class="text">нет данных</span>
+  </div>
+</div>

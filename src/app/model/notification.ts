@@ -22,3 +22,4 @@ export class Notification {
 }
 
 export const welcomeNotification: Notification = new Notification(messages.welcomeMessage, "welcome", 60 * 60 * 1000);
+

@@ -3,8 +3,8 @@ import { select, Store } from "@ngrx/store";
 import { Observable } from "rxjs";
 import { map } from "rxjs/operators";
 import { Test } from "../../../model/test";
-import { removeTaskInfo, saveTaskInfo } from "../../actions/on-edit-tasks.actions";
-import { selectTasks } from "../../selectors/on-edit-tasks.selectors";
+import { removeTaskInfo, saveTaskInfo } from "../../actions/tasks.actions";
+import { selectTasks } from "../../selectors/tasks.selectors";
 import { AppState } from "../../state/app.state";
 
 @Injectable({

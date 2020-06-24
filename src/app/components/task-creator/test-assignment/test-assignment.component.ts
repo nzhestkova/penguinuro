@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { Test } from "../../../model/test";
-import { User } from "../../../model/user";
+import { Student } from "../../../model/user";
 import { OnEditTasksService } from "../../../services/on-edit-tasks-service/on-edit-tasks.service";
 import { UserService } from "../../../services/user-service/user.service";
 
@@ -21,14 +21,19 @@ export class TestAssignmentComponent implements OnInit, OnDestroy {
   }
 
   task: Test;
-  studentsList: User[];
-  assignedList: User[];
+  studentsList: Student[];
+  assignedList: Student[];
 
-  assign(id: number): void {
-    const user = this.studentsList.find((student) => student._id === id);
-    if (!this.assignedList.find((student) => student._id === id)) {
-      this.assignedList.push(user);
+  checkAssign(student: Student): boolean {
+    return this.assignedList.includes(student);
+  }
+
+  assign(assignStudent: Student): void {
+    if (this.assignedList.includes(assignStudent)) {
+      this.assignedList = this.assignedList.filter((student) => student !== assignStudent);
+      return;
     }
+    this.assignedList.push(assignStudent);
   }
 
   disAssign(id: number): void {
@@ -44,15 +49,27 @@ export class TestAssignmentComponent implements OnInit, OnDestroy {
     }));
   }
 
+  initAssignments(): void {
+    if (this.task && this.studentsList.length) {
+      this.task.assigned.forEach((studentID) => {
+        if (!this.assignedList.find((student) => student._id === studentID)) {
+          this.assignedList.push(this.studentsList.find((student) => student._id === studentID));
+        }
+      });
+    }
+  }
+
   ngOnInit(): void {
     this.studentsList = [];
     this.assignedList = [];
     this.taskService.loadTask(this.activatedRoute.snapshot.params.id).subscribe((loadedTask) => {
       this.task = loadedTask;
+      this.initAssignments();
       this.cdr.markForCheck();
     });
-    this.userService.onlyStudents().subscribe((students) => {
+    this.userService.onlyStudents().subscribe((students: Student[]) => {
       this.studentsList = students;
+      this.initAssignments();
       this.cdr.markForCheck();
     });
   }

@@ -92,5 +92,14 @@ export const messages = {
     answerTip: "Запишите вариант ответа",
     addAnswerPhrase: "Добавить вариант ответа",
     completeCreatingAnswer: "Сохранить вопрос"
+  },
+  taskEditor: {
+    structure: {
+      sectionTitle: "Структура теста"
+    },
+    params: {
+      sectionTitle: "Параметры теста",
+      testTitle: "Название:"
+    }
   }
 };

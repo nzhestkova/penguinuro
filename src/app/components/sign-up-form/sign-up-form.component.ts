@@ -4,7 +4,7 @@ import { Router } from "@angular/router";
 import { passwordMatch } from "../../custom-validators/password-match.validator";
 import { messages } from "../../model/messages";
 import { welcomeNotification } from "../../model/notification";
-import { User } from "../../model/user";
+import { Student, User } from "../../model/user";
 import { CookiesService } from "../../services/cookies-service/cookies.service";
 import { UserService } from "../../services/user-service/user.service";
 import { ThemeStoreService } from "../../store/services/theme-store.service/theme-store.service";
@@ -60,25 +60,29 @@ export class SignUpFormComponent implements OnInit, DoCheck {
     this.registerForm.get("submitButton").disable();
     this.registerForm.markAsUntouched();
     if (this.registerForm.invalid) { return; }
-    const newUser: User = {
-      _id: 0,
-      status: "student",
-      login: this.registerForm.get("login").value,
+    // const newUser: User = {
+    //   _id: 0,
+    //   status: "student",
+    //   username: this.registerForm.get("username").value,
+    //   education: {
+    //     materials: [],
+    //     createdTasks: [],
+    //     assignedTasks: [],
+    //   },
+    //   results: [],
+    //   notifications: [welcomeNotification],
+    // };
+    const userInfo = {
       username: this.registerForm.get("username").value,
-      password: this.registerForm.get("password").value,
-      education: {
-        materials: [],
-        createdTasks: [],
-        assignedTasks: [],
-      },
-      results: [],
-      notifications: [welcomeNotification],
     };
+    const login = this.registerForm.get("login").value;
+    const psw = this.registerForm.get("password").value;
     this.waitingStore.activateLoading();
-    this.userService.registerNewUser(newUser).subscribe(data => {
-      this.cookieService.saveLogin(data.login);
-      this.cookieService.savePassword(data.password);
-      this.userStore.loginUser(data);
+    this.userService.registerNewUser(userInfo, login, psw).subscribe(response => {
+      this.cookieService.saveLogin(login);
+      this.cookieService.savePassword(psw);
+      this.userStore.loginUser(response);
+      console.log(response);
       this.waitingStore.deactivateLoading();
       this.router.navigate(["", "profile"]).then();
     },

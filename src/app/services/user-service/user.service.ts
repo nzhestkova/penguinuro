@@ -3,31 +3,30 @@ import { Injectable } from "@angular/core";
 import { Observable, throwError } from "rxjs";
 import { catchError, map } from "rxjs/operators";
 import { environment } from "../../../environments/environment";
-import { User } from "../../model/user";
-import { UserStoreService } from "../../store/services/user-store.service/user-store.service";
+import { Student, Teacher, User } from "../../model/user";
 
 @Injectable({
   providedIn: "root"
 })
 export class UserService {
   usersURL = environment.url + "users";
-  userInfo: User;
-  constructor(private _http: HttpClient,
-              private userStore: UserStoreService) {
-    this.userStore.loadUserInfo().subscribe((user) => {
-      this.userInfo = user;
-    });
-  }
+  constructor(private _http: HttpClient) {}
 
-  onlyStudents(): Observable<User[]> {
+  onlyStudents(): Observable<Student[] | Teacher[]> {
     return this._http.get(`${this.usersURL}/students`).pipe(
-      map((students: User[]) => students),
+      map((students: Student[] | Teacher[]) => students),
     );
   }
 
-  saveUserInfo(): Observable<boolean> {
-    return this._http.put(`${this.usersURL}/${this.userInfo._id}`, this.userInfo).pipe(
-      map(() => true),
+  userInfo(userID: number): Observable<object> {
+    return this._http.get(`${this.usersURL}/results/${userID}`).pipe(
+      map((userInfo) => userInfo),
+    );
+  }
+
+  saveUserInfo(user: Student| Teacher): Observable<Student | Teacher> {
+    return this._http.put(`${this.usersURL}/${user._id}`, user).pipe(
+      map((userUpdated: Student| Teacher) => userUpdated),
       catchError((err) => throwError(err)),
     );
   }
@@ -46,16 +45,41 @@ export class UserService {
     );
   }
 
-  registerNewUser(user: User): Observable<User> {
-    return this._http.post(this.usersURL, user).pipe(
-      map((data: User[]) => data[0]),
+  registerNewUser(user: object, login: string, pswHS: string): Observable<Student|Teacher> {
+    return this._http.post(this.usersURL, {
+      userInfo: user,
+      login: login,
+      pswHS: pswHS
+    }).pipe(
+      map((respondedUser: object) => respondedUser["type"] === "student"
+        ? new Student(respondedUser["_id"], respondedUser["username"], respondedUser["since"],
+          respondedUser["tasks"], respondedUser["results"])
+        : new Teacher(respondedUser["_id"], respondedUser["username"], respondedUser["type"],
+          respondedUser["since"], respondedUser["tasks"], respondedUser["results"])),
     );
   }
 
-  loginUser(login: string, password: string): Observable<User> {
-    return this._http.get(`${this.usersURL}/${login}`, { params: { password: password } } ).pipe(
-      map( (data: User) => data ),
+  loginUser(login: string, password: string): Observable<Student|Teacher> {
+    return this._http.get(this.usersURL, {
+      params: {
+        login: login,
+        pswHS: password
+      }} ).pipe(
+      map( (respondedUser: object) => respondedUser["type"] === "student"
+        ? new Student(respondedUser["_id"], respondedUser["username"], respondedUser["since"],
+          respondedUser["tasks"], respondedUser["results"])
+        : new Teacher(respondedUser["_id"], respondedUser["username"], respondedUser["type"],
+          respondedUser["since"], respondedUser["tasks"], respondedUser["results"])),
     );
+  }
+
+  refreshInfo(userID: number): Observable<Student | Teacher> {
+    return this._http.get(`${this.usersURL}/${userID}`).pipe(
+      map((respondedUser: object) => respondedUser["type"] === "student"
+        ? new Student(respondedUser["_id"], respondedUser["username"], respondedUser["since"],
+          respondedUser["tasks"], respondedUser["results"])
+        : new Teacher(respondedUser["_id"], respondedUser["username"], respondedUser["type"],
+          respondedUser["since"], respondedUser["tasks"], respondedUser["results"])));
   }
 
   deleteAccount(userID: number): Observable<User> {

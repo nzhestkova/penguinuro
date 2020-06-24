@@ -23,6 +23,7 @@
   </tr>
   </tbody>
 </table>
+  <input formenctype="multipart/form-data" type="file" (input)="upload($event)">
 <div *ngIf="displayedInfo.length && panelOptions.view === 'tile'" class="horizontal-padding">
   <div *ngFor="let item of displayedInfo" class="column-display tile">
     <img src="../../../../assets/other/document.svg" alt="document" class="large-icon center-aligned">

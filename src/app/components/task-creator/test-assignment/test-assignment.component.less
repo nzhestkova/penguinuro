@@ -1,9 +1,135 @@
 @import "../../../app.component.less";
 
+.assigned {
+  background: rgba(45, 72, 121, 0.2)
+}
+
+.main-info {
+  .row-display;
+  .flex-grow;
+  padding: @small-space 0;
+
+  &-list {
+    .column-display;
+    .flex-grow;
+    height: 450px;
+    overflow-y: scroll;
+
+    &::-webkit-scrollbar {
+      width: 7px;
+    }
+
+    &::-webkit-scrollbar-track {
+      border-radius: @border-radius;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: rgba(61, 75, 60, 0.1);
+      border-radius: @border-radius;
+    }
+
+    &-record {
+      .smooth-fast-animation;
+      .row-display;
+      .no-select;
+      .pointer;
+      margin: @smallest-space 0;
+      padding: @smallest-space @small-space;
+      border-radius: @border-radius;
+
+      &-mark {
+        .button;
+        width: 1.1em;
+        height: 1.1em;
+        padding: @smallest-space;
+        margin: auto 0;
+
+        &-icon {
+          width: 1em;
+        }
+      }
+
+      &-username {
+        margin: auto @smallest-space;
+      }
+    }
+  }
+
+  &-assignments {
+    .column-display;
+    width: 200px;
+    padding: @smallest-space;
+    margin-left: @small-space;
+    border-left: 0.05em solid rgba(0, 0, 0, 0.16);
+
+    &-record {
+      .row-display;
+      .no-select;
+      padding: @smallest-space 0 @smallest-space @small-space;
+
+      &-text {
+        .flex-grow;
+        text-align: center;
+        margin: auto 0;
+        font-style: italic;
+      }
+
+      &-delete {
+        .button;
+        .row-display;
+        margin: auto 0;
+        width: 1.6em;
+        height: 1.6em;
+
+        &:hover {
+          background: rgba(134, 1, 1, 0.3);
+        }
+
+        &-ico {
+          margin: auto;
+          width: 0.9em;
+        }
+      }
+    }
+  }
+}
+
 .content {
   .column-display;
   padding: @small-space @space;
   border-radius: @border-radius;
   min-width: 470px;
   min-height: 470px;
+}
+
+.button {
+  .smooth-fast-animation;
+  .no-select;
+  .pointer;
+  outline: none;
+  font-size: @font-size;
+  font-family: @font-family;
+  text-align: center;
+  border-radius: @border-radius;
+  border: none;
+  background: transparent;
+  &:hover {
+    background: rgba(0, 0, 0, 0.15);
+  }
+}
+
+.next {
+  .button;
+  margin: auto 2 * @space @small-space auto;
+  padding: @small-space @space;
+  background: rgba(45, 72, 121, 0.9);
+  color: white;
+
+  &:hover {
+    background: #2d4879;
+  }
+
+  &:disabled {
+    background: rgba(74, 130, 74, 0.5);
+  }
 }

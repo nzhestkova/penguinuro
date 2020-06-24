@@ -26,12 +26,12 @@ export class NotificationsComponent implements OnInit, AfterViewInit, OnDestroy 
 
   ngOnInit(): void {
     this.notificationList = [];
-    this.userStore.loadUserInfo().subscribe((user: User) => {
+    this.userStore.loadUserInfo().subscribe((user) => {
       if (user) {
 
         // ??? какого черта
-        this.notificationList = user.notifications.filter((item) => item);
-        this.notificationList.reverse();
+        // this.notificationList = user.notifications.filter((item) => item);
+        // this.notificationList.reverse();
 
         this.cdr.markForCheck();
       }
@@ -42,7 +42,7 @@ export class NotificationsComponent implements OnInit, AfterViewInit, OnDestroy 
     if (this.notificationList.filter((notification) => !notification.checked).length) {
       this.seenTimer = setTimeout(() => {
         this.userStore.markNotificationsAsChecked();
-        this.userService.saveUserInfo().subscribe();
+        // this.userService.saveUserInfo().subscribe();
         this.cdr.markForCheck();
       }, 1.5 * 1000);
     }
