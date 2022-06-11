@@ -1,8 +1,8 @@
 import { Material } from "./material";
 import { Notification } from "./notification";
 
-export class User {
-  _id: number;
+export interface User {
+  id: number;
   status: string;
   username: string;
   education: {
@@ -24,6 +24,7 @@ export class Student {
   _id: number;
   registerSince: string;
   username: string;
+  createdTasks?: number[];
   assignedTasks: number[];
   results: Result[];
 
@@ -44,6 +45,7 @@ export class Teacher {
   registerSince: string;
   username: string;
   createdTasks: number[];
+  assignedTasks?: number[];
   results: Result[];
 
   constructor(idNumber: number, username: string, type: string, since: string,

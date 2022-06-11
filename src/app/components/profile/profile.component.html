@@ -29,8 +29,10 @@
   <div [ngClass]="{'window-light-theme': !darkTheme, 'window-dark-theme': darkTheme}"
        class="column-display router flex-grow small-right-margin">
     <div class="tasks-count top-margin-auto">
-      <span *ngIf="user.assignedTasks">Всего заданий: {{user.assignedTasks.length}}</span>
-      <span *ngIf="user.createdTasks">Создано заданий: {{user.createdTasks.length}}</span>
+<!--      todo: note! temporary commented to migrate angular version-->
+<!--      todo: reimplement later due to #Task-002-->
+<!--      <span *ngIf="user.assignedTasks">Всего заданий: {{user.assignedTasks.length}}</span>-->
+<!--      <span *ngIf="user.createdTasks">Создано заданий: {{user.createdTasks.length}}</span>-->
     </div>
     <div *ngIf="user.type === 'student' && user.results" class="tasks-count with-bottom">
       <span>Решено заданий: {{user.results.length}}</span>
