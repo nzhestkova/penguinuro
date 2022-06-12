@@ -1,4 +1,4 @@
-import { Student, Teacher } from "../../model/user";
+import { Student, Teacher } from "../../common/models/user";
 
 export interface UserState {
   userInfo: Student | Teacher;

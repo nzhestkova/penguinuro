@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
-import { Test } from "../../../model/test";
+import { Test } from "../../../common/models/test";
 import { OnEditTasksService } from "../../../services/on-edit-tasks-service/on-edit-tasks.service";
 
 @Component({

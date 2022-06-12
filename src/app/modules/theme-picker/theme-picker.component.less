@@ -1,0 +1,57 @@
+@import "../../../assets/styles/vars";
+@import "../../../assets/styles/colors";
+
+@grid-column-gap: 4px;
+
+.theme-picker {
+	position: relative;
+	height: @svg-large;
+	width: @svg-large;
+	border-radius: 20px;
+	box-shadow: 0 0 0 2px var(--app-control-border-color, @black) inset;
+	background-color: var(--app-background-color, @white);
+	overflow: hidden;
+	transition: width .2s ease-out;
+
+	&._active {
+		width: 120px;
+	}
+
+	&__button {
+		position: absolute;
+		display: flex;;
+		padding: @grid-column-gap;
+		border-radius: 20px;
+		box-shadow: 0 0 0 2px var(--app-control-border-color, @black) inset;
+		background-color: var(--app-background-color, @white);
+		cursor: pointer;
+		z-index: 2;
+
+		& svg {
+			width: @svg-big;
+			height: @svg-big;
+		}
+	}
+
+	&__list {
+		height: @svg-large;
+		position: absolute;
+		top: 0;
+		right: 0;
+		display: flex;
+
+		&-item {
+			cursor: pointer;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			width: @svg-large;
+			height: @svg-large;
+
+			& svg {
+				width: @svg-big;
+				height: @svg-big;
+			}
+		}
+	}
+}

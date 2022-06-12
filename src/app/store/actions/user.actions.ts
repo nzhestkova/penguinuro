@@ -1,5 +1,5 @@
 import { createAction, props } from "@ngrx/store";
-import { Student, Teacher, User } from "../../model/user";
+import { Student, Teacher, User } from "../../common/models/user";
 
 const LOGIN = "[User] logged in";
 const notificationCHECKED = "[User] notification was marked as seen";

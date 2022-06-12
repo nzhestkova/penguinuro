@@ -3,7 +3,7 @@ import { Injectable } from "@angular/core";
 import { select, Store } from "@ngrx/store";
 import { Observable } from "rxjs";
 import { map } from "rxjs/operators";
-import { Student, Teacher } from "../../../model/user";
+import { Student, Teacher } from "../../../common/models/user";
 import { markNotificationsAsChecked, userLogin, userLogout } from "../../actions/user.actions";
 import { selectUserInfo, selectUserTasks } from "../../selectors/user.selectors";
 import { AppState } from "../../state/app.state";

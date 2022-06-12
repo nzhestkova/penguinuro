@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, DoCheck, OnDestroy } from "@angular/core";
 import { Subscription } from "rxjs";
-import { User } from "../../model/user";
+import { User } from "../../common/models/user";
 import { UserStoreService } from "../../store/services/user-store.service/user-store.service";
 
 @Component({

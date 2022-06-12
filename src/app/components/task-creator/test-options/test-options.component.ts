@@ -1,8 +1,8 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from "@angular/core";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
-import { messages } from "../../../model/messages";
-import { Test } from "../../../model/test";
+import { messages } from "../../../common/models/messages";
+import { Test } from "../../../common/models/test";
 import { OnEditTasksService } from "../../../services/on-edit-tasks-service/on-edit-tasks.service";
 import { OnEditTasksStoreService } from "../../../store/services/on-edit-tasks-store.service/on-edit-tasks-store.service";
 import { converseDate, nextDate } from "../../special/get-date-time";

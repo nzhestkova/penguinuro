@@ -2,8 +2,8 @@ import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnIni
 import { FormControl, FormGroup } from "@angular/forms";
 import { ActivatedRoute, NavigationEnd, Router } from "@angular/router";
 import { Subscription } from "rxjs";
-import { Material } from "../../model/material";
-import { messages } from "../../model/messages";
+import { Material } from "../../common/models/material";
+import { messages } from "../../common/models/messages";
 import { MaterialService } from "../../services/material-service/material.service";
 import { UserStoreService } from "../../store/services/user-store.service/user-store.service";
 import { newestSort, oldestSort } from "../special/sort";

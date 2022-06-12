@@ -1,9 +1,9 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, DoCheck, OnInit } from "@angular/core";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
-import { messages } from "../../../model/messages";
-import { Question } from "../../../model/question";
-import { Test } from "../../../model/test";
+import { messages } from "../../../common/models/messages";
+import { Question } from "../../../common/models/question";
+import { Test } from "../../../common/models/test";
 import { OnEditTasksService } from "../../../services/on-edit-tasks-service/on-edit-tasks.service";
 import { UserService } from "../../../services/user-service/user.service";
 import { OnEditTasksStoreService } from "../../../store/services/on-edit-tasks-store.service/on-edit-tasks-store.service";

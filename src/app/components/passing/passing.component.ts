@@ -1,8 +1,8 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { Subscription } from "rxjs";
-import { Question } from "../../model/question";
-import { Test } from "../../model/test";
+import { Question } from "../../common/models/question";
+import { Test } from "../../common/models/test";
 import { OnEditTasksService } from "../../services/on-edit-tasks-service/on-edit-tasks.service";
 import { UserService } from "../../services/user-service/user.service";
 import { UserStoreService } from "../../store/services/user-store.service/user-store.service";

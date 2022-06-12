@@ -1,7 +1,7 @@
 import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit } from "@angular/core";
-import { messages } from "../../model/messages";
-import { Notification } from "../../model/notification";
-import { User } from "../../model/user";
+import { messages } from "../../common/models/messages";
+import { Notification } from "../../common/models/notification";
+import { User } from "../../common/models/user";
 import { UserService } from "../../services/user-service/user.service";
 import { UserStoreService } from "../../store/services/user-store.service/user-store.service";
 import { stringDateTime } from "../special/get-date-time";

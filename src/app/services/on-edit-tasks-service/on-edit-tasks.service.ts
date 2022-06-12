@@ -3,7 +3,7 @@ import { Injectable } from "@angular/core";
 import { Observable, throwError } from "rxjs";
 import { catchError, map } from "rxjs/operators";
 import { environment } from "../../../environments/environment";
-import { Test } from "../../model/test";
+import { Test } from "../../common/models/test";
 
 @Injectable({
   providedIn: "root"

@@ -1,10 +1,10 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, DoCheck, OnInit } from "@angular/core";
 import { AbstractControl, FormControl, FormGroup, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
-import { passwordMatch } from "../../custom-validators/password-match.validator";
-import { messages } from "../../model/messages";
-import { welcomeNotification } from "../../model/notification";
-import { Student, User } from "../../model/user";
+import { passwordMatch } from "../../common/validation/password-match.validator";
+import { messages } from "../../common/models/messages";
+import { welcomeNotification } from "../../common/models/notification";
+import { Student, User } from "../../common/models/user";
 import { CookiesService } from "../../services/cookies-service/cookies.service";
 import { UserService } from "../../services/user-service/user.service";
 import { ThemeStoreService } from "../../store/services/theme-store.service/theme-store.service";

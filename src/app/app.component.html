@@ -1,20 +1,17 @@
-<div class="background" [ngClass]="{'light-theme': !darkThemeEnable, 'dark-theme': darkThemeEnable}">
+<div [ngClass]="'background _' + colorScheme?.value">
   <div class="user-panel">
-    <div class="row-display">
+    <div class="header row-display">
       <button routerLink="profile" *ngIf="user" class="username right-margin-10px"
               [ngClass]="{'profile-light': !darkThemeEnable, 'profile-dark': darkThemeEnable}">
-        <img src="../assets/user-light.svg" alt="profile" class="username-img">
+        <img src="../assets/icons/user-light.svg" alt="profile" class="username-img">
       </button>
       <button routerLink="" *ngIf="user" class="username right-margin-10px"
               [ngClass]="{'profile-light': !darkThemeEnable, 'profile-dark': darkThemeEnable}">
-        <img src="../assets/home.svg" alt="profile" class="username-img">
+        <img src="../assets/icons/home.svg" alt="profile" class="username-img">
       </button>
-      <button class="theme"
-              [ngClass]="{'light-theme-button': !darkThemeEnable, 'dark-theme-button': darkThemeEnable}"
-              (click)="toggleTheme()">
-        <span class="theme-icon" *ngIf="darkThemeEnable">💡</span>
-        <span class="theme-icon" *ngIf="!darkThemeEnable">🌙</span>
-      </button>
+		<ng-container *ngFor="let control of headerControls">
+			<ng-container *ngTemplateOutlet="control.template"></ng-container>
+		</ng-container>
     </div>
   </div>
   <div class="row-display relative-position top-margin-20px">
@@ -50,6 +47,7 @@
 <!--    <span class="center-aligned">~ {{specialSign}}</span>-->
   </div>
 </div>
+
 <div [ngClass]="{'popup-transparent-light': !darkThemeEnable, 'popup-transparent-dark': darkThemeEnable}"
      *ngIf="loading | async" class="load-popup">
   <div [ngClass]="{'load-icon-transparent-light': !darkThemeEnable, 'load-icon-transparent-dark': darkThemeEnable}"
@@ -60,3 +58,9 @@
           class="center-aligned font-set load-phrase">Подождите</span>
   </div>
 </div>
+
+<ng-template #colorSchemeSwitcherTemplate>
+	<app-theme-picker [(value)]="colorScheme"
+					  [items]="colorSchemeItems"
+	></app-theme-picker>
+</ng-template>

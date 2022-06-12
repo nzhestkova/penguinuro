@@ -1,4 +1,4 @@
-import { Material } from "../../model/material";
+import { Material } from "../../common/models/material";
 
 export function oldestSort(array: Material[]): void {
   array.sort((a: Material, b: Material) => {

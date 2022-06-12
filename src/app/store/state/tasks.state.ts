@@ -1,4 +1,4 @@
-import { Test } from "../../model/test";
+import { Test } from "../../common/models/test";
 
 export interface TasksState {
   idCounter: number;

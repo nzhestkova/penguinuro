@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { select, Store } from "@ngrx/store";
 import { Observable } from "rxjs";
 import { map } from "rxjs/operators";
-import { Test } from "../../../model/test";
+import { Test } from "../../../common/models/test";
 import { removeTaskInfo, saveTaskInfo } from "../../actions/tasks.actions";
 import { selectTasks } from "../../selectors/tasks.selectors";
 import { AppState } from "../../state/app.state";

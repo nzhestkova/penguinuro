@@ -32,12 +32,12 @@
                       [placeholder]="messages.wordingAnswer + (i + 1)">
             </textarea>
             <button class="structure-info-question-remove answer-remove" (click)="removeAnswer(input, i)">
-              <img src="../../../../assets/actions/remove.svg" alt="remove" class="structure-info-question-remove-icon">
+              <img src="../../../../assets/icons/actions/remove.svg" alt="remove" class="structure-info-question-remove-icon">
             </button>
           </div>
         </div>
         <button class="structure-info-question-remove answer-remove">
-          <img src="../../../../assets/actions/save.svg" alt="remove" class="structure-info-question-remove-icon">
+          <img src="../../../../assets/icons/actions/save.svg" alt="remove" class="structure-info-question-remove-icon">
         </button>
       </div>
     </div>
@@ -52,7 +52,7 @@
              [ngClass]="{ 'structure-info-chosen-question': question === selectedQuestion }" (click)="selectQuestion(question)">
           <span class="flex-grow vertical-margin-auto">вопрос #{{i + 1}}</span>
           <button class="structure-info-question-remove" (click)="removeQuestion(question)">
-            <img src="../../../../assets/actions/remove.svg" alt="remove" class="structure-info-question-remove-icon">
+            <img src="../../../../assets/icons/actions/remove.svg" alt="remove" class="structure-info-question-remove-icon">
           </button>
         </div>
       </div>
